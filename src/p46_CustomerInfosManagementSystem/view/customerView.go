@@ -30,7 +30,7 @@ func (this *customerView) mainMenu() {
 		case "1":
 			this.add()
 		case "2":
-			fmt.Println("修改客户")
+			this.alert()
 		case "3":
 			this.del()
 		case "4":
@@ -53,18 +53,18 @@ func (this *customerView) mainMenu() {
 func (this *customerView) list() {
 	// 首先获取所有客户信息 信息在切片中
 	cus := this.customerService.List()
-	fmt.Println("\n------- Customer List -------")
+	fmt.Println("\n------- 客户信息列表 -------")
 	fmt.Println("编号\t姓名\t性别\t年龄\t电话\t\t邮箱")
 	for index := 0; index < len(cus); index++ {
 		//fmt.Println()
 		fmt.Println(cus[index].GetInfo())
 	}
-	fmt.Println("------- All customer list ended -------\n")
+	fmt.Println("------- 以上所有客户信息 -------\n")
 }
 
 // 得到用户的输入 构建新的客户并加入到切片
 func (this *customerView) add() {
-	fmt.Println("\n------- Add Customer -------")
+	fmt.Println("\n------- 新建客户信息 -------")
 	var name, gender, tele, mail string
 	var age int
 	fmt.Print("姓名：")
@@ -81,7 +81,7 @@ func (this *customerView) add() {
 	// 这里没有ID让用户输入 因为ID是唯一的 让系统自己分配
 	customer := model.NewCustomer2(name, gender, age, tele, mail)
 	if this.customerService.AddCustomer(customer) {
-		fmt.Println("------- Success Added Customer -------\n")
+		fmt.Println("------- 成功新建了一个客户信息 -------\n")
 	} else {
 		fmt.Println("添加失败")
 	}
@@ -89,7 +89,7 @@ func (this *customerView) add() {
 
 // 得到用户的输入id，删除该id对应的客户
 func (this *customerView) del() {
-	fmt.Println("\n------- Delete customer -------")
+	fmt.Println("\n------- 删除客户信息 -------")
 	fmt.Print("输入要删除客户的Id：")
 	var selectedId int = -1
 	fmt.Scanln(&selectedId)
@@ -102,12 +102,46 @@ func (this *customerView) del() {
 	var choose string = ""
 	if fmt.Scanln(&choose); choose == "y" || choose == "Y" {
 		if this.customerService.DeleteCustomer(selectedId) {
-			fmt.Println("------- Success Deleted Customer -------\n")
+			fmt.Println("------- 删除客户信息成功 -------\n")
 		} else {
-			fmt.Println("DELETE FAILURE")
+			fmt.Println("删除失败 DELETE FAILURE")
 		}
 	} else {
 		fmt.Println("操作取消")
+	}
+}
+
+func (this *customerView) alert() {
+	fmt.Println("\n------- 修改客户信息 -------")
+	var key int = -1
+	fmt.Print("请输入客户Id： ")
+	fmt.Scanln(&key)
+	//key--
+	if this.customerService.FindTargetId(key) == -1 {
+		fmt.Println("Id = ")
+		fmt.Println("指定Id的客户不存在")
+		fmt.Println("\n------- 没有修改 -------")
+		return
+	} else {
+		var name, gender, tele, mail string
+		var age int
+		fmt.Print("姓名：")
+		fmt.Scanln(&name)
+		fmt.Print("性别：")
+		fmt.Scanln(&gender)
+		fmt.Print("年龄：")
+		fmt.Scanln(&age)
+		fmt.Print("电话：")
+		fmt.Scanln(&tele)
+		fmt.Print("邮箱：")
+		fmt.Scanln(&mail)
+		if this.customerService.AlterCustomer(key, name, gender, age, tele, mail) == true {
+			fmt.Println("修改成功")
+			fmt.Println("\n------- 修改客户信息成功 -------")
+		} else {
+			fmt.Println("\n------- 修改客户信息失败 -------")
+
+		}
 	}
 
 }

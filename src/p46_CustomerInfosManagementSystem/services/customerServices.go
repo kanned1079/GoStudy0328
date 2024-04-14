@@ -2,6 +2,7 @@ package services
 
 import (
 	"GoStudy0328/src/p46_CustomerInfosManagementSystem/model"
+	"fmt"
 )
 
 // 这里有一个客户的切片
@@ -40,6 +41,7 @@ func (this *CustomerService) AddCustomer(customer model.Customer) bool {
 func (this *CustomerService) FindTargetId(index int) (i int) {
 	i = -1
 	// 遍历切片 查找Id
+	fmt.Println(this.customers)
 	for a := 0; a < len(this.customers); a++ {
 		if this.customers[a].Id == index {
 			// 找到了
@@ -59,6 +61,31 @@ func (this *CustomerService) DeleteCustomer(id int) bool {
 		// 从切片中删除一个元素
 		// 这里的[:index]表示从0开时到index-1
 		this.customers = append(this.customers[:index], this.customers[index+1:]...)
+		return true
+	}
+}
+
+// 修改客户
+func (this *CustomerService) AlterCustomer(id int, name, gender string, age int, tele, mail string) bool {
+	index := this.FindTargetId(id)
+	if index == -1 {
+		return false
+	} else {
+		if name != "" {
+			this.customers[index].Name = name
+		}
+		if gender != "" {
+			this.customers[index].Gender = gender
+		}
+		if age != 0 {
+			this.customers[index].Age = age
+		}
+		if tele != "" {
+			this.customers[index].Phone_num = tele
+		}
+		if mail != "" {
+			this.customers[index].Email = mail
+		}
 		return true
 	}
 }

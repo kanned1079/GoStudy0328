@@ -2,7 +2,6 @@ package services
 
 import (
 	"GoStudy0328/src/p46_CustomerInfosManagementSystem/model"
-	"fmt"
 )
 
 // 这里有一个客户的切片
@@ -41,7 +40,7 @@ func (this *CustomerService) AddCustomer(customer model.Customer) bool {
 func (this *CustomerService) FindTargetId(index int) (i int) {
 	i = -1
 	// 遍历切片 查找Id
-	fmt.Println(this.customers)
+	//fmt.Println(this.customers)
 	for a := 0; a < len(this.customers); a++ {
 		if this.customers[a].Id == index {
 			// 找到了

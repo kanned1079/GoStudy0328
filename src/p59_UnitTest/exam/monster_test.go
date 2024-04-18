@@ -11,7 +11,7 @@ import "testing"
 //
 //}
 
-func TestThisMain(t *testing.T) {
+func TestMonster_Store(t *testing.T) {
 	var monster1 = Monster{
 		Name:  "aaaa",
 		Age:   600,
@@ -21,4 +21,13 @@ func TestThisMain(t *testing.T) {
 		t.Fatalf("运行错误")
 	}
 	t.Logf("ok")
+}
+
+func TestMonster_Restore(t *testing.T) {
+	var monster2 Monster
+	if err := monster2.Restore(); err == false {
+		t.Fatalf("失败")
+	} else {
+		t.Logf("成功")
+	}
 }

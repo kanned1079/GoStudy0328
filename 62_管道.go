@@ -31,6 +31,17 @@ var (
 // 3)通过全局变量加锁同步来实现通讯，也并不利用多个协程对全局变量的读写操作。
 // 4)上面种种分析都在呼唤一个新的通讯机制-channel
 
+// channle本质就是数据是先进先出
+// 1)Channel的本质上就是一个数据结构 -> 队列
+// 2)数据是先进先出 [FIFO]
+// 3)线程安全，多goroutine访问时，不需要加锁，就是说channel本身就是线程安全的
+// 4)channel是有类型的，一个string的channel只能存放string类型数据
+
+// Channel的声明/定义
+// channel是引用类型
+// channel必须初始化后才能使用
+// channel是有类型的
+
 // test62() 这个用来计算n的阶乘 然后放入map中
 func test62(n int) {
 	res := 1

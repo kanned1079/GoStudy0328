@@ -15,5 +15,5 @@ func main() {
 	cpuCounts := runtime.NumCPU()
 	runtime.GOMAXPROCS(cpuCounts) // 設置運行時的最大CPU數
 	fmt.Println("CPU(s) = ", cpuCounts)
-
+	// go 1.8版本后程序自动运行在多核上 不需要设置
 }

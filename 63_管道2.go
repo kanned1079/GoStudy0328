@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 // channle本质就是数据是先进先出
@@ -48,7 +49,10 @@ func main() {
 
 	//test63_1()
 	//test63_2()
-	test63_3()
+	//test63_3()
+	//test63_4()
+
+	afterClassExam1()
 
 }
 
@@ -108,5 +112,67 @@ func test63_3() {
 	fmt.Println("person = ", <-personChan1)
 	fmt.Println("person = ", <-personChan1)
 	fmt.Printf("personChan1.len = %d, personChan1.cap = %d\n", len(personChan1), cap(personChan1))
+
+}
+
+type Cat63 struct {
+	Name string
+	Age  int
+}
+
+func test63_4() {
+	fmt.Println("--------------------------")
+	var allChan chan interface{}
+	allChan = make(chan interface{}, 10)
+
+	a := 10
+	d := "Hello"
+
+	allChan <- a
+	allChan <- d
+	allChan <- Cat63{"neko1", 1}
+	allChan <- Cat63{"neko2", 3}
+	fmt.Printf("allChan1.len = %d, allChan1.cap = %d\n", len(allChan), cap(allChan))
+	//var nums int = len(allChan)
+	//for i := 0; i < nums; i++ {
+	//	fmt.Println("allchan = ", <-allChan)
+	//}
+	fmt.Printf("allChan1.len = %d, allChan1.cap = %d\n", len(allChan), cap(allChan))
+	// 如果需要获取第三个元素 那么就先要推出前两个
+	<-allChan
+	<-allChan
+	//newCat1 := (<-allChan).(Cat63)
+	//newCat1 := <-allChan
+	//fmt.Println("newCat1 = ", newCat1) // 这样能用
+	// 但是不能取出字段
+	// 因为这个时候newCat1还只是一个interface{}
+	//fmt.Println("newCat1's Name = ", newCat1.Name)
+	// 那么就需要进行类型断言
+	newCat2 := (<-allChan).(Cat63)
+	fmt.Printf("newCat2's Name = %s, Age = %d\n", newCat2.Name, newCat2.Age)
+
+}
+
+type Person63_2 struct {
+	Name    string
+	Age     int
+	Address string
+}
+
+func afterClassExam1() {
+	// 创建一个 Person结构体 [Name, Age,Address]
+	// 使用rand方法配合随机创建10个Person实例，并放入到channel中3)遍历channel
+	// 将各个Person实例的信息显示在终端
+	var personChannel chan Person63_2
+	personChannel = make(chan Person63_2, 10)
+	for i := 0; i < 10; i++ {
+		personChannel <- Person63_2{"p" + strconv.Itoa(i), 12, "addr" + strconv.Itoa(i)}
+	}
+	fmt.Println("len = ", len(personChannel))
+	fmt.Println("cap = ", cap(personChannel))
+	for i := 0; i < cap(personChannel); i++ {
+		fmt.Println("personChannel[", i, "] = ", <-personChannel)
+	}
+	close(personChannel)
 
 }

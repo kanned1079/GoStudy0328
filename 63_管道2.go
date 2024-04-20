@@ -47,7 +47,8 @@ func main() {
 	//fmt.Println(<-intChan) // 到这里会报错因为已经取完了数据
 
 	//test63_1()
-	test63_2()
+	//test63_2()
+	test63_3()
 
 }
 
@@ -82,5 +83,30 @@ func test63_2() {
 	for i := 1; i <= cap(mapChan1); i++ {
 		fmt.Printf("mapChan1[%02d] = %v\n", i, <-mapChan1)
 	}
+}
+
+type Person63 struct {
+	Name string
+	Age  int
+}
+
+func test63_3() {
+	var personChan1 chan Person63
+	personChan1 = make(chan Person63, 3)
+	p1 := Person63{
+		Name: "kanna",
+		Age:  20,
+	}
+	p2 := Person63{
+		Name: "kinggyo",
+		Age:  16,
+	}
+	personChan1 <- p1
+	personChan1 <- p2
+	fmt.Printf("personChan1.len = %d, personChan1.cap = %d\n", len(personChan1), cap(personChan1))
+
+	fmt.Println("person = ", <-personChan1)
+	fmt.Println("person = ", <-personChan1)
+	fmt.Printf("personChan1.len = %d, personChan1.cap = %d\n", len(personChan1), cap(personChan1))
 
 }

@@ -15,7 +15,6 @@ func main() {
 	go storeNums(intChan)
 
 	start := time.Now()
-
 	for i := 1; i <= goroutineCount; i++ {
 		go judgePrime(i, intChan, primeChan, endChan)
 	}

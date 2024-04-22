@@ -53,10 +53,13 @@ func main() {
 
 }
 
+<<<<<<< HEAD
 func main1111() {
 	traditionMethod()
 }
 
+=======
+>>>>>>> origin/main
 // 启动一个协程来存入数据1-8000
 func storeNums(intChan chan int) {
 	for i := 1; i <= 20000; i++ {
@@ -91,6 +94,7 @@ func isPrime(n int) bool {
 	}
 	return true
 }
+<<<<<<< HEAD
 
 func traditionMethod() {
 	start := time.Now()
@@ -103,3 +107,5 @@ func traditionMethod() {
 	fmt.Println("spend time =", end.Sub(start))
 
 }
+=======
+>>>>>>> origin/main

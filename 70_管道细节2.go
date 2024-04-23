@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // 使用select可以解决从管道取数据的阻塞问题
@@ -21,17 +22,25 @@ func main() {
 
 	// 传统方法在遍历管道时 如果不关闭会导致阻塞而deadlock
 	// 实际开发中 不知道什么时候关闭管道
-	for {
-		select {
-		case v := <-numChan:
-			fmt.Println("读取到数据 = ", v)
-		case v := <-strChan:
-			{
-				fmt.Println("取到数据 = ", v)
+
+	func() {
+		for {
+			select {
+			case v := <-numChan:
+				fmt.Println("读取到数据 = ", v)
+				time.Sleep(time.Second)
+			case v := <-strChan:
+				{
+					fmt.Println("取到数据 = ", v)
+					time.Sleep(time.Second)
+
+				}
+			default:
+				fmt.Println("err")
+				time.Sleep(time.Second)
+				return // 也可以使用 break lable1
 			}
-		default:
-			fmt.Println("err")
 		}
-	}
-	fmt.Println("end")
+	}()
+
 }

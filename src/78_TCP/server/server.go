@@ -102,7 +102,7 @@ func myProcess(conn net.Conn) {
 			return
 		}
 		fmt.Println("消息长度 = ", length)
-		fmt.Print("Message =", string(buffer[:length])) // 这里的length是因为要取切片的第0到第length-1个元素 否则会将切片全部转换
+		fmt.Println("Message = ", string(buffer[:length])) // 这里的length是因为要取切片的第0到第length-1个元素 否则会将切片全部转换
 		fmt.Println()
 	}
 }

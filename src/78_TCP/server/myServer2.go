@@ -23,7 +23,7 @@ func main() {
 	var connection1 MyConnection = MyConnection{}
 	//testReflect(&connection1)
 	connection1.setConnectionInfo()
-	fmt.Println(connection1)
+	// 创建全局消息通道
 	connection1.StartAServer()
 }
 
@@ -50,8 +50,6 @@ func (this *MyConnection) setConnectionInfo() (res bool) {
 			fmt.Println("READ FILE FINISHED.")
 			break
 		}
-		//str = strings.TrimSpace(str)
-		//strSlice = append(strSlice, strings.TrimSpace(str))
 		strSlice[i] = strings.TrimSpace(str)
 		i++
 	}
@@ -94,13 +92,15 @@ func (this *MyConnection) StartAServer() {
 			fmt.Println("客户端连接成功 IP地址为", conn.RemoteAddr().String())
 		}
 		// 4. 每个连接开启一个协程
-		go Worker(&conn)
+		//go Worker(&conn)
+		// 下面是新增功能的代码
+		var msgChan chan string = make(chan string, 10)
+		go Worker(&conn, msgChan)
 	}
-
 }
 
 // 5. 创建Worker协程
-func Worker(conn *net.Conn) {
+func Worker(conn *net.Conn, msgChan chan string) {
 	defer func() {
 		if err := (*conn).Close(); err != nil { // 记得也要关闭conn
 			fmt.Println("Close err:", err)
@@ -117,31 +117,11 @@ func Worker(conn *net.Conn) {
 		} else {
 			buffer = bytes.TrimSpace(buffer)
 			//fmt.Println("消息长度 = ", length)
-			fmt.Println("发送的数据 = ", string(buffer))
-			//fmt.Println()
+			msg := fmt.Sprintf("%s发送的数据 = %s\n", (*conn).RemoteAddr(), string(buffer))
+			fmt.Println(msg)
+			// 下面是实现相互通讯新增的代码
+			msgChan <- msg
 		}
 
 	}
-}
-
-func testReflect(b interface{}) {
-	rTpy := reflect.TypeOf(b)
-	rVal := reflect.ValueOf(b)
-	//funcCount := rTpy.Elem().NumMethod()
-	fieldCount := rVal.Elem().NumField()
-	var fieldMap = make(map[string]string, 3)
-	fieldMap["protocol"] = "tcp"
-	fieldMap["ipaddr"] = "localhost"
-	fieldMap["port"] = "8080"
-	for i := 0; i < fieldCount; i++ {
-		tagName := rTpy.Elem().Field(i).Tag.Get("json")
-		if tagName != "" {
-			fieldMap[rTpy.Elem().Field(i).Name] = tagName
-		}
-		fmt.Println(rTpy.Elem().Field(i).Name)
-		//fieldMap[]
-	}
-
-	fmt.Println(fieldMap)
-
 }

@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/80_RedisTest/1_StartConnect/package/go-redis" vcs="Git" />
   </component>
 </project>

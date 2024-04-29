@@ -44,6 +44,10 @@ func main() {
 	//}
 	startWorker(conn)
 
+	// 创建消息通道
+	//msgChan := make(chan string)
+	//go receiveAndDisplayMessages(conn, msgChan)
+
 	// 客户端也要记得关闭连接
 	defer func() {
 		if err := conn.Close(); err != nil {
@@ -69,5 +73,12 @@ func startWorker(conn net.Conn) {
 		} else {
 			//fmt.Printf("客户端发送了%v字节的数据\n\n", n)
 		}
+	}
+}
+
+func receiveAndDisplayMessages(conn net.Conn, msgChan chan string) {
+	for {
+		msg := <-msgChan
+		fmt.Println("服务器发来消息:", msg)
 	}
 }

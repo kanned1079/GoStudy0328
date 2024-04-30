@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="kanna@192.168.12.244:222" type="ssh/sftp" uuid="a59129ca-488e-4d2a-a5cb-8f754ab88bf3">
+        <config>
+          <option name="projectRootOnTarget" value="/home/kanna/GoStudy0328" />
+          <option name="serverName" value="kanna@192.168.12.244:22 password" />
+        </config>
+        <ContributedStateBase type="GoLanguageRuntime">
+          <config>
+            <option name="goPath" value="/home/kanna/go" />
+            <option name="goRoot" value="/usr/bin/go" />
+            <option name="goVersion" value="go1.15.15 linux/amd64" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

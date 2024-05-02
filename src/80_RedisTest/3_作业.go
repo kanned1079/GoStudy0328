@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gomodule/redigo/redis"
 	"reflect"
+	"strconv"
 )
 
 type Monster3 struct {
@@ -35,7 +36,6 @@ func (m *Monster3) writeToRedis() {
 		}
 	}()
 	// 使用Hash进行存储
-	//var sliceFieldName = make([]string, 0)
 	for i := 0; i < reflect.TypeOf(m).Elem().NumField(); i++ {
 		structName := reflect.TypeOf(m).Elem().Name()
 		fieldName := reflect.TypeOf(m).Elem().Field(i).Name
@@ -70,4 +70,6 @@ func (m *Monster3) readFormRedis() {
 	for i := range slices {
 		fmt.Println(slices[i])
 	}
+	num, err := strconv.Atoi(slices[1])
+	fmt.Println(num)
 }

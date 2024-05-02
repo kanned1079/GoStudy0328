@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gomodule/redigo/redis"
+	"strconv"
 )
 
 var ipaddr string = "api.ikanned.com"
@@ -76,4 +77,10 @@ func main() {
 
 	// 这里设置有效时间为60s
 	_, _ = conn.Do("EXPIRE", "UserName", 60)
+
+	for i := 0; i < 100; i++ {
+		_, _ = conn.Do("SET", "UserName"+strconv.Itoa(i), "kinggyo"+strconv.Itoa(i))
+	}
+
+	//_, _ = conn.Do("FLUSHALL")
 }

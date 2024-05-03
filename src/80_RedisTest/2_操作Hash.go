@@ -82,5 +82,14 @@ func main() {
 		_, _ = conn.Do("SET", "UserName"+strconv.Itoa(i), "kinggyo"+strconv.Itoa(i))
 	}
 
+	_, _ = conn.Do("HMSET", "user1", "name", "kanna", "age", "20")
+	// 查看有多少个键值对
+	lens, _ := redis.Int(conn.Do("Hlen", "user1"))
+	fmt.Println("len = ", lens)
+
+	// 查看哈希表key中有没有指定的field
+	isExist, err := redis.Bool(conn.Do("HEXISTS", "user1", "age"))
+	fmt.Println(isExist)
+
 	//_, _ = conn.Do("FLUSHALL")
 }

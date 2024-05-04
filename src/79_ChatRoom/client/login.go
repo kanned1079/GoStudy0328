@@ -9,8 +9,9 @@ func login(userId int, userPassword string) (err error) {
 	// 最好是使用error来反回错误 而不是使用bool
 	// 下一步是定义协议 怎么组织发送的数据
 	fmt.Println("你输入的用户名和密码 = ", userId, userPassword)
+	// 开始完成用户登录的第一个功能 获取消息的长度 并且服务端可以正常收到该值
+	//
 
-	err = nil
 	return
 }
 
@@ -35,8 +36,10 @@ func login(userId int, userPassword string) (err error) {
 // 9)根据比较结果 返回Mess 里面比较简单 比如1成功 100错误等等
 // 10)发送给客户端
 
+// 定义消息的格式和它的结构
 type Message struct {
-	Type string `json:"type"` // 这里以后会有很多种不同的类型
-	Data string `json:"data"` // 这里是序列化后放入的
+	Length uint32 `json:"length"`
+	Type   string `json:"type"` // 这里以后会有很多种不同的类型
+	Data   string `json:"data"` // 这里是序列化后放入的
 
 }

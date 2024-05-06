@@ -59,11 +59,12 @@ func main() {
 		_, _ = fmt.Scanf("%s\n", &userPassword)
 		// 先把登录的函数写到另一个文件中 需要进行用户检验 设计Message
 
-		if err := login(userId, userPassword); err != nil {
-			fmt.Println("登录失败", err)
-		} else {
-			fmt.Println("登录成功")
-		}
+		//if err := login(userId, userPassword); err != nil {
+		//	fmt.Println("登录失败", err)
+		//} else {
+		//	fmt.Println("登录成功")
+		//}
+		login(userId, userPassword)
 
 	} else if key == 2 {
 		// 这里进行用户注册

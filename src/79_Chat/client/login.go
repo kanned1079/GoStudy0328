@@ -82,6 +82,20 @@ func login(userId int, userPassword string) (err error) {
 	//time.Sleep(10 * time.Second)
 	//fmt.Println("休眠了10s")
 
+	mes, err = readPkg(conn) // mes还需要反序列化
+	if err != nil {
+		fmt.Println("readPkg err:", err)
+		return
+	}
+	// 将mes的Data部分发序列化成LoginRespMes
+	var loginResMes message.LoginRespMes
+	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
+	if loginResMes.Code == 200 {
+		fmt.Println("登录成功")
+	} else if loginResMes.Code == 500 {
+		fmt.Println("登录失败 err = ", loginResMes.Error)
+	}
+
 	return
 }
 

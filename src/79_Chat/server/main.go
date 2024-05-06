@@ -67,7 +67,7 @@ func writePkg(conn net.Conn, data []byte) (err error) {
 func ServerProcessLogin(conn net.Conn, mes *message.Message) (err error) {
 	// 1.先从mes中取出data 并直接反序列化成LoginMes
 	var loginMes message.LoginMes
-	err = json.Unmarshal([]byte(mes.Data), loginMes) // 将string强制转换为[]byte给反序列化
+	err = json.Unmarshal([]byte(mes.Data), &loginMes) // 将string强制转换为[]byte给反序列化
 	if err != nil {
 		fmt.Println("mes.Data反序列化失败 err = ", err)
 		return
@@ -157,6 +157,12 @@ func process(conn net.Conn) {
 		// 但是要根据不同消息来 让这个协程调用不同函数
 		// ServerProcessMes() 处理消息
 		// ServerProcessLoginMess() 处理登录请求
+		err = ServerProcessMes(conn, &mes)
+		if err != nil {
+			fmt.Println("server process err:", err)
+			return
+			// 以后要做错误处理
+		}
 
 	}
 }

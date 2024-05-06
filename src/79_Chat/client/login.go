@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"time"
 )
 
 // 写一个函数 完成登录
@@ -73,12 +74,15 @@ func login(userId int, userPassword string) (err error) {
 	// 3)根据反序列化后对应的消息 判读是否是合法的用户 返回LoginResMes
 	// 4)客户端根据接收到的消息显示对应的页面
 	// 5)这里需要做一些函数的封装
-	_, err = conn.Read(data)
+	_, err = conn.Write(data)
 	if err != nil {
 		fmt.Println("conn.Read err:", err)
 		return
 	}
 	// 这里还需要进行处理服务器返回的消息
+
+	time.Sleep(10 * time.Second)
+	fmt.Println("休眠了10s")
 	return
 }
 

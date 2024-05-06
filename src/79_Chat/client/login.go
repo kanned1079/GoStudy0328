@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
-	"time"
 )
 
 // 写一个函数 完成登录
@@ -80,9 +79,9 @@ func login(userId int, userPassword string) (err error) {
 		return
 	}
 	// 这里还需要进行处理服务器返回的消息
+	//time.Sleep(10 * time.Second)
+	//fmt.Println("休眠了10s")
 
-	time.Sleep(10 * time.Second)
-	fmt.Println("休眠了10s")
 	return
 }
 

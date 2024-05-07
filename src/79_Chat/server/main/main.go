@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"net"
 )
 
@@ -133,35 +132,46 @@ func process(conn net.Conn) {
 			fmt.Println("close conn err:", err)
 		}
 	}()
+
+	// 创建一个总控
+	processor := &Processor{
+		conn: conn,
+	}
+	err := processor.Process2()
+	if err != nil {
+		fmt.Println("客户端和服务器端协程错误 err:", err)
+		return
+	}
+
 	//buffer := make([]byte, 8096)
 	// 读取客户端发送的信息 这里该去写客户端的代码了
-	for {
-		// 不建议在这里乱写 建议封装为函数 readPkg
-		// 这里将读取消息的 直接封装为一个函数 readPkg(conn net.Conn) 返回message和error
-		mes, err := readPkg(conn)
-		if err != nil {
-			if err == io.EOF {
-				fmt.Println("客户端关闭了连接，服务器端也正常退出")
-				return
-			} else {
-				fmt.Println("read err:", err)
-				return
-			}
-			//return // 因为这里的return就不会一直读取
-		}
-		fmt.Println(mes)
-		// 3)根据反序列化后对应的消息 判读是否是合法的用户 返回LoginResMes
-		// 但是要根据不同消息来 让这个协程调用不同函数
-		// ServerProcessMes() 处理消息
-		// ServerProcessLoginMess() 处理登录请求
-		err = ServerProcessMes(conn, &mes)
-		if err != nil {
-			fmt.Println("server process err:", err)
-			return
-			// 以后要做错误处理
-		}
-
-	}
+	//for {
+	//	// 不建议在这里乱写 建议封装为函数 readPkg
+	//	// 这里将读取消息的 直接封装为一个函数 readPkg(conn net.Conn) 返回message和error
+	//	mes, err := readPkg(conn)
+	//	if err != nil {
+	//		if err == io.EOF {
+	//			fmt.Println("客户端关闭了连接，服务器端也正常退出")
+	//			return
+	//		} else {
+	//			fmt.Println("read err:", err)
+	//			return
+	//		}
+	//		//return // 因为这里的return就不会一直读取
+	//	}
+	//	fmt.Println(mes)
+	//	// 3)根据反序列化后对应的消息 判读是否是合法的用户 返回LoginResMes
+	//	// 但是要根据不同消息来 让这个协程调用不同函数
+	//	// ServerProcessMes() 处理消息
+	//	// ServerProcessLoginMess() 处理登录请求
+	//	err = ServerProcessMes(conn, &mes)
+	//	if err != nil {
+	//		fmt.Println("server process err:", err)
+	//		return
+	//		// 以后要做错误处理
+	//	}
+	//
+	//}
 }
 
 func main() {

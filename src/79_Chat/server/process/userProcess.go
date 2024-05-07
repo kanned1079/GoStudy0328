@@ -1,4 +1,4 @@
-package process
+package process2
 
 import (
 	"GoStudy0328/src/79_Chat/common/message"
@@ -56,7 +56,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	tf := &utils.Transfer{ // 新建实例
 		Conn: this.Conn,
 	}
-	err = tf.WritePkg(conn, data)
+	err = tf.WritePkg(data)
 
 	//err = writePkg(conn, data) // 现在这个已经没有了 需要调用Transfer对象的方法
 	// 下面要去客户端写

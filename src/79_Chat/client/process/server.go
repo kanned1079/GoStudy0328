@@ -1,7 +1,9 @@
 package process
 
 import (
+	"GoStudy0328/src/79_Chat/server/utils"
 	"fmt"
+	"net"
 	"os"
 )
 
@@ -32,6 +34,23 @@ func ShowMenu() {
 		}
 	default:
 		fmt.Println("非法输入")
+
+	}
+}
+
+func serverProcessMes(conn net.Conn) {
+	tf := &utils.Transfer{
+		Conn: conn,
+	} // 创建一个Transfer实例 不停向服务器发送消息
+	for { // 保持通讯
+		fmt.Println("客户端正在等服务器发送的消息...")
+		mes, err := tf.ReadPkg() // 这里的mes是已经是序列化后的
+		if err != nil {
+			fmt.Println("服务器端 tf.ReadPkg() err:", err)
+			return
+		}
+		// 如果读取到消息 又是下一步处理逻辑
+		fmt.Printf("mes = %v\n", mes)
 
 	}
 }

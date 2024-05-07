@@ -10,6 +10,7 @@ import (
 
 // 写一个函数 完成登录
 
+// login 只处理登录功能
 func login(userId int, userPassword string) (err error) {
 	// 注意给函数或参数做好命名
 	// 最好是使用error来反回错误 而不是使用bool

@@ -69,6 +69,8 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	}
 	fmt.Println("客户端发送消息成功 长度 = ", pkgLen)
 	fmt.Println("发送的data = ", string(data))
+	// 这是一串信息
+	// "{\"user_id\":100,\"user_password\":\"123456\",\"user_name\":\"kanna\"}"
 	// Class3 update20240506
 	// 完成客户端可以发送消息本身 服务端能正常收到消息 并根据客户端发送的的消息判断是不是合法用户
 	// 并返回相应的LoginResMes

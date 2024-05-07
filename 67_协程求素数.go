@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var intChan = make(chan int, 1000) // 这里只给1000
-	var primeChan = make(chan int, 10000)
+	var primeChan = make(chan int, 1000)
 	var endChan = make(chan bool, 4) // 协程个数
 	goroutineCount := 1
 

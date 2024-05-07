@@ -2,6 +2,7 @@ package process2
 
 import (
 	"GoStudy0328/src/79_Chat/common/message"
+	"GoStudy0328/src/79_Chat/server/model"
 	"GoStudy0328/src/79_Chat/server/utils"
 	"encoding/json"
 	"fmt"
@@ -28,15 +29,27 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	var loginResMes message.LoginRespMes // 要把这个填到上面去才能返回
 
 	// 先不到数据库了去 如果用户的ID为100 密码为123456就是合法的 反之
-	if loginMes.UserId == 100 && loginMes.UserPassword == "123456" {
-		// 这样就是合法的 先不到数据库里去认证
-		loginResMes.Code = 200 // 合法表示200 登录成功
-		loginResMes.Error = "用户登录成功"
+	// 到数据库里去验证
+	// 1)使用model.UserDao去数据库验证
+	user, err := model.MyUserDao.Login(loginMes.UserId, loginMes.UserPassword)
+	if err != nil {
+		loginResMes.Code = 500
+		loginResMes.Error = "该用户不存在 请注册再使用"
+		// 先测试成功 后面再根据返回具体错误信息
 	} else {
-		// 不合法的话就构建一个LoginResMes就返回给客户端
-		loginResMes.Code = 500              // 不合法表示 该用户不存在
-		loginResMes.Error = "该用户不存在 请注册再使用" // 注释
+		// 没有错误
+		loginResMes.Code = 200 // 合法表示200 登录成功
+		fmt.Println(user, "登录成功 by serverProcessLogin")
 	}
+	//if loginMes.UserId == 100 && loginMes.UserPassword == "123456" { // 需要改这里
+	//	// 这样就是合法的 先不到数据库里去认证
+	//	loginResMes.Code = 200 // 合法表示200 登录成功
+	//	loginResMes.Error = "用户登录成功"
+	//} else {
+	//	// 不合法的话就构建一个LoginResMes就返回给客户端
+	//	loginResMes.Code = 500              // 不合法表示 该用户不存在
+	//	loginResMes.Error = "该用户不存在 请注册再使用" // 注释
+	//}
 	// 3.将loginresMes序列化
 	data, err := json.Marshal(loginResMes)
 	if err != nil {

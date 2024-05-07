@@ -4,6 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gomodule/redigo/redis"
+	"strconv"
+)
+
+// 在服务器启动后就初始化一个UserDao实例
+// 在需要对Redis操作时候直接调用
+var (
+	MyUserDao *UserDao // 现在只是一个空的
 )
 
 // 定义一个UserDao结构体
@@ -24,7 +31,8 @@ func NewUserDao(pool *redis.Pool) (userDao *UserDao) {
 // getUserById 根据用户id 返回一个User实例和err
 func (this *UserDao) getUserById(conn redis.Conn, id int) (user *User, err error) {
 	// 通过给定的id去redis里查询这个用户
-	res, err := redis.String(conn.Do("HGET", id, "user"))
+	res, err := redis.String(conn.Do("HGET", "users", strconv.Itoa(id)))
+	fmt.Println("get = ", user)
 	if err != nil {
 		if err == redis.ErrNil { // 这个说明在users中找不到对应的Id
 			err = ERROR_USER_NOT_EXIST
@@ -38,6 +46,7 @@ func (this *UserDao) getUserById(conn redis.Conn, id int) (user *User, err error
 		fmt.Println("res反序列化失败 err = ", err)
 		return
 	} // 到这里只是拿到了用户的数据 但是密码是否正确不知道
+
 	return
 }
 
@@ -57,7 +66,7 @@ func (this *UserDao) Login(userId int, userPwd string) (user *User, err error) {
 		fmt.Println("getUserById err ", err)
 		return
 	} // 这时证明这个用户是获取到了
-	if user.UserPwd != userPwd {
+	if user.UserPassword != userPwd {
 		err = ERROR_USER_PWD
 		return
 	}

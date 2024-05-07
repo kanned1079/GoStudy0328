@@ -1,6 +1,7 @@
 package main
 
 import (
+	"GoStudy0328/src/79_Chat/server/model"
 	"fmt"
 	"net"
 )
@@ -174,7 +175,17 @@ func process(conn net.Conn) {
 	//}
 }
 
+// 对UserDao的初始化任务
+func initUserDao() {
+	// 这里的UserDao本身就是一个全局的
+	// 这里需要注意一个初始化的顺序问题 先调用initPool
+	model.MyUserDao = model.NewUserDao(pool)
+}
+
 func main() {
+	// 服务器一旦启动就初始化Redis连接池
+	initPool("api.ikanned.com:16379", 16, 0, 300)
+	initUserDao() // 初始化这个要先初始化上面的
 	// 提示信息
 	fmt.Println("服务器正在监听8889端口...")
 	listener, err := net.Listen("tcp", "0.0.0.0:8889")

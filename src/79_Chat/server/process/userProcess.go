@@ -2,13 +2,18 @@ package process
 
 import (
 	"GoStudy0328/src/79_Chat/common/message"
+	"GoStudy0328/src/79_Chat/server/utils"
 	"encoding/json"
 	"fmt"
 	"net"
 )
 
+type UserProcess struct {
+	Conn net.Conn // 连接
+}
+
 // ServerProcessLogin 专门处理登录的请求
-func ServerProcessLogin(conn net.Conn, mes *message.Message) (err error) {
+func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	// 1.先从mes中取出data 并直接反序列化成LoginMes
 	var loginMes message.LoginMes
 	err = json.Unmarshal([]byte(mes.Data), &loginMes) // 将string强制转换为[]byte给反序列化
@@ -48,7 +53,12 @@ func ServerProcessLogin(conn net.Conn, mes *message.Message) (err error) {
 	}
 	// 6. 发送data 不能够直接发 也要防止丢包 还有很多步骤 因此这里也用封装成一个函数
 	// 将其封装到一个writePkg中
-	err = writePkg(conn, data)
+	tf := &utils.Transfer{ // 新建实例
+		Conn: this.Conn,
+	}
+	err = tf.WritePkg(conn, data)
+
+	//err = writePkg(conn, data) // 现在这个已经没有了 需要调用Transfer对象的方法
 	// 下面要去客户端写
 	return
 }

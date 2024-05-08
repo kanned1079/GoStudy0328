@@ -1,10 +1,10 @@
 package model
 
 import (
+	"GoStudy0328/src/79_Chat/common/message"
 	"encoding/json"
 	"fmt"
 	"github.com/gomodule/redigo/redis"
-	"strconv"
 )
 
 // 在服务器启动后就初始化一个UserDao实例
@@ -31,11 +31,12 @@ func NewUserDao(pool *redis.Pool) (userDao *UserDao) {
 // getUserById 根据用户id 返回一个User实例和err
 func (this *UserDao) getUserById(conn redis.Conn, id int) (user *User, err error) {
 	// 通过给定的id去redis里查询这个用户
-	res, err := redis.String(conn.Do("HGET", "users", strconv.Itoa(id)))
-	fmt.Println("get = ", user)
+	res, err := redis.String(conn.Do("HGET", "users", id))
+	fmt.Println("数据库读取的用户数据 =", res)
 	if err != nil {
 		if err == redis.ErrNil { // 这个说明在users中找不到对应的Id
-			err = ERROR_USER_NOT_EXIST
+			fmt.Println("在数据库中找不到对应Id的用户")
+			err = ERROR_USER_NOT_EXIST // 用户不存在
 		}
 		return
 	} // 到这里就是成功
@@ -46,7 +47,6 @@ func (this *UserDao) getUserById(conn redis.Conn, id int) (user *User, err error
 		fmt.Println("res反序列化失败 err = ", err)
 		return
 	} // 到这里只是拿到了用户的数据 但是密码是否正确不知道
-
 	return
 }
 
@@ -68,7 +68,39 @@ func (this *UserDao) Login(userId int, userPwd string) (user *User, err error) {
 	} // 这时证明这个用户是获取到了
 	if user.UserPassword != userPwd {
 		err = ERROR_USER_PWD
+		fmt.Println("密码不正确")
 		return
 	}
+	// pass
+	return
+}
+
+func (this *UserDao) Register(user *message.User) (err error) {
+	// 先从连接池中取出一个连接
+	conn := this.pool.Get()
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("recover err ", err)
+		}
+	}()
+	_, err = this.getUserById(conn, user.UserId)
+	if err == nil { // 这里查询到了反而是用户已经存在
+		fmt.Println("用户已经存在 getUserById err ", err)
+		err = ERROR_USER_EXISTS // 返回用户已经存在
+		return
+	} // 这时证明这个用户还没有注册过
+	// 在Redis中查询不到 因此可以入库完成注册
+	data, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println("新建用户序列化错误 json err ", err)
+		return
+	}
+	// 开始入库
+	_, err = conn.Do("HSET", "users", user.UserId, string(data))
+	if err != nil {
+		fmt.Println("新用户入库错误 err ", err)
+		return
+	}
+	// pass
 	return
 }

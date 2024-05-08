@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"os"
 )
 
 type UserProcess struct {
@@ -37,7 +38,7 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	var loginMes message.LoginMes // 要序列化这个给上面的Mes
 	loginMes.UserId = userId
 	loginMes.UserPassword = userPassword
-	fmt.Println(loginMes)
+	fmt.Println("func(Login) >", loginMes)
 	//mes.Data = loginMes // 这样不行
 	// 4.将LoginMes序列化
 	data, err := json.Marshal(loginMes) // 这里的data是[]byte切片
@@ -107,8 +108,67 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 			// 如果服务器有数据推送过来给客户端就接受并显示在客户端的终
 		}
 
-	} else if loginResMes.Code == 500 {
-		fmt.Println("登录失败 err = ", loginResMes.Error)
+	} else { // 修改了这里 根据状态码直接返返回
+		fmt.Println("登录失败 可能的原因 err = ", loginResMes.Error)
+	}
+	return
+}
+
+func (this *UserProcess) Register(userId int, userPassword string, userName string) (err error) {
+	conn, err := net.Dial("tcp", "127.0.0.1:8889")
+	if err != nil {
+		fmt.Println("net.Dial err:", err)
+		return
+	}
+	defer func() {
+		_ = conn.Close()
+	}()
+	// 复制的Login的代码
+	var mes message.Message
+	mes.Type = message.RegisterMesType // 修改消息类型
+	//mes.Data // 这个要序列化后放进去
+	// 3.创建一个LoginMes结构体
+	var registerMes message.RegisterMes // 要序列化这个给上面的Mes
+	registerMes.User.UserId = userId
+	registerMes.User.UserPassword = userPassword
+	registerMes.User.UserName = userName
+	// 下面要完成序列化 将regMes序列化
+	data, err := json.Marshal(registerMes) // 这里的data是[]byte切片
+	if err != nil {
+		fmt.Println("json.Marshal err:", err)
+		return
+	}
+	mes.Data = string(data) // 将[]byte转换为string
+	// 将mes序列化
+	data, err = json.Marshal(mes) // 这里的data就是需要发送的数据了 这是个byte切片
+	fmt.Println("发送前 ", mes)
+	if err != nil {
+		fmt.Println("json.Marshal err:", err)
+		return
+	}
+	// 需要封装上面的
+	// 创建一个Transfer
+	tf := utils.Transfer{
+		Conn: conn,
+	}
+	// 发送data给服务器
+	err = tf.WritePkg(data)
+	if err != nil {
+		fmt.Println("请求注册信息 writePkg err:", err)
+	}
+	mes, err = tf.ReadPkg() // 这个mes就是RegisterRespMes
+	if err != nil {
+		fmt.Println("请求注册信息 readPkg err:", err)
+	}
+	// 将mes的Data部分发序列化成RegisterRespMes
+	var registerRespMes message.RegisterRespMes
+	err = json.Unmarshal([]byte(mes.Data), &registerRespMes)
+	if registerRespMes.Code == 200 { // 正确
+		fmt.Println("注册成功 需要重新登录")
+		os.Exit(0) // pass
+	} else { // 修改了这里 根据状态码直接返返回
+		fmt.Println("注册失败 可能的原因 err = ", registerRespMes.Error)
+		os.Exit(0) // pass
 	}
 
 	return

@@ -15,6 +15,7 @@ type Processor struct {
 
 // ServerProcessMes 根据客户端发送消息种类不同 决定调用哪个函数来处理
 func (this *Processor) serverProcessMes(mes *message.Message) (err error) {
+	fmt.Println("mes.Type =", mes.Type)
 	switch mes.Type {
 	case message.LoginMesType:
 		{
@@ -25,9 +26,14 @@ func (this *Processor) serverProcessMes(mes *message.Message) (err error) {
 			}
 			_ = up.ServerProcessLogin(mes)
 		}
-	case message.LoginResMesType:
+	case message.RegisterMesType:
 		{
 			// 处理注册
+			up := &process2.UserProcess{ // 创建一个UserProcessor
+				Conn: this.conn,
+			}
+			_ = up.ServerProcessRegister(mes) // 这个mes里面有 1)type 2)data
+			// 然后先去写userDao
 		}
 	default:
 		fmt.Println("消息类型不存在 无法处理")
@@ -54,7 +60,7 @@ func (this *Processor) Process2() (err error) {
 			}
 			//return // 因为这里的return就不会一直读取
 		}
-		fmt.Println(mes)
+		fmt.Println("读取到客户端的消息 =", mes)
 		// 3)根据反序列化后对应的消息 判读是否是合法的用户 返回LoginResMes
 		// 但是要根据不同消息来 让这个协程调用不同函数
 		// ServerProcessMes() 处理消息

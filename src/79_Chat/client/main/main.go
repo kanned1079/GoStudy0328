@@ -9,6 +9,7 @@ import (
 // 定义暂时的全局变量 一个id 一个密码
 var userId int
 var userPassword string
+var userName string
 
 func main() {
 	// 接受用户输入
@@ -41,6 +42,16 @@ func main() {
 			{
 				fmt.Println("注册用户")
 				//loop = false
+				fmt.Print("输入用户的ID > ")
+				_, _ = fmt.Scanf("%d\n", &userId)
+				fmt.Print("输入用户的密码 > ")
+				_, _ = fmt.Scanf("%s\n", &userPassword)
+				fmt.Print("输入用户昵称 > ")
+				_, _ = fmt.Scanf("%s\n", &userName)
+				// 创建up的实例 来完成注册的请求
+				up := &process.UserProcess{}
+				_ = up.Register(userId, userPassword, userName)
+
 			}
 		case 3:
 			{

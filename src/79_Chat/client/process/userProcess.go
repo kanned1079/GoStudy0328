@@ -100,6 +100,12 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	var loginResMes message.LoginRespMes
 	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
 	if loginResMes.Code == 200 {
+		// 显示在线用户的列表 遍历loginResMes.UserIds
+		fmt.Println("当前在线用户列表如下: ")
+		for _, v := range loginResMes.UserIds {
+			fmt.Println("用户Id： ", v)
+		}
+		fmt.Println("\n\n")
 		go serverProcessMes(conn) // 在这里启动协程
 		go fmt.Println("登录成功")    // 要修改这里
 		for {                     // 显示登录成功的菜单 且要做循环显示

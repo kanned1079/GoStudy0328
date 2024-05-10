@@ -10,7 +10,8 @@ import (
 )
 
 type UserProcess struct {
-	Conn net.Conn // 连接
+	Conn   net.Conn // 连接
+	UserId int      // 用来识别是哪一个用户 在线用户的修改
 }
 
 // ServerProcessLogin 专门处理登录的请求
@@ -50,6 +51,14 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	} else {
 		// 没有错误
 		loginResMes.Code = 200 // 合法表示200 登录成功
+		// 这里因为用户已经登录成功 需要把登录成功的用户放入到全局的userMgr中
+		this.UserId = loginMes.UserId // 还要将登录成功的用户的userId赋给this
+		userMgr.AddOnlineUser(this)   // 需要的参数就是当前用户对应的那个userProcess
+		// 将当前在线用户的Id放入到loginResMes.UserId
+		// 遍历userMgr.onlineUsers
+		for id, _ := range userMgr.onlineUsers {
+			loginResMes.UserIds = append(loginResMes.UserIds, id)
+		} // 返回的时候肯定有一个切片里面包含Ids给客户端 下面去编写客户端
 		fmt.Println(user, "登录成功 by serverProcessLogin")
 	}
 	//if loginMes.UserId == 100 && loginMes.UserPassword == "123456" { // 需要改这里

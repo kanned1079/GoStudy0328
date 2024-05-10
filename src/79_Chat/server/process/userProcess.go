@@ -52,8 +52,9 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 		// 没有错误
 		loginResMes.Code = 200 // 合法表示200 登录成功
 		// 这里因为用户已经登录成功 需要把登录成功的用户放入到全局的userMgr中
-		this.UserId = loginMes.UserId // 还要将登录成功的用户的userId赋给this
-		userMgr.AddOnlineUser(this)   // 需要的参数就是当前用户对应的那个userProcess
+		this.UserId = loginMes.UserId            // 还要将登录成功的用户的userId赋给this
+		userMgr.AddOnlineUser(this)              // 需要的参数就是当前用户对应的那个userProcess
+		this.NotifyOthersOnline(loginMes.UserId) // 通知其他用户我上线了
 		// 将当前在线用户的Id放入到loginResMes.UserId
 		// 遍历userMgr.onlineUsers
 		for id, _ := range userMgr.onlineUsers {
@@ -143,6 +144,46 @@ func (this *UserProcess) ServerProcessRegister(mes *message.Message) (err error)
 		Conn: this.Conn,
 	}
 	err = tf.WritePkg(data)
-
 	return err
+}
+
+// 编写通知所有在线用户
+func (this *UserProcess) NotifyOthersOnline(userId int) { // 这个userId是用来通知别人 我上线了的
+	// 遍历onlineUser 然后一个个的发送 NotifyUserStatus
+	for id, up := range userMgr.onlineUsers {
+		if id == userId { // 过滤掉自己
+			continue
+		}
+		// 开始通知 单独使用一个函数
+		up.notifyMeOnline(userId)
+	}
+}
+
+func (this *UserProcess) notifyMeOnline(userId int) {
+	// 开始组装NotifyUserStatusMes消息
+	var mes message.Message
+	mes.Type = message.NotifyUserStatusType
+	// 还需要创建一个NotifyUserStatus消息 这个发送时候是包含在mes中的
+	var notifyUserStatusMes message.NotifyUserStatusMes
+	notifyUserStatusMes.UserId = userId
+	notifyUserStatusMes.Status = message.UserOnline // 这里有需要定义常量
+	// 首先是要把notifyUserStatusMes序列化
+	data, err := json.Marshal(notifyUserStatusMes)
+	if err != nil {
+		fmt.Println("notifyUserStatusMes错误 err =", err)
+		return
+	} // 现在只序列化了一个
+	mes.Data = string(data)       // 需要转换成String
+	data, err = json.Marshal(mes) // 对mes再次序列化
+	if err != nil {
+		fmt.Println("mes错误 err =", err)
+		return
+	} // 以上一堆代码建议封装
+	tf := &utils.Transfer{
+		Conn: this.Conn,
+	} // 创建Transfer实例用于传送
+	if err := tf.WritePkg(data); err != nil {
+		fmt.Println("tf.notifyUsers错误 err =", err)
+		return
+	}
 }

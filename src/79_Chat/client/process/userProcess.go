@@ -103,6 +103,10 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 		// 显示在线用户的列表 遍历loginResMes.UserIds
 		fmt.Println("当前在线用户列表如下: ")
 		for _, v := range loginResMes.UserIds {
+			// 如果要求不显示自己在线 下面需要增加的
+			if v == loginMes.UserId {
+				continue
+			}
 			fmt.Println("用户Id： ", v)
 		}
 		fmt.Println("\n\n")

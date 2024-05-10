@@ -8,6 +8,15 @@ const (
 	// 注册消息与返回
 	RegisterMesType     = "RegisterMes"
 	RegisterRespMesType = "RegisterRespMes"
+	// 用户状态消息的
+	NotifyUserStatusType = "NotifyUserStatusMes"
+)
+
+const (
+	// 下面一些是用户状态
+	UserOnline = iota
+	UserOffine
+	UserBusy
 )
 
 type Message struct {
@@ -37,4 +46,10 @@ type RegisterMes struct {
 type RegisterRespMes struct {
 	Code  int    `json:"code"`  // 400表示已经占用 200表示注册成功
 	Error string `json:"error"` // 返回的错误信息
+}
+
+// 为了配合服务器端推送用户状态变化状态
+type NotifyUserStatusMes struct {
+	UserId int `json:"user_id"` // 	用户的Id
+	Status int `json:"status"`
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoStudy0328/src/79_Chat/server/model"
+	"fmt"
 	"log"
 	"net"
 )
@@ -184,11 +185,15 @@ func initUserDao() {
 
 func main() {
 	// 服务器一旦启动就初始化Redis连接池
-	initPool("api.ikanned.com:16379", 16, 0, 300)
+	var conf1 Conf
+	if err := conf1.ReadConfig("./server_conf.yaml"); err != nil {
+		log.Println("读取配置文件错误 err:", err)
+	}
+	initPool(fmt.Sprintf("%s:%d", conf1.RedisIpAddr, conf1.RedisPort), 16, 0, 300)
 	initUserDao() // 初始化这个要先初始化上面的
 	// 提示信息
-	log.Println("服务器正在监听8889端口...")
-	listener, err := net.Listen("tcp", "0.0.0.0:8889")
+	log.Printf("服务器正在监听%d端口...", conf1.ServerPort)
+	listener, err := net.Listen(conf1.ServerProtocol, fmt.Sprintf("%s:%d", conf1.ServerIpAddr, conf1.ServerPort))
 	if err != nil {
 		log.Println("net.Listen err:", err)
 		return

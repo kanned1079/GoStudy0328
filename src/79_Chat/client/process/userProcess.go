@@ -22,7 +22,7 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	//fmt.Println("你输入的用户名和密码 = ", userId, userPassword)
 	// 开始完成用户登录的第一个功能 获取消息的长度 并且服务端可以正常收到该值
 	// 1.连接到服务器端
-	conn, err := net.Dial("tcp", "127.0.0.1:8889")
+	conn, err := net.Dial("tcp", "0.0.0.0:8889")
 	if err != nil {
 		fmt.Println("net.Dial err:", err)
 		return

@@ -52,7 +52,7 @@ const (
 )
 
 const (
-	filePath string = "./Files/a.txt"
+	filePath2 string = "./Files/a.txt"
 )
 
 func main() {

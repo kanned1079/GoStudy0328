@@ -1,5 +1,5 @@
 server_protocol: tcp            #服务器监听协议
-server_ip_addr: 0.0.0.0         #服务器监听IP
+erver_ip_addr: 0.0.0.0          #服务器监听IP
 server_port: 8889               #服务器监听端口
 redis_protocol: tcp             #Redis连接协议
 redis_ip_addr: api.ikanned.com  #Redis服务器IP

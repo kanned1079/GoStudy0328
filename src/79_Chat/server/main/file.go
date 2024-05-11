@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io"
 	"log"
 	"os"
+	"reflect"
 	"time"
 )
 
@@ -26,37 +26,25 @@ type Conf struct {
 func (this *Conf) ReadConfig(path string) (err error) {
 	file, err := os.OpenFile(path, os.O_RDONLY, 0400)
 	if err != nil {
-		log.Println("配置文件打开出错或不存在 err: ", err)
+		log.Println("打开配置文件出错 err: ", err)
 		return
 	}
-	defer func() {
+	defer func() { // 延迟关闭文件
 		if err = file.Close(); err != nil {
 			log.Println("关闭配置文件错误 err: ", err)
+			return
 		}
 	}()
-	dec := yaml.NewDecoder(file)
-	if err = dec.Decode(&this); err != nil && err != io.EOF {
-		log.Println("err: ", err)
+	dec := yaml.NewDecoder(file)                              // 先新建NewDecoder
+	if err = dec.Decode(&this); err != nil && err != io.EOF { // 再创建实例 就像Unmarshel一样
+		log.Println("解码文件错误 err: ", err)
+		return
 	}
-
-	fmt.Println(this)
-
-	return
+	this.ShowConfDetails()
+	return nil
 }
 
-func (c *Conf) ReadConfigFromFile(path string) error {
-	file, err := os.OpenFile(path, os.O_RDONLY, 0444)
-	if err != nil {
-		log.Println("配置文件打开出错或不存在 err: ", err)
-		return err
-	}
-	defer file.Close()
-
-	dec := yaml.NewDecoder(file)
-	if err := dec.Decode(&c); err != nil {
-		return err
-	}
-	fmt.Println(c)
-
-	return nil
+func (this *Conf) ShowConfDetails() {
+	log.Println("需要的配置个数 =", reflect.TypeOf(this).Elem().NumField())
+	log.Println("配置文件信息 =", this)
 }

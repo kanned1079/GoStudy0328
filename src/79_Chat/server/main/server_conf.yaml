@@ -1,8 +1,9 @@
 server_protocol: tcp            #服务器监听协议
 server_ip_addr: 0.0.0.0         #服务器监听IP
 server_port: 8889               #服务器监听端口
-
 redis_protocol: tcp             #Redis连接协议
 redis_ip_addr: api.ikanned.com  #Redis服务器IP
 redis_port: 16379               #Redis服务器端口
-idle_time: 30                   #延迟时间
+redis_max_idle: 16              #Redis最大允许等待
+redis_max_active: 0             #Redis最大连接数
+redis_idle_time_out: 300        #Redis单个连接超时时间

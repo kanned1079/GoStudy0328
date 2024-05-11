@@ -189,7 +189,7 @@ func main() {
 	if err := conf1.ReadConfig("./server_conf.yaml"); err != nil {
 		log.Println("读取配置文件错误 err:", err)
 	}
-	initPool(fmt.Sprintf("%s:%d", conf1.RedisIpAddr, conf1.RedisPort), 16, 0, 300)
+	initPool(fmt.Sprintf("%s:%d", conf1.RedisIpAddr, conf1.RedisPort), conf1.RedisMaxIdle, conf1.RedisMaxActive, conf1.RedisIdleTimeOut)
 	initUserDao() // 初始化这个要先初始化上面的
 	// 提示信息
 	log.Printf("服务器正在监听%d端口...", conf1.ServerPort)

@@ -10,6 +10,8 @@ const (
 	RegisterRespMesType = "RegisterRespMes"
 	// 用户状态消息的
 	NotifyUserStatusType = "NotifyUserStatusMes"
+	// 短消息类型
+	SmsMesTyoe = "SmsMes"
 )
 
 const (
@@ -48,8 +50,14 @@ type RegisterRespMes struct {
 	Error string `json:"error"` // 返回的错误信息
 }
 
-// 为了配合服务器端推送用户状态变化状态
+// NotifyUserStatusMes 为了配合服务器端推送用户状态变化状态
 type NotifyUserStatusMes struct {
 	UserId int `json:"user_id"` // 	用户的Id
 	Status int `json:"status"`
+}
+
+// 增加一个发送消息的
+type SmsMes struct {
+	Content string `json:"content"`
+	User           // 使用了一个匿名的结构体
 }

@@ -15,6 +15,8 @@ type Processor struct {
 
 // ServerProcessMes 根据客户端发送消息种类不同 决定调用哪个函数来处理
 func (this *Processor) serverProcessMes(mes *message.Message) (err error) {
+	// 是否能接收到客户端发送的消息
+	fmt.Println("Client.mes =", mes)
 	fmt.Println("mes.Type =", mes.Type)
 	switch mes.Type {
 	case message.LoginMesType:
@@ -35,6 +37,14 @@ func (this *Processor) serverProcessMes(mes *message.Message) (err error) {
 			_ = up.ServerProcessRegister(mes) // 这个mes里面有 1)type 2)data
 			// 然后先去写userDao
 		}
+	case message.SmsMesTyoe:
+		{
+			// 在客户端每次要创建新的up
+			smsProcess := &process2.SmsProcess{}
+			smsProcess.SendGroupMes(mes) // 是指针
+
+		}
+
 	default:
 		fmt.Println("消息类型不存在 无法处理")
 

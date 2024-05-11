@@ -100,6 +100,10 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	var loginResMes message.LoginRespMes
 	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
 	if loginResMes.Code == 200 {
+		// 初始化CurrUser
+		CurrUser.Conn = conn
+		CurrUser.UserId = userId
+		CurrUser.UserStatus = message.UserOnline
 		// 显示在线用户的列表 遍历loginResMes.UserIds
 		fmt.Println("当前在线用户列表如下: ")
 		for _, v := range loginResMes.UserIds {
@@ -108,6 +112,13 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 				continue
 			}
 			fmt.Println("用户Id： ", v)
+			// 在这里把Id放到onlineUser中
+			user := &message.User{ // 这里是用的指针
+				UserId:     v,
+				UserStatus: message.UserOnline,
+			}
+			onlineUsers[v] = user // 这里的value也是要的指针
+
 		}
 		fmt.Println("\n\n")
 		go serverProcessMes(conn) // 在这里启动协程

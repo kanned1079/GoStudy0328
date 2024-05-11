@@ -14,7 +14,7 @@ type SmsProcess struct {
 func (this *SmsProcess) SendGroupMes(content string) (err error) {
 	// 创建一个Message
 	var mes message.Message
-	mes.Type = message.SmsMesTyoe
+	mes.Type = message.SmsMesType
 	// 创建一个smsMes实例
 	var smsMes message.SmsMes
 	smsMes.Content = content        // 说得内容

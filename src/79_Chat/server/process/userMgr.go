@@ -1,6 +1,8 @@
 package process2
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 因为UserMgr实例在服务器端只会有一个
 // 因为在很多地方都会用到 因此定义为全局变量

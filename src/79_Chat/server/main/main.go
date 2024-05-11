@@ -2,7 +2,7 @@ package main
 
 import (
 	"GoStudy0328/src/79_Chat/server/model"
-	"fmt"
+	"log"
 	"net"
 )
 
@@ -130,7 +130,7 @@ func process(conn net.Conn) {
 	// 也需要延迟关闭
 	defer func() {
 		if err := conn.Close(); err != nil {
-			fmt.Println("close conn err:", err)
+			log.Println("close conn err:", err)
 		}
 	}()
 
@@ -140,7 +140,7 @@ func process(conn net.Conn) {
 	}
 	err := processor.Process2()
 	if err != nil {
-		fmt.Println("客户端和服务器端协程错误 err:", err)
+		log.Println("客户端和服务器端协程错误 err:", err)
 		return
 	}
 
@@ -187,24 +187,24 @@ func main() {
 	initPool("api.ikanned.com:16379", 16, 0, 300)
 	initUserDao() // 初始化这个要先初始化上面的
 	// 提示信息
-	fmt.Println("服务器正在监听8889端口...")
+	log.Println("服务器正在监听8889端口...")
 	listener, err := net.Listen("tcp", "0.0.0.0:8889")
 	if err != nil {
-		fmt.Println("net.Listen err:", err)
+		log.Println("net.Listen err:", err)
 		return
 	}
 	// 延时关闭
 	defer func() {
 		if err := listener.Close(); err != nil {
-			fmt.Println("listener close err:", err)
+			log.Println("listener close err:", err)
 		}
 	}()
 	// 一旦监听成功 就等待客户端来连接
 	for {
-		fmt.Println("等待客户端连接...")
+		log.Println("等待客户端连接...")
 		conn, err := listener.Accept()
 		if err != nil {
-			fmt.Println("listener.Accept err:", err)
+			log.Println("listener.Accept err:", err)
 			// 先不退出
 		}
 		// 一旦连接成功就启动一个协程 和客户端保持通讯

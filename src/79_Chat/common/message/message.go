@@ -11,7 +11,7 @@ const (
 	// 用户状态消息的
 	NotifyUserStatusType = "NotifyUserStatusMes"
 	// 短消息类型
-	SmsMesTyoe = "SmsMes"
+	SmsMesType = "SmsMes"
 )
 
 const (

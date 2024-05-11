@@ -5,6 +5,7 @@ import (
 	"GoStudy0328/src/79_Chat/server/utils"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net"
 	"os"
 )
@@ -66,6 +67,7 @@ func serverProcessMes(conn net.Conn) {
 			return
 		}
 		// 如果读取到消息 又是下一步处理逻辑
+		log.Println("读取到服务器发送的消息 =", mes)
 		switch mes.Type {
 		case message.NotifyUserStatusType: // 通知有人上线了
 			{
@@ -81,10 +83,16 @@ func serverProcessMes(conn net.Conn) {
 				updateUserStatus(&notifyUSerStatusMes)
 				// 编写一个方法处理返回的信息
 			}
+		case message.SmsMesType:
+			{
+				log.Println("服务器发送的消息类型是 = ", message.SmsMesType)
+				outputGroupMes(&mes)
+			}
+
 		default:
 			fmt.Println("服务器端返回了一个未知消息 Type =", mes.Type)
 		}
-		fmt.Printf("mes = %v\n", mes)
+		//fmt.Printf("mes = %v\n", mes)
 
 	}
 }

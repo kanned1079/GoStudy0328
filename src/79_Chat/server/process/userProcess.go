@@ -5,7 +5,8 @@ import (
 	"GoStudy0328/src/79_Chat/server/model"
 	"GoStudy0328/src/79_Chat/server/utils"
 	"encoding/json"
-	"fmt"
+	_ "fmt"
+	"log"
 	"net"
 )
 
@@ -20,7 +21,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	var loginMes message.LoginMes
 	err = json.Unmarshal([]byte(mes.Data), &loginMes) // 将string强制转换为[]byte给反序列化
 	if err != nil {
-		fmt.Println("mes.Data反序列化失败 err = ", err)
+		log.Println("mes.Data反序列化失败 err = ", err)
 		return
 	}
 	// 先声明一个返回的ResMes
@@ -46,7 +47,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 			loginResMes.Code = 505 // 未知错误
 			loginResMes.Error = "未知服务器内部错误..."
 		}
-		fmt.Println(user, "登录失败 by serverProcessLogin")
+		log.Println(user, "登录失败 by serverProcessLogin")
 		// 先测试成功 后面再根据返回具体错误信息
 	} else {
 		// 没有错误
@@ -60,7 +61,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 		for id, _ := range userMgr.onlineUsers {
 			loginResMes.UserIds = append(loginResMes.UserIds, id)
 		} // 返回的时候肯定有一个切片里面包含Ids给客户端 下面去编写客户端
-		fmt.Println(user, "登录成功 by serverProcessLogin")
+		log.Println(user, "登录成功 by serverProcessLogin")
 	}
 	//if loginMes.UserId == 100 && loginMes.UserPassword == "123456" { // 需要改这里
 	//	// 这样就是合法的 先不到数据库里去认证
@@ -74,7 +75,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	// 3.将loginresMes序列化
 	data, err := json.Marshal(loginResMes)
 	if err != nil {
-		fmt.Println("序列化失败 err = ", err)
+		log.Println("序列化失败 err = ", err)
 		return
 	}
 	// 4. 将data赋值给resMes
@@ -82,7 +83,7 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	// 5. 再对resMes进行序列化 发送至客户端需要
 	data, err = json.Marshal(resMes)
 	if err != nil {
-		fmt.Println("序列化失败 err = ", err)
+		log.Println("序列化失败 err = ", err)
 		return
 	}
 	// 6. 发送data 不能够直接发 也要防止丢包 还有很多步骤 因此这里也用封装成一个函数
@@ -102,7 +103,7 @@ func (this *UserProcess) ServerProcessRegister(mes *message.Message) (err error)
 	var registerMes message.RegisterMes
 	err = json.Unmarshal([]byte(mes.Data), &registerMes) // 将string强制转换为[]byte给反序列化
 	if err != nil {
-		fmt.Println("mes.Data反序列化失败 err = ", err)
+		log.Println("mes.Data反序列化失败 err = ", err)
 		return
 	}
 	// 先声明一个返回的ResMes
@@ -124,18 +125,18 @@ func (this *UserProcess) ServerProcessRegister(mes *message.Message) (err error)
 		}
 	} else {
 		registerRespMes.Code = 200
-		fmt.Println("ServerProcessRegister 成功")
+		log.Println("ServerProcessRegister 成功")
 	}
 	// 下面开始组合数据
 	data, err := json.Marshal(registerRespMes)
 	if err != nil {
-		fmt.Println("序列化失败 err = ", err)
+		log.Println("序列化失败 err = ", err)
 		return
 	}
 	resMes.Data = string(data)
 	data, err = json.Marshal(resMes)
 	if err != nil {
-		fmt.Println("序列化失败 err = ", err)
+		log.Println("序列化失败 err = ", err)
 		return
 	}
 	// 6. 发送data 不能够直接发 也要防止丢包 还有很多步骤 因此这里也用封装成一个函数
@@ -170,20 +171,20 @@ func (this *UserProcess) notifyMeOnline(userId int) {
 	// 首先是要把notifyUserStatusMes序列化
 	data, err := json.Marshal(notifyUserStatusMes)
 	if err != nil {
-		fmt.Println("notifyUserStatusMes错误 err =", err)
+		log.Println("notifyUserStatusMes错误 err =", err)
 		return
 	} // 现在只序列化了一个
 	mes.Data = string(data)       // 需要转换成String
 	data, err = json.Marshal(mes) // 对mes再次序列化
 	if err != nil {
-		fmt.Println("mes错误 err =", err)
+		log.Println("mes错误 err =", err)
 		return
 	} // 以上一堆代码建议封装
 	tf := &utils.Transfer{
 		Conn: this.Conn,
 	} // 创建Transfer实例用于传送
 	if err := tf.WritePkg(data); err != nil {
-		fmt.Println("tf.notifyUsers错误 err =", err)
+		log.Println("tf.notifyUsers错误 err =", err)
 		return
 	}
 }

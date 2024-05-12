@@ -185,7 +185,7 @@ func initUserDao() {
 
 func main() {
 	// 服务器一旦启动就初始化Redis连接池
-	var conf1 Conf
+	var conf1 Conf // 这个实例用于读取配置文件
 	if err := conf1.ReadConfig("./server_conf.yaml"); err != nil {
 		log.Println("读取配置文件错误 err:", err)
 	}

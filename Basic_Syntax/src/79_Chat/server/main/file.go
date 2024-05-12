@@ -23,6 +23,7 @@ type Conf struct {
 	RedisIdleTimeOut time.Duration `yaml:"redis_idle_time_out"`
 }
 
+// ReadConfig 用于读取配置文件内容
 func (this *Conf) ReadConfig(path string) (err error) {
 	file, err := os.OpenFile(path, os.O_RDONLY, 0400)
 	if err != nil {
@@ -44,6 +45,7 @@ func (this *Conf) ReadConfig(path string) (err error) {
 	return nil
 }
 
+// ShowConfDetails 用于显示具体信息
 func (this *Conf) ShowConfDetails() {
 	log.Println("需要的配置个数 =", reflect.TypeOf(this).Elem().NumField())
 	log.Println("配置文件信息 =", this)

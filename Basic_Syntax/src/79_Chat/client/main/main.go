@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoStudy0328/src/79_Chat/client/process"
+	"GoStudy0328/Basic_Syntax/src/79_Chat/client/process"
 	"fmt"
 	"os"
 )

@@ -1,8 +1,8 @@
 package process
 
 import (
-	"GoStudy0328/src/79_Chat/common/message"
-	"GoStudy0328/src/79_Chat/server/utils"
+	"GoStudy0328/Basic_Syntax/src/79_Chat/common/message"
+	"GoStudy0328/Basic_Syntax/src/79_Chat/server/utils"
 	"encoding/json"
 	"fmt"
 	"log"

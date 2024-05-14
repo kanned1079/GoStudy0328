@@ -9,18 +9,26 @@ import (
 	"time"
 )
 
-type Conf struct {
-	// 下面是服务端的启动配置
+type ServerConfig struct {
 	ServerProtocol string `yaml:"server_protocol"`
 	ServerIpAddr   string `yaml:"server_ip_addr"`
 	ServerPort     int    `yaml:"server_port"`
-	// 下面是Redis的连接信息和Redis配置
+}
+
+type RedisServerConfig struct {
 	RedisProtocol    string        `yaml:"redis_protocol"`
 	RedisIpAddr      string        `yaml:"redis_ip_addr"`
 	RedisPort        int           `yaml:"redis_port"`
 	RedisMaxIdle     int           `yaml:"redis_max_idle"`
 	RedisMaxActive   int           `yaml:"redis_max_active"`
 	RedisIdleTimeOut time.Duration `yaml:"redis_idle_time_out"`
+}
+
+type Conf struct {
+	// 下面是服务端的启动配置
+	ServerConfig `yaml:"server_config"`
+	// 下面是Redis的连接信息和Redis配置
+	RedisServerConfig `yaml:"redis_server_config"`
 }
 
 // ReadConfig 用于读取配置文件内容

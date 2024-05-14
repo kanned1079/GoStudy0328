@@ -1,0 +1,6 @@
+db_proto: tcp
+db_addr: api.ikanned.com
+db_port: 4407
+db_user: go
+db_pwd: PassCode987!
+db_name: db0

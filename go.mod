@@ -9,5 +9,9 @@ require (
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/gomodule/redigo v1.9.2 // indirect
 	github.com/redis/go-redis/v9 v9.5.1 // indirect
+	github.com/smartystreets/goconvey v1.8.1 // indirect
+	golang.org/x/mod v0.9.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/tools v0.7.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

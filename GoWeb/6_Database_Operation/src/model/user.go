@@ -49,6 +49,7 @@ func (u *User) AddUser2() (err error) {
 }
 
 // GetUserById 根据用户id从数据库中查询一条记录
+// QueryRow 用于从数据库中取出一条数据
 func GetUserById(fromid int) (user *User, err error) {
 	sqlStr := "select id, username, password, email from users where id = ?"
 	row := utils.Db.QueryRow(sqlStr, fromid)

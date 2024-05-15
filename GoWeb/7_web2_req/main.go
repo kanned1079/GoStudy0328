@@ -30,11 +30,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//r.Body.Read(body)
 	//fmt.Fprintln(w, "请求体中的内容: ", string(body))
 	//log.Println(string(body))
+	// 注意上面的不注释下面的就没有用
 	fmt.Fprintln(w, "-------------------------------\n下面是获取表单Form	的内容")
 	// Form 字段
 	// 1)类型是url.Value类型 Form是解析好的表达数据 包含url字段和query参数和POST或PUT的表单数据
 	// 2)字段只有在调用request的ParseForm方法后才有效 在客户端会忽略请求中的本字段而使用Body代替
-	//err := r.ParseForm()
+	//err := r.ParseForm()	// 必须解析表单后才能调用r.Form
 	// 如果form表单的action属性的URL地址中也有与form表单参数相同的请求参数
 	// 那么参数值都可以得到 并且for吗表单中的参数值在URL的参数值的前面
 	//if err != nil {
@@ -45,11 +46,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintln(w, "POST请求的from表单中的请求参数有: ", r.PostForm)
 
 	// 可以通过FromValue和PostFromValue快速获得表单的值
-	fmt.Fprintln(w, "Url中的user请求参数的值: ", r.FormValue("user"))
-	fmt.Fprintln(w, "Url中的user请求参数的值: ", r.PostFormValue("username"))
+	// Form表单优先级高于POST
+	fmt.Fprintln(w, "Url中的user请求参数的值: ", r.FormValue("user")) // 这两个是获得url中的
+	fmt.Fprintln(w, "Url中的pwd请求参数的值: ", r.FormValue("pwd"))
+	fmt.Fprintln(w, "Url中Post的user请求参数的值: ", r.PostFormValue("username")) // 这两个获取的POST表单的
+	fmt.Fprintln(w, "Url中Post的password请求参数的值: ", r.PostFormValue("password"))
+
+	// 还可以通过Request结构体获得字段的值
 
 }
 
+// testJson 测试向客户端返回一个json数据
 func testJson(w http.ResponseWriter, r *http.Request) {
 	// 1.设置相应头的类型
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -66,6 +73,7 @@ func testJson(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
+// testRedirect 测试重定向 状态码发送302
 func testRedirect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Location", "https://ikanned.com:55444/")
 	// 上面这个一定一定一定要在WriteHeader前面

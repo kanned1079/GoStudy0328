@@ -1,0 +1,65 @@
+{{ define "admin/index.html" }}
+<!--给模版起一个名称-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>这是Admin的index.html {{.title}}</h1>
+
+    {{$t := .title}}
+<!--    定义变量-->
+
+    <h2>{{$t}}</h2>
+<!--    使用变量-->
+
+<!--    条件判断-->
+
+<!--    	// gin中的一些比较函数
+	// eq 如果 arg1 == arg2 则返回真如果
+	// ne 如果 arg1 != arg2 则返回真如果
+	// lt 如果 arg1 < arg2  则返回真如果
+	// le 如果 arg1 <= arg2 则返回真如果
+	// gt 如果 arg1 > arg2  则返回真如果
+	// ge 如果 arg1 >= arg2 则返回真-->
+
+
+    {{if ge .score 60}}
+    <p>及格</p>
+    {{else}}
+    <p>不及格</p>
+    {{end}}
+
+    {{if gt .score 90}}
+    <p>优秀</p>
+    {{else}}
+    <p>及格</p>
+    {{end}}
+
+<!--    循环遍历数据-->
+    {{range $key, $value := .hobby}}
+        <li>{{$key}} -> {{$value}}</li>
+    {{end}}
+
+<!--    如果数组中没有数据 中间可以加入else-->
+    {{range $key, $value := .hobby1}}
+    <li>{{$key}} -> {{$value}}</li>
+    {{else}}
+    <p>没有数据</p>
+
+    {{end}}
+
+<!--    使用with-->
+    {{with .news}}
+    <li>{{.Title}} --- {{.Body}}</li>
+    {{end}}
+
+
+</body>
+</html>
+
+{{ end }}
+
+<!--成对出现-->

@@ -47,7 +47,7 @@ func main() {
 
 	// 相应一个JSOPN 主要用户跨域请求 jsonp可以传入回调函数
 	// http://localhost:8080/jsopn?callback=xxxxxxxx
-	r.GET("jsopn", func(context *gin.Context) {
+	r.GET("/jsonp", func(context *gin.Context) {
 		context.JSON(http.StatusOK, &Article{
 			Title:   "This is Tiele from jsopn",
 			Desc:    "This is Desc",
@@ -56,7 +56,7 @@ func main() {
 	})
 
 	// 相应xml
-	r.GET("xml", func(context *gin.Context) {
+	r.GET("/xml", func(context *gin.Context) {
 		// 使用context.XML
 		context.XML(http.StatusOK, &Article{
 			Title:   "This is Tiele from xml",
@@ -67,4 +67,5 @@ func main() {
 	})
 
 	r.Run("localhost:8080")
+
 }

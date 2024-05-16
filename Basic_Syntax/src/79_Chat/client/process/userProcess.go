@@ -6,6 +6,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net"
 	"os"
 )
@@ -64,6 +65,7 @@ func (this *UserProcess) Login(userId int, userPassword string) (err error) {
 	binary.BigEndian.PutUint32(buffer[0:4], pkgLen) // 相当于把长度转换为了bytes
 	// 发送长度
 	n, err := conn.Write(buffer[:4])
+	log.Println("client.n = ", n, "client.pkgLen = ", pkgLen)
 	if n != 4 || err != nil {
 		fmt.Println("conn.Write err:", err)
 		return

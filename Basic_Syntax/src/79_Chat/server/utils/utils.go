@@ -34,7 +34,8 @@ func (this *Transfer) ReadPkg() (mes message.Message, err error) {
 	pkgLen = binary.BigEndian.Uint32(this.Buffer[0:4]) // 这里是Uint32转回来 前面是Putuint32
 	// 根据pkgLen来读取内通
 	n, err := this.Conn.Read(this.Buffer[:pkgLen]) // 从conn套接字中读取[:pkgLen]长度的内容到buffer里
-	if n != int(pkgLen) || err != nil {            // 第一种可能读到了但是没有读全 还有一种就是对方关闭了管道
+	log.Println("n =", n, "pkgLen = ", pkgLen)
+	if n != int(pkgLen) || err != nil { // 第一种可能读到了但是没有读全 还有一种就是对方关闭了管道
 		log.Println("read err:", err) // 这里是读取内容出错
 		//err = errors.New("read pkg body err")
 		return

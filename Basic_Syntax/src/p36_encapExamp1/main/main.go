@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	//var p1 = model.NewPerson("張三")
+	//var p1 = 1_Create.NewPerson("張三")
 	//p1.SetAge(34)
 	//p1.SetSalary(5200.0)
 	//

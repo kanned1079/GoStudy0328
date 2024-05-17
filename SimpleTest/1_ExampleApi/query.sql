@@ -1,0 +1,1 @@
+select * from db0.myusers limit 1000;

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoStudy0328/src/p111_package/utils"
+	"GoStudy0328/Basic_Syntax/src/p111_package/utils"
 	"fmt"
 )
 

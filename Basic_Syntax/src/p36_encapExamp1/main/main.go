@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoStudy0328/src/p36_encapExamp1/model"
+	"GoStudy0328/Basic_Syntax/src/p36_encapExamp1/model"
 	"fmt"
 )
 

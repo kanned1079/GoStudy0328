@@ -9,10 +9,8 @@ func InitRouter() {
 	r := gin.Default()
 
 	r.GET("/users", user.GetAllUsers)
-	r.POST("/post", user.GetData)
-	r.POST("/api/getid", func(context *gin.Context) {
-
-	})
+	//r.POST("/post", user.GetData)
+	r.POST("/api/getid", user.GetDataByEmail)
 
 	r.Run("localhost:8080")
 

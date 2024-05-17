@@ -15,6 +15,7 @@ type MyUser struct {
 	Age         int
 	PhoneNumber string
 	Email       string `gorm:"unique"`
+	Password    string
 	Premium     string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
@@ -29,12 +30,27 @@ func (MyUser) TableName() string {
 	return "myusers"
 }
 
-func GetData(context *gin.Context) {
-	var data string
-	data = context.PostForm("mail")
-	context.PostForm("name")
-	log.Println(data)
-	context.JSON(http.StatusOK, nil)
+func GetDataByEmail(context *gin.Context) {
+	nameData := context.PostForm("mail")
+	passData := context.PostForm("pass")
+	log.Println("data:", nameData)
+	user := MyUser{}
+	result := dao.Db.Where("email = ?", nameData).Limit(1).Find(&user)
+	if result.RowsAffected == 0 {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "用户不存在"})
+		log.Println("err:", result.Error)
+	} else {
+		if user.Password == passData {
+			var resp Response
+			resp.Code = http.StatusOK
+			resp.MyUser = user
+			context.JSON(http.StatusOK, resp)
+		} else {
+			context.JSON(http.StatusInternalServerError, gin.H{"error": "密码错误"})
+
+		}
+
+	}
 }
 
 func GetAllUsers(context *gin.Context) {
@@ -64,6 +80,7 @@ func GetID(context *gin.Context) {
 
 }
 
-func translateJSON() {
-	context.JSON(http.StatusOK, &MyUser{})
-}
+//
+//func translateJSON() {
+//	context.JSON(http.StatusOK, &MyUser{})
+//}

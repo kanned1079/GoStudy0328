@@ -14,6 +14,7 @@ func InitRouter() {
 	r.POST("/api/reg", user.HandleRegister)
 	r.POST("/api/login", user.HandleLogin)
 	r.POST("/api/del", user.HandlerDeleteUser)
+	r.POST("/api/update", user.HandlerUpdateUser)
 
 	r.Run("localhost:8080")
 

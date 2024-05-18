@@ -11,13 +11,13 @@ func TestAddUser(t *testing.T) {
 
 	dao.InitDB()
 	var testUser1 user.MyUser = user.MyUser{
-		Name:        "崔俊",
-		Gender:      "男",
-		Age:         17,
-		PhoneNumber: "155460839",
-		Email:       "cj@ikanned.com",
-		Password:    "cjpass",
-		Premium:     "lv-0",
+		Name:        "崔俊2",
+		Gender:      "女",
+		Age:         16,
+		PhoneNumber: "153453460839",
+		Email:       "cj2@ikanned.com",
+		Password:    "cjpasfergfesrs",
+		Premium:     "lv-7",
 		UpdatedAt:   time.Now(),
 	}
 	testUser1.Insert()

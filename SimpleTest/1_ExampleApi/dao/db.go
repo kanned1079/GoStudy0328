@@ -29,7 +29,10 @@ func InitDB() {
 		DontSupportRenameIndex:    true,
 		DontSupportRenameColumn:   true,
 		SkipInitializeWithVersion: false,
-	}), &gorm.Config{})
+	}), &gorm.Config{
+		SkipDefaultTransaction: true, // 禁用事务
+		QueryFields:            true, // 显示sql语句
+	})
 	if err != nil {
 		log.Println("MySQL数据库连接失败 err: ", err)
 	} else {

@@ -24,6 +24,14 @@ type MyUser struct {
 	DeletedAt   gorm.DeletedAt
 }
 
+const (
+	USER_IS_NOT_EXIST  = 403
+	USER_IS_EXISTED    = 201
+	INCORRECT_PASSWORD = 500
+	USER_AUTH_PASS     = 1200
+	USER_AUTH_FAIL     = 1501
+)
+
 type Response struct {
 	Code   int    `json:"code"`
 	MyUser MyUser `gorm:" - "`
@@ -71,6 +79,8 @@ func GetAllUsers(context *gin.Context) {
 }
 
 func (u *MyUser) Insert() {
+	var ency Encryptor
+	u.Password = ency.Encrypt(u.Password)
 	result := dao.Db.Create(&u)
 	if result.Error != nil {
 		log.Println("insert err:", result.Error)
@@ -89,7 +99,9 @@ func HandleRegister(context *gin.Context) {
 	user.Password = context.PostForm("password")
 	user.Premium = context.PostForm("lv")
 	user.CreatedAt = time.Now()
-	if IsExist(user.Email) {
+	if IsExist(user.Email) == USER_IS_NOT_EXIST { // 用户不存在就创建用户
+		var ency Encryptor
+		user.Password = ency.Encrypt(user.Password)
 		result := dao.Db.Create(&user)
 		log.Println(result.RowsAffected)
 		if result.Error != nil {
@@ -103,17 +115,18 @@ func HandleRegister(context *gin.Context) {
 
 }
 
-func IsExist(email string) (res bool) {
+func IsExist(email string) (Code int) {
 	log.Println("email:", email)
 	var user MyUser
 	user.Email = email
-	result := dao.Db.Model(&MyUser{}).Where("email = ?", email).First(&user)
-	if result.RowsAffected == 0 {
-		log.Println("该用户已注册")
-		return true
+	dao.Db.Where("email = ?", email).Limit(1).Find(&user)
+	log.Println(user)
+	if user.UserId != 0 {
+		log.Println("IsExist:该用户已注册")
+		return USER_IS_EXISTED
 	} else {
-		log.Println("用户不存在")
-		return false
+		log.Println("IsExist:用户不存在")
+		return USER_IS_NOT_EXIST
 	}
 }
 
@@ -123,29 +136,36 @@ func HandleLogin(context *gin.Context) {
 	user.Password = context.PostForm("password")
 	log.Println(user)
 	newUser, isExist := AuthUserInfo(user.Email, user.Password)
-	if isExist {
+	if isExist == USER_IS_EXISTED {
 		context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "user": newUser})
-	} else {
-		context.JSON(http.StatusInternalServerError, gin.H{"error": "用户不存在或密码错误"})
+	} else if isExist == USER_IS_NOT_EXIST {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "用户不存在"})
+	} else if isExist == USER_AUTH_PASS {
+
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "ok"})
 	}
 }
 
-func AuthUserInfo(email string, password string) (u *MyUser, res bool) {
+func AuthUserInfo(email string, password string) (u *MyUser, code int) {
 	var user MyUser
 	result := dao.Db.Where("email = ?", email).Limit(1).Find(&user)
+	log.Println(user)
+	var ency Encryptor
+	user.Password = ency.Decrypt(user.Password)
 	if result.RowsAffected == 0 {
 		log.Println("用户不存在")
-		return nil, false
+		return nil, USER_IS_NOT_EXIST
 	}
 	if user.Password == password {
 		log.Println("密码正确")
-		return &user, true
+		return &user, USER_AUTH_PASS
 	} else {
 		log.Println("密码错误")
-		return nil, false
+		return nil, INCORRECT_PASSWORD
 	}
 }
 
+// HandlerDeleteUser 处理删除用户 使用软删除
 func HandlerDeleteUser(context *gin.Context) {
 	var email string
 	email = context.PostForm("mail")
@@ -158,8 +178,9 @@ func HandlerDeleteUser(context *gin.Context) {
 		result = dao.Db.Model(&MyUser{}).Where("email = ?", email).Delete(&user)
 		if result.RowsAffected == 1 {
 			context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "deleted": "ok"})
-
 		}
+	} else {
+
 	}
 	//if IsExist(email) {
 	//	context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "deleted": "ok"})
@@ -169,18 +190,44 @@ func HandlerDeleteUser(context *gin.Context) {
 
 }
 
-func IsIDExist(id int) (res bool) {
-	log.Println("id:", id)
+func HandlerUpdateUser(context *gin.Context) {
 	var user MyUser
-	result := dao.Db.Model(&MyUser{}).Where("id = ?", id).First(&user)
-	if result.RowsAffected == 0 {
-		log.Println("该用户已注册")
-		return true
+	user.Name = context.PostForm("name")
+	user.Gender = context.PostForm("gender")
+	user.Age, _ = strconv.Atoi(context.PostForm("age"))
+	user.PhoneNumber = context.PostForm("phone")
+	user.Email = context.PostForm("mail")
+	user.Password = context.PostForm("password")
+	user.Premium = context.PostForm("lv")
+
+	user.UserId, _ = strconv.Atoi(context.PostForm("id"))
+	log.Println("需要查询的用户Id: ", user.UserId)
+	if IsIdExist(user.UserId) == USER_IS_EXISTED {
+		result := dao.Db.Model(&MyUser{}).Where("user_id = ?", user.UserId).Updates(&user)
+		log.Println(result.RowsAffected, result.Error)
+		context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "data": "update ok"})
 	} else {
-		log.Println("用户不存在")
-		return false
+		context.JSON(http.StatusInternalServerError, gin.H{"code": http.StatusInternalServerError, "data": "not found"})
 	}
 }
+
+func IsIdExist(id int) (code int) {
+	log.Println("UserId: ", id)
+	var usr MyUser
+	result := dao.Db.Model(&MyUser{}).Where("user_id = ?", id).Limit(1).Find(&usr)
+	log.Println("RowsAffected: ", result.RowsAffected)
+	if usr.UserId == id {
+		log.Println("指定Id的用户存在")
+		return USER_IS_EXISTED
+	} else {
+		log.Println("指定Id的用户不存在")
+		return USER_IS_NOT_EXIST
+	}
+}
+
+//func (u *MyUser) AfterSave(tx *gorm.DB) {
+//	u.UpdatedAt = time.Now()
+//}
 
 //
 //func translateJSON() {

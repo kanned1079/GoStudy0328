@@ -203,6 +203,8 @@ func HandlerUpdateUser(context *gin.Context) {
 	user.UserId, _ = strconv.Atoi(context.PostForm("id"))
 	log.Println("需要查询的用户Id: ", user.UserId)
 	if IsIdExist(user.UserId) == USER_IS_EXISTED {
+		var ency Encryptor
+		user.Password = ency.Encrypt(user.Password)
 		result := dao.Db.Model(&MyUser{}).Where("user_id = ?", user.UserId).Updates(&user)
 		log.Println(result.RowsAffected, result.Error)
 		context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "data": "update ok"})

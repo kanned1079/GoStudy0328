@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数</title>
+    <style></style>
+
+    <script>
+
+        // 创建一个对象
+        var obj = {
+            name: "孙悟空",
+            age: 18,
+            gender: "男",
+            sayName:function () {
+                // alert(this.name)
+                document.write(this.name, this.age, this.gender);
+            }
+        }
+        // 调用方法
+        obj.sayName()
+        //
+        // 使用工厂模式创建对象
+        function createPerson(name, age, gender) {
+            var obj = new Object()
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            obj.sayHello = function() {
+                document.write(this.name);
+            }
+            return obj
+        }
+
+        var dog = createPerson("dog2", 3, "male")
+        dog.sayHello()
+
+        document.write("<br>")
+
+
+        // 使用构造函数
+        function Person(name, age, gender) {
+            document.write("调用了Person构造函数")
+            this.name = name;
+            this.age = age;
+            this.gender = gender
+            this.sayHello = function () {
+                document.write(this.name)
+            }
+        }
+
+        var per1 = new Person() // 这里调用了构造函数
+        per1.name = "2222"
+        per1.sayHello()
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

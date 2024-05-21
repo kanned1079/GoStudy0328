@@ -77,6 +77,7 @@ func HandleRegister(ctx *gin.Context) {
 func HandleDelete(ctx *gin.Context) {
 	var user user2.MyUser
 	GetFormMsg(ctx, &user)
+	log.Println("HandleDelete.user =", user)
 	code := user.NewDelete()
 	switch code {
 	case user2.USER_DELETE_SUCCESS:

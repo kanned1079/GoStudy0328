@@ -72,3 +72,18 @@ func HaveBeenDeleted(userId int, email string) (code int) {
 		return USER_EXISTED
 	}
 }
+
+func RecordsCount() (count int64) {
+	dao.Db.Model(&MyUser{}).Count(&count)
+	return
+}
+
+func ValidRecordsCount() (count int64) {
+	dao.Db.Model(&MyUser{}).Where("deleted_at != null").Count(&count)
+	return
+}
+
+func InValidRecordsCount() (count int64) {
+	dao.Db.Model(&MyUser{}).Where("deleted_at IS NOT NULL").Count(&count)
+	return
+}

@@ -25,7 +25,8 @@ func TestAddUser(t *testing.T) {
 			Premium:     "lv-0",
 			UpdatedAt:   time.Now(),
 		}
-		testUser1.Insert()
+		//testUser1.Insert()
+		testUser1.NewDelete()
 	}
 
 	//testUser1.Insert()

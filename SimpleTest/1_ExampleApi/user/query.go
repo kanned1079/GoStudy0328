@@ -58,6 +58,7 @@ func AuthLoginQuery(mail, pwd string) (code int) {
 	}
 }
 
+// HaveBeenDeleted 查询用户是否被删除
 func HaveBeenDeleted(userId int, email string) (code int) {
 	var user MyUser
 	user.UserId = userId

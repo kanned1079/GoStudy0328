@@ -20,6 +20,7 @@ func HandleGetId(ctx *gin.Context) {
 				"userExisted": "用户不存在",
 			})
 		}
+
 	}
 	log.Println(user)
 	ctx.JSON(http.StatusOK, user)

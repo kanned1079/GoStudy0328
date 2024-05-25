@@ -157,6 +157,6 @@ func main() {
 	//TestCreateInvalidUser()
 	//TestMap()
 	//TestSliceMap()
-	TestSqlSyntaxInsert()
+	//TestSqlSyntaxInsert()
 
 }

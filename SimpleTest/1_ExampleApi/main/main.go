@@ -7,5 +7,6 @@ import (
 
 func main() {
 	dao.InitDB()
+	//user.TuncatDatabase()
 	router.InitRouter()
 }

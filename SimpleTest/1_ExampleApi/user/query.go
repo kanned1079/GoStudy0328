@@ -88,3 +88,9 @@ func InValidRecordsCount() (count int64) {
 	dao.Db.Model(&MyUser{}).Where("deleted_at IS NOT NULL").Count(&count)
 	return
 }
+
+func TuncatDatabase() (err error) {
+	result := dao.Db.Exec("TRUNCATE TABLE myusers")
+	log.Println("RowEffected: ", result.RowsAffected)
+	return nil
+}

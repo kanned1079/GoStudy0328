@@ -54,6 +54,21 @@
         per1.name = "2222"
         per1.sayHello()
 
+        // 尽量不要将定义放在全局中 因为污染命名空间 而且在全局中也不安全
+
+        function MyClass() {
+
+        }
+        MyClass.prototype.name = "这是原型对象中的名字";
+
+        var mc = new MyClass();
+        mc.age = 19;
+
+        mc.hasOwnProperty("name")   // 可以使用原型对象的hasOwnProperty方法来检查对象中是否有该属性
+
+        document.write(mc.hasOwnProperty("name"))
+        document.write(mc.hasOwnProperty("age"))
+
 
 
     </script>

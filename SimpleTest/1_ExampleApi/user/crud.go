@@ -54,7 +54,7 @@ func (u *MyUser) NewUpdate() (code int) {
 	isExist := IsUserExistByEmail(u.Email)
 	log.Println("NewUpdate.isExist:", isExist)
 	if isExist == USER_EXISTED { // 用户存在
-		result := dao.Db.Model(&MyUser{}).Where("email = ?", u.Email).Updates(&u)
+		var result = dao.Db.Model(&MyUser{}).Where("email = ?", u.Email).Updates(&u)
 		log.Println("NewUpdate: ", result)
 		if result.RowsAffected == 1 {
 			log.Println("更新成功")

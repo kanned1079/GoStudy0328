@@ -100,6 +100,37 @@ func HandleDelete(ctx *gin.Context) {
 	}
 }
 
+func HandleLogin(context *gin.Context) {
+	var user user2.MyUser
+	user.Email = context.PostForm("mail")
+	user.Password = context.PostForm("password")
+	code := user2.AuthLoginQuery_v2(user.Email, user.Password)
+	switch code {
+	case user2.AUTH_PASS:
+		{
+			_ = user.FullQueryByEmail()
+			context.JSON(http.StatusOK, user)
+		}
+	case user2.PASSWORD_INCORRECT:
+		{
+			context.JSON(http.StatusInternalServerError, gin.H{
+				"code:":   "ERROR_PASSWORD_INCORRECT",
+				"message": "密码错误",
+			})
+		}
+	case user2.USER_NOT_EXIST:
+		{
+			context.JSON(http.StatusInternalServerError, gin.H{
+				"code:":   "USER_NOT_EXIST",
+				"message": "用户不存在",
+			})
+		}
+	default:
+		log.Println("未知错误")
+
+	}
+}
+
 func GetFormMsg(context *gin.Context, user *user2.MyUser) {
 	user.UserId, _ = strconv.Atoi(context.PostForm("id"))
 	user.Name = context.PostForm("name")

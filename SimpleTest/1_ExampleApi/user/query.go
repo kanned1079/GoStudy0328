@@ -58,6 +58,28 @@ func AuthLoginQuery(mail, pwd string) (code int) {
 	}
 }
 
+// AuthLoginQuery_v2 用于验证用户信息
+// 这是第二个测试版本
+func AuthLoginQuery_v2(mail, pwd string) (code int) {
+	var getUser MyUser
+	getUser.Email = mail
+	result := dao.Db.Model(&getUser).Where("email = ?", getUser.Email).First(&getUser)
+	if result.RowsAffected == 1 {
+		var encry Encryptor
+		getUser.Password = encry.Decrypt(getUser.Password)
+		if getUser.Password == pwd {
+			return AUTH_PASS // 这里是邮箱和密码都正确 返回验证通过
+		} else {
+			return PASSWORD_INCORRECT // 返回密码错误
+		}
+	} else if result.RowsAffected == 0 {
+		return USER_NOT_EXIST // 0条搜索记录即用户不存在
+	} else {
+		return UNKNOW_ERROR
+	}
+
+}
+
 // HaveBeenDeleted 查询用户是否被删除
 func HaveBeenDeleted(userId int, email string) (code int) {
 	var user MyUser

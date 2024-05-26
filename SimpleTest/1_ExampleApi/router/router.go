@@ -23,6 +23,7 @@ func InitRouter() {
 	r.POST("/api/update", HandleUpdate)
 	r.POST("/api/register", HandleRegister)
 	r.POST("/api/delete", HandleDelete)
+	r.POST("/api/login", HandleLogin)
 
 	r.Run("localhost:8080")
 

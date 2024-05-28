@@ -20,7 +20,6 @@ func HandleGetId(ctx *gin.Context) {
 				"userExisted": "用户不存在",
 			})
 		}
-
 	}
 	log.Println(user)
 	ctx.JSON(http.StatusOK, user)
@@ -72,6 +71,11 @@ func HandleRegister(ctx *gin.Context) {
 			log.Println("用户创建失败")
 			ctx.JSON(http.StatusOK, gin.H{"code": "failure"})
 		}
+	default:
+		{
+			log.Println("未知错误")
+			// pass
+		}
 	}
 }
 
@@ -96,7 +100,14 @@ func HandleDelete(ctx *gin.Context) {
 			log.Println("用户不存在")
 			ctx.JSON(http.StatusInternalServerError, gin.H{"code": "not exist"})
 		}
-
+	default:
+		{
+			log.Println("未知错误")
+			ctx.JSON(http.StatusInternalServerError, gin.H{
+				"code:": "Unknow Error",
+				"msg":   "未知错误",
+			})
+		}
 	}
 }
 

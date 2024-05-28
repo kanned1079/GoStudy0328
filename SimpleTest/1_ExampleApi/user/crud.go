@@ -5,6 +5,17 @@ import (
 	"log"
 )
 
+type Operate interface {
+	FullQuery() (code int)
+	FullQueryByEmail() (code int)
+	FullQueryByEmail2() (code int)
+	NewCreate() (code int)
+	NewUpdate() (code int)
+	NewDelete() (code int)
+}
+
+var encryptor Encryptor
+
 // FullQuery 请求获取用户所有数据
 // 返回值 请求通过 请求失败 用户不存在
 func (u *MyUser) FullQuery() (code int) {
@@ -13,8 +24,7 @@ func (u *MyUser) FullQuery() (code int) {
 		result := dao.Db.First(&u)
 		if result.RowsAffected == 1 {
 			log.Println("FullQuery PASS")
-			var encry Encryptor
-			u.Password = encry.Decrypt(u.Password)
+			u.Password = encryptor.Decrypt(u.Password)
 			return QUERY_PASS
 		} else {
 			log.Println("FullQuery FAIL")
@@ -27,6 +37,20 @@ func (u *MyUser) FullQuery() (code int) {
 	return UNKNOW_ERROR
 }
 
+func (u *MyUser) FullQueryByEmail2() (code int) {
+	result := dao.Db.First(&u)
+	if result.RowsAffected == 0 {
+		log.Println("[FullQueryByEmail2]用户不存在")
+		return USER_NOT_EXIST
+	} else if result.RowsAffected == 1 {
+		log.Println("[FullQueryByEmail2]用户存在")
+		u.Password = encryptor.Decrypt(u.Password)
+		return QUERY_PASS
+	} else {
+		return UNKNOW_ERROR
+	}
+}
+
 // FullQueryByEmail 请求获取用户所有数据通过邮箱地址
 // 返回值 请求通过 请求失败 用户不存在
 func (u *MyUser) FullQueryByEmail() (code int) {
@@ -35,8 +59,7 @@ func (u *MyUser) FullQueryByEmail() (code int) {
 		result := dao.Db.Model(&u).Where("email = ?", u.Email).First(&u)
 		if result.RowsAffected == 1 {
 			log.Println("FullQuery PASS")
-			var encry Encryptor
-			u.Password = encry.Decrypt(u.Password)
+			u.Password = encryptor.Decrypt(u.Password)
 			return QUERY_PASS
 		} else {
 			log.Println("FullQuery FAIL")
@@ -55,8 +78,7 @@ func (u *MyUser) NewCreate() (code int) {
 	isExist := IsUserExistByEmail(u.Email)
 	if isExist == USER_NOT_EXIST {
 		log.Println("用户不存在 可以注册")
-		var encry Encryptor
-		u.Password = encry.Encrypt(u.Password) // 密码base64编码
+		u.Password = encryptor.Encrypt(u.Password) // 密码base64编码
 		result := dao.Db.Model(&u).Create(&u)
 		if result.RowsAffected == 1 {
 			log.Println("写入数据库成功")

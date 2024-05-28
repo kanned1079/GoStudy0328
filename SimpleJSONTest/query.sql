@@ -1,0 +1,1 @@
+select * from db0.wx_users limit 1000;

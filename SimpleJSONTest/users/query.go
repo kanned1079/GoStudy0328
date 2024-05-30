@@ -1,7 +1,7 @@
 package users
 
 import (
-	"GoStudy0328/SimpleTest/1_ExampleApi/dao"
+	"GoStudy0328/SimpleJSONTest/dao"
 	"errors"
 	"log"
 )
@@ -11,7 +11,7 @@ import (
 func IsUserExist(query, args any) (Code int, err error) {
 	var user WxUsers
 	result := dao.Db.Model(&WxUsers{}).Where(query, args).First(&user)
-	log.Println("RowAffected:", result.RowsAffected)
+	log.Println("[IsUserExist] RowAffected:", result.RowsAffected)
 	switch result.RowsAffected {
 	case 0:
 		return User_Not_Exist, errors.New("指定Id/Email的用户不存在")
@@ -32,7 +32,6 @@ func IsUserExistById_New(id int) (Code int, err error) {
 // 返回值有 Unknow_Error User_Not_Exist User_Exist
 func IsUserExistByEmail_New(email string) (Code int, err error) {
 	return IsUserExist("email = ?", email)
-
 }
 
 // --------------改进前的-----------------------------------------------

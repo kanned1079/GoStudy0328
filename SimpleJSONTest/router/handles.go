@@ -116,6 +116,24 @@ func HandleUpdate(context *gin.Context) {
 
 }
 
+func HandleDelete(context *gin.Context) {
+	var thisUser users.WxUsers
+	if err := context.Bind(&thisUser); err != nil {
+		log.Println("HandleDelete err: ", err)
+		ResponseMsg(context, http.StatusInternalServerError, err.Error())
+	}
+	if isExist, err := users.IsUserExistById_New(int(thisUser.UserId)); isExist != users.User_Exist {
+		log.Println("[HandleDelete] err: ", err)
+		ResponseMsg(context, http.StatusInternalServerError, err.Error())
+	}
+	if code, err := thisUser.DeleteUserByID(); code != users.Delete_Success {
+		log.Println("[HandleDelete] err: ", err)
+		ResponseMsg(context, http.StatusInternalServerError, err.Error())
+	} else {
+		context.JSON(http.StatusOK, gin.H{"code": code})
+	}
+}
+
 func ResponseMsg(context *gin.Context, status any, msg any) {
 	context.JSON(http.StatusOK, gin.H{
 		"code": status,

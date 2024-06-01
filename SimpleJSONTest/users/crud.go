@@ -57,3 +57,15 @@ func (u *WxUsers) UpdateUserInfo() (Code int, err error) {
 		return Update_Failure, result.Error
 	}
 }
+
+// DeleteUserByID 用于删除对应ID的用户
+// 需要额外判断用户是否存在
+func (u *WxUsers) DeleteUserByID() (Code int, err error) {
+	result := dao.Db.Model(u).Where("id = ?", u.UserId).Delete(&u)
+	log.Println("[DeleteUser] error:", result.Error)
+	if result.RowsAffected == 1 {
+		return Delete_Success, result.Error
+	} else {
+		return Delete_Failure, result.Error
+	}
+}

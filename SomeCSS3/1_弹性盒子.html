@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性盒子</title>
+    <style>
+        .container{
+            width: 500px;
+            height: 500px;
+            background-color: #666666;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            flex-grow: 3;
+        }
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            flex-grow: 2;
+        }
+
+        .box3{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+
+</div>
+
+</body>
+</html>

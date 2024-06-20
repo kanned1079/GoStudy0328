@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box1{
+            font-size: 20px;
+        }
+        .box2{
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root" class="box1">66666</div>
+    <script>
+        var root = document.getElementById("root")
+        root.id = "root2"
+        console.log(root.id)
+        console.log(root.className)
+        root.classList.add("box2")
+        root.classList.remove("box2")
+        if (root.classList.contains("box2"))
+            console.log("yes")
+        else
+            console.log("no")
+        root.innerHTML = "elirverf"
+        root.innerText = "aaaaaaa"
+        // innerHTML和innerText的qubie
+        // innerHTML可以识别一个标签
+        // innerText会识别为字符串
+        // var str = "<p>22222222</p>"
+    </script>
+
+</body>
+</html>

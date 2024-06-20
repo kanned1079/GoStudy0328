@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM1</title>
+</head>
+<body>
+
+    <button id="bt1" onclick="bt1clicked">click me</button>
+    <script>
+        var bt1 = document.getElementById("bt1");
+        bt1.onclick = function (){
+            alert("clicked bt1.");
+        };
+        bt1.onmousemove = function (){
+            alert("moved")
+        }
+    </script>
+
+</body>
+</html>

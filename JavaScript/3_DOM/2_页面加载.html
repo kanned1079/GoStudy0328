@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM2</title>
+</head>
+<body>
+
+    <script>
+        // onload事件会在整个页面加载完成后才触发
+        window.onload = function (){
+            alert("hello ")
+            var bt1 = document.getElementById("bt1")
+            bt1.onclick = function (){
+                alert("clicked")
+            }
+        }
+    </script>
+
+    <button id="bt1">btn1</button>
+
+</body>
+</html>

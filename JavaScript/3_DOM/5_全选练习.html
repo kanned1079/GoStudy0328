@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选</title>
+    <style>
+        * {
+            font-family: "PingFang SC", serif;
+        }
+        .back {
+            background-color: #e3e5e7;
+        }
+        .btn {
+            width: 100px;
+            height: 30px;
+            background-color: cadetblue;
+            border: 0px;
+            border-radius: 5px;
+            color: white;
+        }
+    </style>
+    <script>
+        function myClick(id, func) {
+            document.getElementById(id).onclick = func;
+        }
+        let sports = document.getElementsByName("sports");
+        window.onload = function () {
+            // 全选
+            myClick("selectAll", function () {
+                for (let i=0; i<sports.length; i++) {
+                    sports[i].checked = true;
+                }
+            });
+
+            // 全不选
+            myClick("cancelAll", function () {
+                for (let i=0; i<sports.length; i++) {
+                    sports[i].checked = false;
+                }
+            });
+
+            // 反选
+            myClick("selectReverse", function () {
+                for (let i=0; i<sports.length; i++) {
+                    // if (sports[i].checked == true)
+                    //     sports[i].checked = false;
+                    // else
+                    //     sports[i].checked = true;
+                    sports[i].checked = !sports[i].checked;
+                }
+            });
+
+            // 提交
+            myClick("commit", function () {
+                let checkedItems = []
+                for (let i=0; i<sports.length; i++) {
+                    if (sports[i].checked) {
+                        checkedItems.push(sports[i].value)
+                        alert(sports[i].value)
+                    }
+                }
+            });
+
+            // 全选/全不选
+            myClick("fullSelect", function () {
+                for (let i=0; i<sports.length; i++) {
+                    sports[i].checked = this.checked;
+                }
+            })
+        }
+
+
+    </script>
+</head>
+<body class="back">
+<h3>你喜爱的运动是</h3>
+<label><input type="checkbox" id="fullSelect"> 全选/全不选</label><br><br>
+<label><input type="checkbox" name="sports" id="football" value="足球"> 足球</label>
+<label><input type="checkbox" name="sports" id="basketball" value="篮球"> 篮球</label>
+<label><input type="checkbox" name="sports" id="ym" value="羽毛球"> 羽毛球</label>
+<label><input type="checkbox" name="sports" id="pp" value="乒乓球"> 乒乓球</label><br><br>
+<label><button class="btn" id="selectAll">全选</button></label>
+<label><button class="btn" id="cancelAll">全不选</button></label>
+<label><button class="btn" id="selectReverse">反选</button></label>
+<label><button class="btn" type="submit" id="commit">提交</button></label>
+</body>
+</html>

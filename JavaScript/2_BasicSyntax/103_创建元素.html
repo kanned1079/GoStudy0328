@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>NAV1</div>
+    <div id="container"></div>
+    <script>
+        var text = document.createElement("p")
+        var context = document.createTextNode("我是文本")
+        var id = document.createAttribute("id1")
+        id.value = "root"
+        text.append(context)
+        text.setAttributeNode(id)
+        console.log(text)
+
+        var div1 = document.getElementById("container")
+        console.log(div1)
+        div1.appendChild(text)
+
+    </script>
+
+</body>
+</html>

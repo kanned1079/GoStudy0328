@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+    </script>
+</head>
+    <body>
+    <div>helloDiv1</div>
+    <div>helloDiv2</div>
+    <div class="div3">helloDiv3</div>
+    <form name="form1">
+
+    </form>
+    <div id="rootDiv"></div>
+    <div class="nav">nav1</div>
+    <div class="nav">nav2</div>
+
+        <script>
+            var div1 = document.getElementsByTagName("div")[0]
+            console.log(div1)
+            div1.innerHTML = "666666"
+
+            var div2 = document.getElementsByClassName("div3")[0]
+            div2.innerHTML = "HELLO!"
+
+            var f1 = document.getElementsByName("form1")
+            console.log(f1)
+
+            var rootDiv = document.getElementById("rootDiv")
+            rootDiv.innerHTML = "99999999999999"
+
+            //获取一个
+            var nav1 = document.querySelector(".nav")
+            console.log(nav1)
+
+            //获取多个
+            var navs = document.querySelectorAll(".nav")
+            console.log(navs)
+            navs.item(0).innerHTML = "NNNNNAV1"
+        </script>
+    </body>
+</html>

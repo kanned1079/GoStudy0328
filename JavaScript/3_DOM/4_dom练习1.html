@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM练习1</title>
+    <script>
+        window.onload = function (){
+            let mgArray = ["./imgs/ig1.png", "./imgs/ig2.png", "./imgs/ig3.png", "./imgs/ig4.png", "./imgs/ig5.png"];
+            let nowImgId = 0;
+            let prev = document.getElementById("prev");
+            let next = document.getElementById("next");
+            // 切换图片就是要修改img的src属性
+            // 获取标签名可以使用标签名img也可以使用Id 下面将使用标签名
+            let img1 = document.getElementsByTagName("img")[0]; // 这里拿到的是一个数组 因此取第一个
+            // 设置提示文字
+            let imgInfo = document.getElementById("imgInfo");
+            imgInfo.innerText = "共 " + mgArray.length.toString() + " 张图片，当前第 " + (nowImgId+1) + "张。";
+            prev.onclick = function (){
+                nowImgId--;
+                if (nowImgId < 0)
+                    nowImgId = mgArray.length-1;
+                img1.src = mgArray[nowImgId];
+                imgInfo.innerText = "共 " + mgArray.length.toString() + " 张图片，当前第 " + (nowImgId+1) + "张。";
+            }
+            next.onclick = function () {
+                nowImgId++;
+                if (nowImgId > mgArray.length-1)
+                    nowImgId = 0;
+                img1.src = mgArray[nowImgId];
+                imgInfo.innerText = "共 " + mgArray.length.toString() + " 张图片，当前第 " + (nowImgId+1) + "张。";
+            }
+        }
+    </script>
+    <style>
+        .center {
+            text-align: center;
+        }
+        .imgs {
+            width: 500px;
+            border-radius: 10px;
+        }
+        .btn {
+            margin-top: 30px;
+            width: 150px;
+            height: 30px;
+            border: 0px;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="outer" class="center">
+        <img src="imgs/ig1.png" class="imgs" alt="" id="img1">
+    </div>
+    <div class="center">
+        <span>
+        <button id="prev" class="btn">Prev</button>
+        <button id="next" class="btn">Next</button>
+    </span>
+    </div>
+    <p class="center" id="imgInfo"></p>
+
+
+
+</body>
+</html>

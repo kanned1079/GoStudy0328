@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .bg {
+        background-color: #e3e5e7;
+    }
+    #box1 {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine !important;
+        /* 如果上面使用了!important 那么在js中新的样式不会生效 */
+        border-radius: 10px;
+    }
+</style>
+<script>
+    window.onload = function () {
+        let box1 = document.getElementById("box1");
+        document.getElementById("btn01").onclick = function () {
+            box1.style.width = "300px";
+            box1.style.height = "300px";
+            box1.style.backgroundColor = "#86c166";
+            // 内连样式具有较高的优先级 所以通过js修改样式会立即生效
+        }
+        document.getElementById("btn02").onclick = function () {
+            alert(box1.style.height);
+            // 通过这里读取和设置的都是内连样式
+            // 因此不能读取样式表中的样式
+        }
+    }
+</script>
+<body class="bg">
+    <div id="box1"></div>
+    <button id="btn01" style="width: 100px; margin-top: 20px;">修改</button><br>
+    <button id="btn02" style="width: 100px; margin-top: 20px;">读取样式</button>
+</body>
+</html>

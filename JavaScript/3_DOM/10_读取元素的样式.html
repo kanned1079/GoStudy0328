@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box1 {
+        width: 200px;
+        height: 200px;
+        background-color: cadetblue;
+        border-radius: 5px;
+    }
+
+</style>
+<script>
+    
+    // 定义一个函数用于获取指定元素的样式
+    function getStyle(obj, name) {
+        // 一般浏览器使用
+        // return getComputedStyle(obj, null)[name];   // 特殊变量名使用
+        // IE8的使用方法
+        // return obj.currentStyle[name];
+        // 那么就需要判断浏览器的版本
+        if (window.getComputedStyle) // 如果有这方法 但是在IE8中即使这里写getComputedStyle判断照样会报错
+        // 得写window.getComputedStyle 这样来判断在window中有没有这个对象
+            return getComputedStyle(obj, null)[name];
+        else    // 如果没有这个方法
+            return obj.currentStyle[name];
+
+        // 这样写也可以
+        //return window.getComputedStyle? getComputedStyle(obj, null)[name]: obj.currentStyle[name];
+    }
+
+    window.onload = function () {
+        // 读取box1的样式
+        let box1 = document.getElementById("box1");
+        document.getElementById("btn01").onclick = function () {
+            // 获取元素当前显示的样式
+            // 元素.currentStyle.样式名 // 这个只有在IE里支持 
+            //alert(getComputedStyle(box1, null).width);
+            // getComputedStyle(要获取样式的元素, 可以传入一个伪元素一般传入null)
+            //alert(getComputedStyle(box1, null).backgroundColor);
+            // 如果获取的样式没有设置 那么会获取到真实的值 而不是默认值
+            
+            alert(getStyle(box1, "width"));
+        }
+    }
+</script>
+<body>
+    <div id="box1" class="box1"></div>
+    <button id="btn01">btn01</button>
+
+</body>
+</html>

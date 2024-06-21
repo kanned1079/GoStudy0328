@@ -27,7 +27,6 @@ func randPassword(length int) (res string) {
 		password[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(password)
-
 }
 
 func TestAddMultiUser(t *testing.T) {

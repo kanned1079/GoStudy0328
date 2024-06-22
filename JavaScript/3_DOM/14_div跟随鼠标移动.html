@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14</title>
+</head>
+<script>
+    window.onload = function () {
+        let box1 = document.getElementById("box1");
+        document.onmousemove = function (event) {
+            let x = event.pageX, y = event.pageY;
+            box1.style.left = (x-50)+"px";
+            box1.style.top = (y-50)+"px";
+            // 记得要开启box1的绝对定位
+        }
+    }
+</script>
+<body id="bdy" style="height: 2160px">
+    <div id="box1" style="width: 100px; height: 100px; background-color: #39987c; border-radius: 10px; border: 0px; position: absolute"></div>
+
+</body>
+</html>

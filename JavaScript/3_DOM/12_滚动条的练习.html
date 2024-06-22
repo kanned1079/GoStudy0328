@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>协议</title>
+</head>
+<script>
+    window.onload = function () {
+        let agreeChk = document.getElementById("agree");
+        let submitBtn = document.getElementById("reg");
+        let infos = document.getElementById("infos");
+        // onScroll 在滚动时触发
+        infos.onscroll = function () {
+            // 检查滚动条是否到底
+            if (parseInt(infos.scrollHeight - infos.scrollTop) === infos.clientHeight) {
+                // 滚动到底时候 使表单项可用
+                document.getElementById("agree").disabled = false;
+                document.getElementById("reg").disabled = false;
+            }
+        }
+    }
+</script>
+<style>
+    #infos {
+        width: 300px;
+        height: 500px;
+        background-color: #39987c;
+        color: white;
+        margin: 5px;
+        overflow: auto;
+    }
+</style>
+<body>
+
+    <p style="font-size: 20px; font-weight: bold">用户协议</p>
+    <p id="infos">请勿使用我们的服务散布他人的个人信息和机密信息（如信用卡号码、机密身份证号码、帐户密码或者不可公开访问的其他任何信息）。请勿在未经当事人许可的情况下私自发布或散布其个人裸照或色情图片/视频。如果有人使用我们的服务发布了您的个人裸照或色情图片/视频，请向我们举报。若未获得未成年人法定代表人的必要许可，不得发布和散播未成年人的图片或视频。举报违规行为。请注意，根据我们的政策，大多数情况下，可以在互联网上的其他位置或公开记录中找到的信息都不属于隐私信息或机密信息。请勿使用我们的服务散布他人的个人信息和机密信息（如信用卡号码、机密身份证号码、帐户密码或者不可公开访问的其他任何信息）。请勿在未经当事人许可的情况下私自发布或散布其个人裸照或色情图片/视频。如果有人使用我们的服务发布了您的个人裸照或色情图片/视频，请向我们举报。若未获得未成年人法定代表人的必要许可，不得发布和散播未成年人的图片或视频。举报违规行为。请注意，根据我们的政策，大多数情况下，可以在互联网上的其他位置或公开记录中找到的信息都不属于隐私信息或机密信息。请勿使用我们的服务散布他人的个人信息和机密信息（如信用卡号码、机密身份证号码、帐户密码或者不可公开访问的其他任何信息）。请勿在未经当事人许可的情况下私自发布或散布其个人裸照或色情图片/视频。如果有人使用我们的服务发布了您的个人裸照或色情图片/视频，请向我们举报。若未获得未成年人法定代表人的必要许可，不得发布和散播未成年人的图片或视频。举报违规行为。请注意，根据我们的政策，大多数情况下，可以在互联网上的其他位置或公开记录中找到的信息都不属于隐私信息或机密信息。请勿使用我们的服务散布他人的个人信息和机密信息（如信用卡号码、机密身份证号码、帐户密码或者不可公开访问的其他任何信息）。请勿在未经当事人许可的情况下私自发布或散布其个人裸照或色情图片/视频。如果有人使用我们的服务发布了您的个人裸照或色情图片/视频，请向我们举报。若未获得未成年人法定代表人的必要许可，不得发布和散播未成年人的图片或视频。举报违规行为。请注意，根据我们的政策，大多数情况下，可以在互联网上的其他位置或公开记录中找到的信息都不属于隐私信息或机密信息。</p>
+    <input type="checkbox" id="agree" disabled="disabled"> 我同意该协议。<br>
+    <input type="submit" value="注册" id="reg" disabled="disabled" style="width: 150px; height: 40px; border-radius: 5px; border: 0px; margin-top: 20px; background-color: #e3e5e7";>
+</body>
+</html>

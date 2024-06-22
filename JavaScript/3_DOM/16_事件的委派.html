@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的委派</title>
+</head>
+<script>
+    window.onload = function () {
+        let uls = document.getElementById("links");
+        let allA = document.getElementsByTagName("a");
+        let addBtn = document.getElementById("addLink");
+        // for (let i=0; i<allA.length; i++) {
+        //     allA[i].onclick = function () {
+        //         alert("点击了链接 "+i)
+        //         return false;
+        //     }
+        // }
+        addBtn.onclick = function () {
+            let newLi = document.createElement("li");
+            newLi.innerHTML='<a href="66666666" class="lk">这是一个新的链接</a>';
+            uls.appendChild(newLi);
+        }
+        // 需要只绑定一次，就可运用到多个元素上，即使元素是后添加的
+        // 绑定单击相应函数到父级
+        // 为ul绑定一个单击相应函数
+        document.getElementById("links").onclick = function (event) {
+            // alert("我是ul的单击相应函数")
+            // 如果触发对象是期望的就执行 否则不执行
+            event = event || window.event;  // 处理兼容性
+            // alert(event.target)
+            if (event.target.className == "link") {
+                alert("我是ul需要的点击相应函数")
+            }
+            return false;
+        }
+    }
+</script>
+<body>
+    <button id="addLink" style="width: 200px; height: 35px; border: 0px; border-radius: 7px; background-color: #39987c; color: white;">添加一个超链接</button>
+
+    <ul id="links" style="background-color: #e3e5e7; border-radius: 5px">
+        <li><p>我是p元素</p></li>
+        <li><a href="aaaaaaaa" class="lk">link1</a></li>
+        <li><a href="bbbbbbbb" class="lk">link2</a></li>
+        <li><a href="cccccccc" class="lk">link3</a></li>
+    </ul>
+
+</body>
+</html>

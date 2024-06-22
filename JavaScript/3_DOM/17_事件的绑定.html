@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的绑定</title>
+    <style>
+        #btn01 {
+            width: 200px;
+            height: 35px;
+            border: 0px;
+            border-radius: 7px;
+            background-color: #39987c;
+            color: white;
+        }
+    </style>
+</head>
+<script>
+    window.onload = function () {
+        let btn01 = document.getElementById("btn01");
+        btn01.onclick = function () {
+            alert(1)
+        }
+        btn01.onclick = function () {
+            alert(2)
+        }
+    }
+</script>
+<body>
+    <button id="btn01">Click me</button>
+</body>
+</html>

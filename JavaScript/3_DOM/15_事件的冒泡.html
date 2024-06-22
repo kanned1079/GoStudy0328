@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的冒泡</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #ffbbaa;
+        }
+        #s1 {
+            background-color: yellowgreen;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let s1 = document.getElementById("s1");
+            let box1 = document.getElementById("box1");
+            let bdy = document.getElementById("bdy");
+            // 事件的冒泡：
+            // 当一个事件的子孙事件被触发时，其祖先事件也会被触发
+            // 大部分事件是有用的
+            // 可以通过事件对象来取消冒牌
+
+            // 为s1设置单击相应函数
+            s1.onclick = function (event) {
+                event = event || window.event // 这个用于兼容IE8
+                event.cancelBubble = true;
+                alert("I am span's onclick event")
+
+            }
+            // 为box1设置单击相应函数
+            box1.onclick = function () {
+                alert("clicked box1")
+            }
+            // 为body设置单击相应函数
+            bdy.onclick = function () {
+
+            }
+        }
+    </script>
+</head>
+<body id="bdy">
+    <div id="box1">
+        我是box1
+        <span id="s1">
+            我是span
+        </span>
+    </div>
+</body>
+</html>

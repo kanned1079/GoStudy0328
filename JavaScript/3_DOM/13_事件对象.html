@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件对象</title>
+    <script>
+        window.onload = function () {
+            let showArea = document.getElementById("showDiv");
+            document.getElementById("areaDiv").onmousemove = function (event) { // onmousemove 在鼠标移动时被触发
+                // clientX可以获取鼠标指针的x位置
+                // clientY可以获取y位置
+                let x = event.clientX, y = event.clientY, px = event.pageX, py = event.pageY;
+                // alert("x="+x+ " y="+y+ " px="+px+ " py="+py);
+                showArea.innerText = "x="+x+ " y="+y+ " px="+px+ " py="+py;
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="areaDiv" style="width: 400px; height: 120px; border-radius: 5px; border: #39987c solid 2px;"></div>
+    <div id="showDiv" style="width: 400px; height: 30px; line-height: 30px; border-radius: 5px; border: #39987c solid 2px; margin-top: 30px"></div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind函数</title>
+</head>
+<style>
+    #btn01 {
+        width: 200px;
+        height: 35px;
+        border: 0px;
+        border-radius: 7px;
+        background-color: #39987c;
+        color: white;
+    }
+</style>
+<script>
+    window.onload = function () {
+        let btn01 = document.getElementById("btn01");
+        function click1() {
+            alert("aaa")
+        }
+        bind(btn01, "click", click1)
+
+        // 定义一个函数 用来指定元素绑定响应函数
+        function bind(obj, eventStr, callbackFunc) {
+            // 这里要兼容所有浏览器
+            // addEventListener() 中的this是绑定事件的对象
+            // attachEvent() 中的this是window
+            if (obj.addEventListener)
+                obj.addEventListener(eventStr, callbackFunc, false);
+            else
+                obj.addEventListener('on'+eventStr, function () {
+                    callbackFunc.call(obj); // 在匿名函数中调用回调函数
+                });
+
+        }
+    }
+</script>
+<body>
+    <button id="btn01">Click me</button>
+</body>
+</html>

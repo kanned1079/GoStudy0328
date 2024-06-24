@@ -113,11 +113,20 @@
 
             //查找#bj的文本值
             myClick("btn11", function () {
-               alert(document.getElementById("beijing").innerText)
+               // alert(document.getElementById("beijing").innerText)
+                let fc = document.getElementById("beijing").firstChild;
+                alert(fc.nodeValue);
             });
         }
     </script>
     <style>
+        .back {
+            background: #e3e5e7;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
         * {
             font-family: "PingFang SC", serif;
         }
@@ -137,16 +146,34 @@
             background: #e3e5e7;
             border-radius: 3px;
         }
-
+        .sq {
+            width: 70px;
+            height: 30px;
+            background: #39987c;
+            border-radius: 5px;
+            border: 0px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            margin-top: 10px;
+        }
+        .bord {
+            border: 10px;
+            border-color: black;
+            border-radius: 5px;
+        }
     </style>
 </head>
-<body>
+<body class="back">
     <div id="total">
         <div class="inner">
-            <p>喜欢哪个城市</p>
-            <ul id="city">
-                <li id="beijing">北京</li><li id="shanghai">上海</li><li id="tokyo">北京</li><li id="koria">首尔</li>
-            </ul>
+            <div class="bord">
+                <p class="title">喜欢哪个城市</p>
+                <ul id="city">
+                    <li id="beijing" class="sq">北京</li><li id="shanghai" class="sq">上海</li><li id="tokyo" class="sq">东京</li><li id="koria" class="sq">首尔</li>
+                </ul>
+            </div>
+
             <br><br>
             <p>喜欢哪个单机游戏</p>
             <ul id="games">

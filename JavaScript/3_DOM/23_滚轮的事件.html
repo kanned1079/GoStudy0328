@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 300px;
+            background-color: #39987c;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let box1 = document.getElementById("box1");
+            function scrollFunc01 (event) {
+                event = event || window.event;
+                // alert("111122222");
+                // 先判断滚轮的方向
+                // event.wheelDelta 可以获取滚动方向 正值向上 负值向下
+                // FireFox不支持这个
+
+                // event.detail 在火狐中向上为负数 向下为正数
+                if (event.wheelDelta > 0 || event.detail < 0) {
+                    // alert("向上")
+                    // 向上box1变短
+
+                    box1.style.height = (box1.clientHeight-10) + "px";
+                } else {
+                    // alert("向下")
+                    box1.style.height = (box1.clientHeight+10) + "px";
+                }
+
+                // 使用addEventListener()方法绑定的相应函数 取消默认行为不能使用 return false
+                // 需要使用event来取消默认行为
+                // 可以IE8还是不支持此方法 否则会报错
+                event.preventDefault && event.preventDefault()
+
+                // 使用滚动条时 如果浏览器有滚动条 滚动条会随之滚动
+                // 这是浏览器的默认行为 如果不希望发生 则可以取消默认行为
+                return false;
+            }
+            // 一般浏览器
+            box1.onmousewheel = scrollFunc01;
+            // 但是在FireFox中需要使用DOMMouseScroll来绑定 而且要使用addEventListener()
+            box1.addEventListener("DOMMouseScroll", scrollFunc01, false);
+        }
+    </script>
+</head>
+<body style="2000px">
+    <div id="box1"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <style>
+
+    </style>
+    <script>
+        window.onload = function () {
+            // onkeyup
+            // onkeydown
+            // 键盘事件一般绑定给一些可以获取焦点的对象 比如input 或者document
+            // document.onkeydown = function (event) {
+            //     event = event || window.event
+            //     // 如果一直按着会一直触发
+            //     // 可以通过keycode获取按了什么
+            //     console.log("onkeydown: " + event.key);
+            //     if (event.metaKey === true && event.key === 'c')
+            //         alert("输入了复制")
+            // }
+            // document.onkeyup = function () {
+            //     event = event || window.event
+            //
+            //     console.log("onkeyup: ");
+            // }
+
+            let input01 = document.getElementById("input01");
+            input01.onkeydown = function (event) {
+                event = event || window.event
+                console.log("pressed: ", event.key)
+                // 实现不能输入数字
+                if (event.key >= '0' && event.key <= '9')
+                    return false
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1" style="width: 100px; height: 100px; background-color: #39987c"></div>
+    <input id="input01" type="text">
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: lightskyblue;
+            position: absolute;
+        }
+        #box2 {
+            left: 300px;
+            top: 400px;
+            width: 150px;
+            height: 150px;
+            background-color: grey;
+            position: absolute;
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            // 1.在元素被鼠标按下时 开始拖拽
+            // 2.在鼠标移动时 跟随鼠标进行移动
+            // 3.鼠标松开时 匀速固定在位置上 onmouseup
+            let box1 = document.getElementById("box1");
+            box1.addEventListener("mousedown", function (event) {
+                // alert("开始拖拽")
+                // 给document绑定onmousemove
+                event = event || window.event;
+                let ol = event.pageX - box1.offsetLeft;
+                let ot = event.pageY - box1.offsetTop;
+                document.onmousemove = function (event) {
+                    event = event || window.event;
+                    box1.style.left = (event.pageX-ol)+'px';
+                    box1.style.top = (event.pageY-ot)+'px';
+                }
+            }, false)
+            // 这里记得给document绑定
+            document.onmouseup = function () {
+                // 直接取消document的onmousemove
+                document.onmousemove = null;
+                // 取消document的onmouseup事件
+                document.onmouseup = null;
+                alert("取消了")
+            }
+            return false;   // 但是这个对IE8没有作用
+        }
+    </script>
+</head>
+<body>
+
+<p>这是一段文字</p>
+<div id="box1"></div>
+<div id="box2"></div>
+
+</body>
+</html>

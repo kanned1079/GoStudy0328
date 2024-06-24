@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘移动div</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: lightskyblue;
+            border-radius: 10px;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let box1 = document.getElementById("box1");
+
+            document.onkeydown = function (event) {
+                let key = event.key;
+                let x = box1.offsetLeft;
+                let y = box1.offsetTop;
+                let speed = 10;
+                switch (key) {
+
+                    case 'ArrowLeft': {box1.style.left = (x-(event.metaKey===true?speed+=30:speed)) + 'px';  break;}
+                    case 'ArrowRight': {box1.style.left = (x+(event.metaKey===true?speed+=30:speed)) + 'px'; break;}
+                    case 'ArrowUp': {box1.style.top = (y-(event.metaKey===true?speed+=30:speed)) + 'px'; break;}
+                    case 'ArrowDown': {box1.style.top = (y+(event.metaKey===true?speed+=30:speed)) + 'px'; break;}
+                }
+                console.log("position: ("+x+")("+y+")");
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box1"></div>
+</body>
+</html>

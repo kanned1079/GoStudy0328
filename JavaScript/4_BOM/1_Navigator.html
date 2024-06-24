@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigator</title>
+    <script>
+        // BOM共有多少个对象
+        // Window       代表整个浏览器的窗口 同时window也是网页中的全局对象
+        // Navigator    代表当前的浏览区 通过该对象可以来识别不同的浏览器
+        // Location     代表当前浏览器的地址栏信息 通过location可以操作地址栏或完成跳转
+        // History      代表浏览器的历史记录 可以通过这个对象来操作浏览器的历史记录
+        //              由于隐私问题 该对象不能获取到具体的历史记录 只能操作浏览器向前或向后翻页
+        //              而且该操作只在当前访问中有效
+        // Screen       代表用户屏幕信息 通过该对象了可以获取到该对象的显示器相关信息
+        //
+        // 以上对象都是window的属性 由于是全局对象 因此可以全局直接使用
+        console.log(window);
+        console.log(navigator);
+        console.log(window.location);
+        console.log(window.screen);
+        console.log("--------------------")
+        console.log(window.navigator.userAgent)
+        let ua = navigator.userAgent;
+        if (/firefox/i.test(ua)) {
+            console.log("FIREFOX");
+        } else if (/chrome/i.test(ua)) {
+            console.log("CHROME")
+        } else if (/msie/i.test(ua)) {
+            console.log("IE")
+        } else if (/rv/i.test(ua)) {
+            console.log("IE11")
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

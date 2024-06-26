@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Symbol内置值.html</title>
+		<script>
+			// 除了定义自己使用的Symbol值以外，ES6还提供来11个内置的Symbol值，指向语言内部使用的方法。
+			class Person {
+				static [Symbol.hasInstance](params) {
+					console.log(params);
+					console.log("我被用来检测类型了");
+					}
+			}
+			let o = {};
+			
+			console.log(o instanceof Person)
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

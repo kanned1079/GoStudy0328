@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+    <script>
+        // 这是之前的声明函数
+        let func1 = function () {
+            // ...
+        }
+
+        // 现在
+        let func2 = (a, b) => {
+            document.write(a+b);
+            return a+b;
+        }
+
+        func2(10,18);
+
+        // 区别
+        // 1.this是静态的 this始终会指向函数声明时所在作用域下的this的值
+        function getName1() {
+            document.write(this.name);
+        }
+
+        let getName2 = () => {
+            document.write(this.name);
+        }
+
+        window.name = 'CHN ';
+        const school = {
+            name: 'NNU ',
+        }
+        getName1(); // CHN
+        getName2(); // CHN
+
+        // 使用call调用
+        getName1.call(school); // NNU
+        getName2.call(school); // CHN
+
+        // 不能作为构造函数构造实例化对象
+        // let Person = (name, age) => {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // let me = new Person('kanna', 18);
+        // document.write(me);
+
+        // // 不能使用arguments变量
+        // let fu = () => {
+        //     document.write(argument)    // 这里会报错找不到argument
+        // }
+
+        // 箭头函数的简写
+        let add = (n) => {
+            return n+n;
+        }
+        // 也可以省略花括号 但是这个要省略return
+        let add2 = n => n+n
+        document.write(add(9))
+        document.write(add2(17))
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

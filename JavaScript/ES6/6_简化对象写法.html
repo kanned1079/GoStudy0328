@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简化对象写法</title>
+</head>
+<script>
+    let name = 'kanna';
+    let change = function() {
+        document.write('We can change.');
+    }
+
+    const school = {
+        name,
+        change,
+        // 方法声明的简化
+        improve () {
+            document.write('We can improve.');
+        }
+    }
+
+    document.write(school.name);
+    school.change();
+    school.improve();
+</script>
+<body>
+    
+</body>
+</html>

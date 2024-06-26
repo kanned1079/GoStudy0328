@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生成器函数参数</title>
+		<script>
+			function *gen(args) {
+				console.log(args)
+				
+				let one = yield 111;
+				console.log(one);
+				
+				let two = yield 222;
+				console.log(two);
+				
+				let three = yield 333;
+				console.log(three);
+		}
+		let iterator = gen('AAA');
+		console.log(iterator.next())
+		console.log(iterator.next('BBBBBBBB'))
+		console.log(iterator.next('CCCCCCCCCCCCCCC'))
+		console.log(iterator.next('666666666666666666666'))
+		// console.log(iterator.next())
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

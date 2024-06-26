@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let a;
+        let b, c, d;
+        let e = 100;
+        let f = 512, g='iloveu', h=[];
+        //let 不能重复声明
+        //块级作用域
+        {
+            let girl = 'kinggyo';
+        }
+        console.log(girl);
+        // 这样是不能获取到的
+
+        // 不存在变量提升
+        console.log(song); // 这样会输出Undefined
+        let song = 'aaaa'; 
+
+        // 不影响作用域链
+        {
+            let school = 'nnu';
+            function fu() {
+                console.log(school);
+            }
+            fu();
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量解钩赋值</title>
+    <script>
+        // ES6允许按照一定的模式从数组和对象中提取值 对变量进行赋值
+        // 这样被成为解构赋值
+        //1.数组的结构
+        // const F4 = ['aa', 'bb', 'cc', 'dd']
+        // let [a1, a2, a3, a4] = F4;
+        // console.log(a1);
+        // console.log(a2);
+        // console.log(a3);
+        // console.log(a4);
+
+        //2.对象的解构
+        const zhao = {
+            name: '赵本山',
+            age: '不知道',
+            xiaopin: function() {
+                document.write('我可以演小品');
+            }
+        }
+
+        let {name, age, xiaopin} = zhao;
+        console.log(name);
+        console.log(age);
+        console.log(xiaopin);
+
+        xiaopin();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

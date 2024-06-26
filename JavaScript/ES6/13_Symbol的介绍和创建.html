@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			window.onload = function () {
+				// Symbol 用来表示独一无二的值
+				// Symbol 不能与其他数据进行运算
+				// 不能使用for...in...遍历 但是能用Reflect.ownKeys来获取对象的所有键名	
+				
+				// 创建一个Symbol
+				let s1 = Symbol();
+				console.log(s1, typeof s1)
+				
+				let s2 = Symbol('aaa');	// 这个'aaa'想当一个注释
+				let s3 = Symbol('aaa');	// 这个'aaa'想当一个注释
+				console.log(s2 === s3); // 返回 false
+				
+				// 也可以使用Symbol.for创建
+				let s4 = Symbol.for('aaaaa');	
+				let s5 = Symbol.for('aaaaa');
+				console.log(s4 === s5);
+				// 这样创建可以得到唯一的值
+				
+				// USONB
+				// Undefined
+				// String Symbol
+				// Object
+				// null number
+				// boolean
+				
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

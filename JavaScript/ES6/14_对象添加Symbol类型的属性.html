@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>对象添加Symbol类型的属性</title>
+		<script>
+			// //向对象中添加方法 up down 相关
+			// let game = {
+			// 	let  up = function() {
+			// 	},
+			// 	// 不确定里面是否有up这个方法
+			// }
+			
+			// let methods = {
+			// 	up: Symbol(),
+			// 	down: Symbol(),
+			// }
+			
+			// // 开始扩展方法
+			// game[methods.up] = function () {
+			// 	console.log("downdowndown")
+			// }
+			// game[methods.down] = function () {
+			// 	console.log("upupup")
+			// }
+			
+			// console.log(game)
+			
+			let youxi = {
+				name: 'langrensha',
+				[Symbol('say')]: function() {
+					console.log('say sth.');
+				},
+				[Symbol('boom')]: function() {
+					console.log('boomed');
+				}
+			}
+			
+			console.log(youxi)
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生成器函数</title>
+		<script>
+			// 生成器是ES6提供的一种异步编程解决方案 语法行为与传统函数完全不同
+			function *gen() {
+				console.log("11111");
+				yield 'aaa';	// 这个看作是分隔符 三个yield将分成四个部分
+				console.log("22222");
+				yield 'bbbb';
+				console.log("33333");
+				yield 'ccccc';
+				console.log("44444");
+			}
+			
+			// let iterator = gen();
+			// iterator.next();
+			// iterator.next();
+			
+			for (let v of gen()){
+				console.log(v);
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

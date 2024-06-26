@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>函数参数的默认值</title>
+		<script>
+			function ad (a, b, c=10) {
+				return a+b+c;
+			}
+			let result = ad(1, 2);
+			document.write(result+'<br>');
+			
+			// 可以与解构赋值结合使用
+			function connect({host='127.0.0.1', username, password, port}) {
+				// let host = options.host;
+				// let username = options.username;
+				// 以上的options重复
+				document.write(host+'<br>');
+				document.write(username+'<br>');
+			}
+			// 调用
+			connect({
+				host: 'localhost',
+				username: 'root',
+				password: 'pwd123',
+				port: 3306,
+			})
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

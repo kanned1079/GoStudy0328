@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>promise Introduction</title>
+		<script>
+			// first create a object
+			const p = new Promise((resolve, reject)=>{
+				setTimeout(()=>{
+					// let data = 'userdata in DB';
+					// resolve(data); // if resolve() execed, that means success
+					
+					let err = 'read data failure.';	// if error occured.
+					reject(err);	// if reject() execed, that means failure, it will call the second callback functoin.
+				}, 1000)
+			});
+			
+			// call `then` function in promise
+			// In generally, Success is called `value`
+			// Failure is called `reason`
+			p.then(function(value){
+				console.log(value);
+			}, function(reason){
+				console.log(reason);
+			})
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

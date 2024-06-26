@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生成器实例2</title>
+		<script>
+			// emulator 	1.userdata 2.orderdata 3.goodsdata
+			function getUsers() {
+				setTimeout(()=>{
+					let data = 'userdata';
+					// put this data into next(date), than it will be transfered to next yield function.
+					iterator.next(data);
+				}, 1000);
+			}
+			function getOrders() {
+				setTimeout(()=>{
+					// as well
+					let data = 'orderdata';
+					iterator.next(data);
+				}, 1000);
+			}
+			function getGoods() {
+				setTimeout(()=>{
+					let data = 'goodsdata';
+					iterator.next(data);
+				}, 1000);
+			}
+			
+			function *gen(){
+				// so it need a value to receive getUsers()
+				let user = yield getUsers();
+				console.log(user);
+				
+				let order = yield getOrders();
+				console.log(order);
+				
+				let goods = yield getGoods();
+				console.log(goods);
+			}
+			
+			let iterator = gen();
+			iterator.next();
+			
+			
+			// no this !!!
+			// getUsers();
+			// getUOrders();
+			// getGoods();
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

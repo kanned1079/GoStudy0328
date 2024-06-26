@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ad {
+            width: 200px;
+            height: 200px;
+            background-color: #58a;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // 点击div2s后颜色变为pink
+            let ad = document.getElementById("ad");
+            ad.addEventListener("click", function () {
+                // 在外层保存this的值
+                // let _this = this;
+                // 添加一个定时器
+                setTimeout(() => {
+                    // _this.style.background = 'pink';
+                    this.style.background = 'pink';
+                }, 2000)
+            }, false);
+
+            // 从数组中返回偶数的元素
+            const arr = [1, 6, 9 ,10 ,100, 255];
+            // const result = arr.filter(function(item) {
+            //     return item%2===0?true:false;
+            // })
+            const result = arr.filter(item => {
+                return item%2===0
+
+            })
+            document.write(result)
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="ad"></div>
+</body>
+</html>

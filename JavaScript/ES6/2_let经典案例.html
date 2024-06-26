@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 80px;
+            height: 40px;
+            border: skyblue solid 2px;
+            float: left;
+            margin-right: 20px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let items = document.getElementsByClassName("item");  
+            for (var i=0; i<items.length; i++) {
+                items[i].onclick = function () {
+                    this.style.background = 'pink';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header" id="headbtn">Click to change color.</h2>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+</html>

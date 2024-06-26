@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			// ES6引入了rest参数 用于获取函数的实参 用于代替arguments
+			
+			// ES5的写法
+			// function date() {
+			// 	document.write(arguments)
+			// }
+			// date('白质', '阿娇', '四惠'); // 但是这里的是一个对象
+			
+			//ES6 rest参数
+			function date(...args) {
+				document.write(args);
+			}
+			date('白质', '阿娇', '四惠');	// 这里出来的是一个数组 因此这里就可以使用filter等
+			
+			// 注意 rest参数要放到最后面
+			function fn(a, b, ...args) {
+				document.write(a);
+				document.write(b));
+				document.write(args);
+			}
+			fn(1, 2, 3, 4, 5, 6, 7);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

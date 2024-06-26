@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自定义遍历数据</title>
+	</head>
+	<script>
+		const banji = {
+			name: 'class1',
+			stus: [
+				'xiaoming',
+				'xiaoning',
+				'xiaotian',
+				'knight'
+			],
+			[Symbol.iterator]() {
+				let index = 0;
+				let _this = this;
+				return {
+					next: () => {
+						if (index < _this.stus.length) {
+						const result =  {value:_this.stus[index], done: false};
+						index++;
+						return result;
+						} else {
+							return {value:undefined, done: true}
+						}
+					}
+				}
+			}
+		}
+		
+		for (let v of banji) {
+			console.log(v)
+			}
+		
+	</script>
+	<body>
+	</body>
+</html>

@@ -8,12 +8,12 @@ import (
 )
 
 const (
-	dbUser  = "go"
-	dbPass  = "PassCode987!"
-	dbProto = "tcp"
-	dbHost  = "api.ikanned.com"
-	dbPort  = "4407"
-	dbName  = "db0"
+	dbUser  = "go"              // 使用哪个用户来连接数据库
+	dbPass  = "PassCode987!"    // 用户的密码
+	dbProto = "tcp"             // 连接的协议
+	dbHost  = "api.ikanned.com" // 数据库主机的IP或域名
+	dbPort  = "4407"            // 数据库连接端口
+	dbName  = "db0"             // 操作哪一个数据库
 )
 
 var (

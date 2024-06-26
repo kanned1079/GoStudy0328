@@ -10,6 +10,7 @@ import (
 // CreateNew 创建用户
 func (u *WxUsers) CreateNew() (code int, err error) {
 	u.Password = encrypt.Base64Encryptor.Base64Encrypt(u.Password)
+	log.Println(u)
 	result := dao.Db.Model(WxUsers{}).Create(&u)
 	if result.Error != nil {
 		return Unknow_Error, errors.New("未知错误")
@@ -68,4 +69,17 @@ func (u *WxUsers) DeleteUserByID() (Code int, err error) {
 	} else {
 		return Delete_Failure, result.Error
 	}
+}
+
+// Test new
+func (u *WxUsers) CreateNewRec(code int) {
+	var newUser WxUsers
+	result := dao.Db.Model(&WxUsers{}).Limit(1).Find(&newUser)
+	if result.RowsAffected >= 1 {
+		code = Insert_Success
+	} else if result.Error != nil {
+		log.Println(result.Error)
+		code = Insert_Failure
+	}
+	return
 }

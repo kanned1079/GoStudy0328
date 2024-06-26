@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请求超时与网络异常</title>
+    <style>
+        .btn {
+            width: 150px;
+            height: 35px;
+            border: 0px;
+            border-radius: 5px;
+            background-color: #5588aa;
+            color: white;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            // 标识一个变量
+            let isSending = false;
+            let xhr = null;
+            document.getElementById('btn01').addEventListener('click', () => {
+                if (isSending === false)    // 正在发送 那么就取消该请求 创建一个新的
+                    xhr = new XMLHttpRequest();
+                // 正在发送 修改isSending为true
+                isSending = true;
+                xhr.open('GET', 'http://localhost:9000/query1');
+                xhr.send();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        isSending = false;
+                        if (xhr.status >= 200 && xhr.status < 200) {
+                            // pass
+                        }
+                    }
+                }
+            });
+
+
+
+        }
+    </script>
+</head>
+<body>
+<button id="btn01" class="btn">点击发送</button><br><br>
+
+</body>

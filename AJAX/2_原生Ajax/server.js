@@ -16,6 +16,14 @@ app.post('/server', (request, response) => {
 
 });
 
+app.get('/query1', (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    // response.send('hello this is query1')
+    setTimeout(function () {
+        response.send('hello from query1');
+    }, 3000)
+});
+
 app.listen('8000', function () {
     console.log('Server started, listening 8000 port...');
 })

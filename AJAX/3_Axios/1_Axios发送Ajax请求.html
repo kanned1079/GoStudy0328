@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Axios发送Ajax请求</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<style>
+    .btn {
+        width: 300px;
+        height: 70px;
+        border: 0px;
+        border-radius: 5px;
+        background-color: #5588aa;
+        color: white;
+    }
+</style>
+<script>
+    window.onload = () => {
+        document.getElementById('btn01').addEventListener('click', function () {
+            // 配置baseURL
+            axios.defaults.baseURL = 'http://localhost:9000';
+            // GET请求
+            axios.get('/axios1', {
+                // url参数
+                params: {
+                    id: 100,
+                    vip: 7,
+                },
+                // 请求头信息
+                headers: {
+                    // name: 'kanna',
+                    // age: 18,
+                }
+
+            }).then(value => {
+                console.log(value);
+                console.log(value.data);
+            });
+        });
+        document.getElementById('btn02').addEventListener('click', () => {
+            // const xhr = new XMLHttpRequest();
+            // xhr.open('POST', 'http://localhost:9000/axios2');
+            // xhr.send('name=admin&pwd=123456');
+            // 配置baseURL
+            axios.defaults.baseURL = 'http://localhost:9000';
+            // POST请求
+            axios.post('/axios2', {
+                name: 'admin',
+                pwd: '123456',
+            }, {
+                params: {
+                    id: 100,
+                    vip: 7,
+                },
+                headers: {
+                    // 你可以在这里添加请求头信息
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+        });
+        document.getElementById('btn03').addEventListener('click', function () {
+
+        });
+
+    }
+</script>
+<body style="text-align: center; background-color: #666666">
+<button id="btn01" class="btn">GET</button><br><br>
+<button id="btn02" class="btn">POST</button><br><br>
+<button id="btn03" class="btn">AJAX</button><br><br>
+
+</body>
+</html>

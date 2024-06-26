@@ -31,6 +31,17 @@ func StartAll() {
 		})
 	})
 
+	r.GET("/ie", func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		context.String(http.StatusOK, "hello ie1")
+	})
+
+	r.GET("/query1", func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		time.Sleep(time.Second * 3) // 延迟3s
+		context.String(http.StatusOK, "hello from gin after 3sec")
+	})
+
 	r.POST("/server", func(context *gin.Context) {
 		context.Header("Access-Control-Allow-Origin", "*")
 		//context.Header("Access-Control-Allow-Headers", "*")
@@ -48,7 +59,7 @@ func StartAll() {
 func showNumbers() {
 	for {
 		log.Println("当前GO协程数量: ", runtime.NumGoroutine())
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Minute)
 	}
 
 }

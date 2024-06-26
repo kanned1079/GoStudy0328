@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IE缓存问题</title>
+    <title>请求超时与网络异常</title>
     <style>
         #btn01 {
             width: 150px;
@@ -25,14 +25,19 @@
             let box = document.getElementById('box1');
             btn.onclick = () => {
                 const xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://localhost:9000/ie?'+Date.now());
+                // 增加超时处理
+                xhr.timeout = 1000;
+                // 超时回调
+                xhr.ontimeout = () => { alert('请求超时'); }
+                // 增加网络超时的回调
+                xhr.onerror = () => { alert('网络异常'); }
+                xhr.open('GET', 'http://localhost:9000/query1?'+Date.now());
                 xhr.send();
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4)
                         if (xhr.status >= 200 && xhr.status < 300)
                             handle();
                 }
-
 
                 let handle = () => {
                     box.innerText = xhr.response;

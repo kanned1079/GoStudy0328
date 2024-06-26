@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请求超时与网络异常</title>
+    <style>
+        .btn {
+            width: 150px;
+            height: 35px;
+            border: 0px;
+            border-radius: 5px;
+            background-color: #5588aa;
+            color: white;
+        }
+        #box1 {
+            width: 400px;
+            height: 250px;
+            background-color: #e3e5e7;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            let sendBtn = document.getElementById('btn01');
+            let cancelBtn = document.getElementById('btn02');
+            let xhr = null;
+            sendBtn.addEventListener('click', ()=>{
+                // sendBtn.style.backgroundColor = '#b85353'
+                xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:9000/query1');
+                xhr.send();
+            });
+            cancelBtn.addEventListener('click', ()=>{
+                xhr.abort();
+            })
+
+
+        }
+    </script>
+</head>
+<body>
+<button id="btn01" class="btn">点击发送</button><br><br>
+<button id="btn02" class="btn">点击取消</button><br><br>
+
+</body>
+</html>

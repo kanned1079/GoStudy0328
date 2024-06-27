@@ -54,7 +54,7 @@ func StartAll() {
 	r.Use(func(context *gin.Context) {
 		context.Header("Access-Control-Allow-Origin", "*")
 		//c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-		//c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		context.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		// 如果是预检请求 返回 200
 		if context.Request.Method == "OPTIONS" {
 			context.AbortWithStatus(http.StatusOK)
@@ -71,13 +71,25 @@ func StartAll() {
 		context.String(http.StatusOK, "POST: Hello from Gin")
 	})
 
+	r.GET("/fetch", func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		context.String(http.StatusOK, "GET: hello from gin")
+		//context.JSON(http.StatusOK, us1)
+	})
+
+	r.POST("/fetch", func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		//context.String(http.StatusOK, "POST: hello from gin")
+		context.JSON(http.StatusOK, us1)
+	})
+
 	r.Run("localhost:9000")
 }
 
 func showNumbers() {
 	for {
 		log.Println("当前GO协程数量: ", runtime.NumGoroutine())
-		time.Sleep(time.Minute)
+		time.Sleep(time.Second * 30)
 	}
 
 }

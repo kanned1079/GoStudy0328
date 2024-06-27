@@ -55,12 +55,30 @@
                 },
                 headers: {
                     // 你可以在这里添加请求头信息
-                    'Content-Type': 'application/x-www-form-urlencoded',
+
                 },
             })
         });
-        document.getElementById('btn03').addEventListener('click', function () {
-
+        document.getElementById('btn03').addEventListener('click', () => {
+            axios.defaults.baseURL = 'http://localhost:9000';
+            axios({
+                method: 'POST',
+                url: '/axios2',
+                params: {
+                    a: 100,
+                    b: 200,
+                },
+                headers: {
+                    // aa: 111,
+                    // bb: 222,
+                },
+                data: {
+                    name: 'admin',
+                    pwd: '123456',
+                },
+            }).then(value => {
+                console.log(value.data);
+            })
         });
 
     }

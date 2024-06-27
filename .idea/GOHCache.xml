@@ -688,6 +688,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/AJAX/100_TestBackend/main.go" />
+              <option value="file://$PROJECT_DIR$/AJAX/2_原生Ajax/main.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/common/message/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/server/model/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/dbTest/main/main.c.go" />
@@ -842,6 +843,13 @@
             </set>
           </value>
         </entry>
+        <entry key="user">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/AJAX/4_同源策略/server.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="valNode1">
           <value>
             <set>
@@ -856,10 +864,34 @@
         <entry key="file://$PROJECT_DIR$/AJAX/100_TestBackend/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719405045657" />
+              <option name="lastModified" value="1719462053441" />
               <option name="schema">
                 <list>
                   <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/AJAX/2_原生Ajax/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719462053445" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/AJAX/4_同源策略/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719485746961" />
+              <option name="schema">
+                <list>
+                  <option value="user" />
                 </list>
               </option>
             </ScannedPath>
@@ -2549,13 +2581,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/SimpleJSONTest/dao/Db_Acc.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1719390314348" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/SimpleJSONTest/encrypt/aes256.go">
           <value>
             <ScannedPath>
@@ -2867,7 +2892,7 @@
         <entry key="transfer" value="Transfer" />
         <entry key="tv" value="TV" />
         <entry key="tv2" value="TV2" />
-        <entry key="user" value="User" />
+        <entry key="user" value="user" />
         <entry key="user2" value="User2" />
         <entry key="user_controller" value="UserController" />
         <entry key="user_dao" value="UserDao" />
@@ -2879,6 +2904,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719382121074" />
+    <option name="lastTimeChecked" value="1719471478969" />
   </component>
 </project>

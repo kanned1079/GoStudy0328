@@ -709,7 +709,6 @@
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/server/model/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/dbTest/main/main.c.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create.go" />
-              <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create2.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/2_query/query.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/3_advanced_query/advancedQuery.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/4_update/update_test.go" />
@@ -2956,6 +2955,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719471478969" />
+    <option name="lastTimeChecked" value="1719562058095" />
   </component>
 </project>

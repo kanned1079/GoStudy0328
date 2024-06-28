@@ -409,6 +409,21 @@
             </set>
           </value>
         </entry>
+        <entry key="NxcUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create2.go" />
+              <option value="file://$PROJECT_DIR$/SimpleJSONTest/users/users.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OfficialUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create2.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Persion1">
           <value>
             <set>
@@ -693,6 +708,7 @@
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/server/model/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/dbTest/main/main.c.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create.go" />
+              <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create2.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/2_query/query.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/3_advanced_query/advancedQuery.go" />
               <option value="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/4_update/update_test.go" />
@@ -2325,10 +2341,23 @@
         <entry key="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718944930982" />
+              <option name="lastModified" value="1719554507213" />
               <option name="schema">
                 <list>
                   <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/GORM/2_FromOfficialManual/1_Create/create2.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719555417151" />
+              <option name="schema">
+                <list>
+                  <option value="NxcUser" />
+                  <option value="OfficialUser" />
                 </list>
               </option>
             </ScannedPath>
@@ -2664,10 +2693,11 @@
         <entry key="file://$PROJECT_DIR$/SimpleJSONTest/users/users.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1718944931608" />
+              <option name="lastModified" value="1719549323849" />
               <option name="schema">
                 <list>
                   <option value="WxUsers" />
+                  <option value="NxcUser" />
                 </list>
               </option>
             </ScannedPath>
@@ -2851,6 +2881,8 @@
         <entry key="nav_controller" value="NavController" />
         <entry key="node79" value="Node79" />
         <entry key="notify_user_status_mes" value="NotifyUserStatusMes" />
+        <entry key="nxc_user" value="NxcUser" />
+        <entry key="official_user" value="OfficialUser" />
         <entry key="persion1" value="Persion1" />
         <entry key="person" value="person" />
         <entry key="person27" value="Person27" />
@@ -2892,7 +2924,7 @@
         <entry key="transfer" value="Transfer" />
         <entry key="tv" value="TV" />
         <entry key="tv2" value="TV2" />
-        <entry key="user" value="user" />
+        <entry key="user" value="User" />
         <entry key="user2" value="User2" />
         <entry key="user_controller" value="UserController" />
         <entry key="user_dao" value="UserDao" />

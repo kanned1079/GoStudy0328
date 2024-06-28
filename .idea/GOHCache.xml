@@ -704,6 +704,7 @@
             <set>
               <option value="file://$PROJECT_DIR$/AJAX/100_TestBackend/main.go" />
               <option value="file://$PROJECT_DIR$/AJAX/2_原生Ajax/main.go" />
+              <option value="file://$PROJECT_DIR$/AJAX/5_解决跨域/2_jsonp实践/server.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/common/message/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/79_Chat/server/model/user.go" />
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/dbTest/main/main.c.go" />
@@ -910,6 +911,25 @@
                   <option value="user" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/AJAX/5_解决跨域/2_jsonp实践/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719559389067" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/AJAX/6_CORS/server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719560667628" />
             </ScannedPath>
           </value>
         </entry>
@@ -2693,7 +2713,7 @@
         <entry key="file://$PROJECT_DIR$/SimpleJSONTest/users/users.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719549323849" />
+              <option name="lastModified" value="1719556207953" />
               <option name="schema">
                 <list>
                   <option value="WxUsers" />

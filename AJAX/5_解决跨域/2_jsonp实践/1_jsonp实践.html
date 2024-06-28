@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsonp实践</title>
+     <script>
+        window.onload = () => {
+            const input = document.getElementById('name');
+            const btn01 = document.getElementById('btn01');
+
+            // 创建一个回调函数handle
+            window.handle = function (data) {   
+                input.style.border = 'solid 1px #f00';
+                // 修改p标签的提示文本
+                document.getElementById('info').innerText = '用户已经存在';
+            }
+        
+            input.onblur = () => {
+                let name = this.value;
+                // 向服务端发送请求
+                // 1创建一个script标签
+                const s = document.createElement('script');
+                // 2设置标签的src属性
+                s.src = 'http://localhost:8080/check';
+                // 3将s插入到文档中
+                document.body.appendChild(s)
+                // 删除之前的 script 标签，防止重复请求和内存泄漏
+                s.onload = () => {
+                    document.body.removeChild(s);
+                };
+
+            }
+        }
+     </script>
+     <style>
+     </style>
+</head>
+<body>
+
+    <input type="text" id="name">&nbsp;<button id="btn01">测试</button><br>
+    <p id="info"></p>
+    
+</body>
+</html>

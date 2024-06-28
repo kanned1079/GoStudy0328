@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS</title>
+    <style>
+        #btn01 {
+            width: 150px;
+            height: 40px;
+        }
+        #box1 {
+            width: 400px;
+            height: 200px;
+            border: #5588aa solid 1px;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            const send = document.getElementById('btn01');
+            const msg = document.getElementById('box1');
+            const txt = document.getElementById('txt');
+
+            send.onclick = () => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8080/cors');
+                xhr.send();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
+                        console.log(xhr.response);
+                        // 这里被阻挡了没有设置相应头
+                        // Access to XMLHttpRequest at 'http://localhost:8080/cors' from origin 'http://localhost:63342' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+                        txt.innerText = xhr.response;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn01">发送请求</button><br><br>
+    <div id="box1">
+        <p id="txt"></p>
+    </div>
+</body>
+</html>

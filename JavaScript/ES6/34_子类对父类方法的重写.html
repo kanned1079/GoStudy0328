@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子类对父类方法的重写</title>
+</head>
+<body>
+    <script>
+        // 声明父类
+        class Phone {
+            constructor(brand, price) {
+                this.brand = brand;
+                this.price = price;
+            }
+            call() {
+                console.log('it can make calls.')
+            }
+        }
+
+        // 声明子类
+        class SmartPhone extends Phone {
+            // 构造方法
+            constructor(brand, price, color, size) {
+                super(brand, price);    // 这就是父类的constructor方法
+                this.color = color;
+                this.size = size;
+            }
+            photo() {
+                console.log('take photos')
+            }
+            playGame() {
+                console.log('play games')
+            }
+            call() {
+                console.log('视频通话')
+            }
+        }
+
+        // 实例化
+        const xiaomi = new SmartPhone('小米', 799, '黑色', '4.3 inch')
+        console.log(xiaomi);
+        xiaomi.call();
+        xiaomi.photo();
+        xiaomi.playGame();
+        xiaomi.call();
+    </script>
+</body>
+</html>

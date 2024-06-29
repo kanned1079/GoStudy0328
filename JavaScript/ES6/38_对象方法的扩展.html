@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象方法扩展</title>
+</head>
+<body>
+    <script>
+        // Object.is() 判断两个值是否完全相等
+        console.log(Object.is(120, 120));   // true
+        console.log(Object.is(NaN, NaN));   // true
+        console.log(NaN === NaN);   // false
+
+        // Object.assign(<旧的>, <新的>) 对象的合并
+        const config1 = {   // 旧的
+            host: 'localhost',
+            port: 3306,
+            name: 'root',
+            passwd: 'password',
+            mark: 'none',
+        };
+        const config2 = {   // 新的
+            host: 'https://ikanned.com',
+            port: 4407,
+            name: 'kanna',
+            passwd: '123456',
+        };
+        Object.assign(config1, config2);
+        // 用config2 覆盖掉了 config1
+        console.log(config1);
+
+        // Object.setPrototypeOf() 设置原型对象
+        const school = {
+            name: 'nnu',
+        }
+        const cities = {
+            posi: ['beijing', 'shanghai', 'chongqing']
+        }
+        // 在原型链中插入
+        Object.setPrototypeOf(school, cities);
+        console.log(school);
+
+        // Object.getPrototypeOf() 获取原型对象
+        console.log(Object.getPrototypeOf(school));
+
+    </script>
+</body>
+</html>

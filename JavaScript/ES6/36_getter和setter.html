@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getter和setter方法</title>
+</head>
+<body>
+    <script>
+        // get 和 set
+        class Phone{
+            get price() {
+                console.log('读取了price')
+            }
+            set price(val) {   // setter必须有一个参数
+                console.log('price属性被修改了')
+            }
+        }
+
+        let s = new Phone();
+        s.price = 'free';
+        s.price;
+    </script>
+</body>
+</html>

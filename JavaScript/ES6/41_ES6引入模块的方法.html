@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6中引入模块的方法</title>
+</head>
+<body>
+
+    <script type="module">
+        // 1. 通用方法导入
+        // // 引入m1.js的内容
+        // // 分别暴露
+        // import * as m1 from './models/m1.js'
+        // console.log(m1);
+        // // 引入m2.js
+        // // 统一暴露
+        // import * as m2 from './models/m2.js'
+        // console.log(m2);
+        // // 引入m3.js
+        // // 默认暴露
+        // import * as m3 from './models/m3.js'
+        // console.log(m3);
+        // m3.default.change();
+
+        // 2. 解构赋值形式
+        import {school, teach} from './models/m1.js'
+        import {school as school1, teach as teach1} from './models/m2.js'
+        // 默认暴露这里必须要起一个别名
+        import {default as m3} from './models/m3.js'
+        console.log(school);
+        console.log(teach);
+
+        console.log('-----------------')
+        console.log(school1, teach1)
+
+        console.log('-----------------')
+        console.log(m3)
+
+        // 3. 简便形式 针对于默认暴露
+        // 默默暴露的js形式
+        /*
+        // 默认暴露
+        export default {
+            school : 'nnutc',
+            change: () => {
+                console.log('we can change you.')
+    }
+}
+
+        * */
+        import m33 from './models/m3.js'
+        console.log(m33);
+
+
+    </script>
+
+</body>
+</html>

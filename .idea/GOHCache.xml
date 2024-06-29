@@ -2622,6 +2622,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/GoWeb/ginFramework/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719820085096" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/JavaScript/ES6/servers/server24.go">
           <value>
             <ScannedPath>
@@ -2962,6 +2969,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719562058095" />
+    <option name="lastTimeChecked" value="1719806147458" />
   </component>
 </project>

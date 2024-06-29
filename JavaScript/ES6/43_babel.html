@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    1. 安装工具 babel-cli babel-preset-env browserify(webpack也可)
+    2. 转换
+        npm init --yes
+        npm i babel-cli babel-preset-env browserify -D
+        npx babel ./models -d ./dist/js --presets=babel-preset-env
+    3. 打包
+        npx browserify ./dist/js/app.js -o ./dist/bundle.js
+    4. 引入文件
+
+    -->
+    <script src="./dist/bundle.js" type="module">
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数实现继承</title>
+</head>
+<body>
+<script>
+    // ES5
+    // 手机
+    function Phone1(brand, price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    Phone1.prototype.call = function () {
+        console.log("it can call.")
+    }
+
+    // 智能手机
+    function SmartPhone1(brand, price, color, size) {
+        Phone1.call(this, brand, price);
+        this.color = color;
+        this.size = size;
+    }
+
+    // 设置子级构造函数的原型
+    SmartPhone1.prototype = new Phone1; // 构造链
+    SmartPhone1.prototype.constructor = SmartPhone1;
+
+    // 声明子类的方法
+    SmartPhone1.prototype.photo = function () {
+        console.log('it can take photos');
+    }
+    SmartPhone1.prototype.playGame = function () {
+        console.log('it can play games');
+    }
+
+    const chuizi = new SmartPhone1('锤子', 2499, '黑色', 5.9)
+
+    console.log(chuizi);
+
+</script>
+</body>
+</html>

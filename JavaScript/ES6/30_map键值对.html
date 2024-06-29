@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map键值对</title>
+</head>
+<body>
+    <script>
+        // 声明map
+        let m = new Map();
+
+        // 添加元素
+        m.set('name', 'kanna');
+        m.set('change', function () {console.log("we can change.")});
+
+        let key = {
+            school : 'SCH'
+        };
+        m.set(key, ['北京', '上海', '深圳'])
+
+        // 获取size
+        console.log(m.size);
+
+        // 删除
+        m.delete('name');
+
+        // 获取
+        console.log(m.get('change'));
+        // 获取数组的值
+        console.log(m.get(key));
+
+        // 晴空
+        m.clear();
+
+        // 使用for...of遍历
+        for (let v of m)
+            console.log(v)
+
+
+        console.log(m)
+    </script>
+</body>
+</html>

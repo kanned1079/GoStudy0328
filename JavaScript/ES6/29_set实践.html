@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>set实践</title>
+</head>
+<body>
+
+    <script>
+        let arr = [1,2,3,4,5,6,7,8,9,0,4,12,8,3,0,7,1,8,4];
+        // 0x01.去重
+        // ...用于展开Set
+        let result = [...new Set(arr)];
+        console.log(result);
+
+        // 0x02.交集 n
+        let arr2 = [7,2,9,1,100,45,901,666];
+        // let result2 = [...new Set(arr)].filter(item => {
+        //     let s2 = new Set(arr2);
+        //     return s2.has(item)
+        // });
+        // 简写
+        let result2 = [...new Set(arr)].filter(item => new Set(arr2).has(item));
+
+        console.log(result2)
+
+        // 0x03.并集 u
+        let union = [...new Set([...arr, ...arr2])];
+        console.log(union);
+
+        // 0x04.差集 和交集相反
+        let diff = [...new Set(arr)].filter(item => !(new Set(arr2).has(item)));
+        console.log(diff);
+
+
+    </script>
+
+</body>
+</html>

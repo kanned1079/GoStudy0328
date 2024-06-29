@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise的catch方法</title>
+    <script>
+        window.onload = () => {
+            const p = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    reject('出错');
+                }, 1000)
+            });
+
+            p.then((value) => {}, (reason) => {
+                console.warn(reason);
+            });
+
+            // 使用catch
+            p.catch((reason) => {
+                console.warn(reason)
+            })
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

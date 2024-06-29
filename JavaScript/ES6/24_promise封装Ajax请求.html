@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise封装Ajax请求</title>
+    <script>
+        window.onload = () => {
+            // 使用promise封装
+            const ps = new Promise((resolve, reject) => {
+                // 原生
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8080/test');
+                xhr.send();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4)
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            // 表示成功
+                            resolve(xhr.response);
+                        } else {
+                            // 表示失败
+                            reject(xhr.status);
+                            // 如果失败会调用then的第二个回调函数来处理结果
+                        }
+                }
+            })
+
+            // 指定回调函数
+            ps.then((value) => {
+                console.log(value)
+            }, (reason) => {
+                console.error(reason)
+            })
+
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

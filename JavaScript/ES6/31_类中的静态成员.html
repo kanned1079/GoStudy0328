@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>静态成员</title>
+</head>
+<body>
+    <script>
+        // ES5
+        function Phone(brand, price) {}
+        // 本身Phone也是一个变量 因此可以添加属性
+        Phone.name = '手机';
+        Phone.change = function () {
+            console.log("i can change the world.");
+        }
+        Phone.prototype.size = '5.5 inch'
+        let nokia = new Phone();
+        // 这样是没有name属性的
+        // 函数对象是属于函数的 而不是属于实例对象的
+        console.log(nokia.name);
+        // nokia.change();
+        // 这里的函数也是没有的
+        console.log(nokia.size);
+
+        class Phone2 {
+            static name = 'mobile phone';
+            static change() {
+                console.log('I can also change the world.');
+            }
+        }
+        let nokia2 = new Phone2();
+        console.log(nokia2.name);   // undefined
+        console.log(Phone2.name);
+        // 声明了static的属性仍然属于函数
+
+    </script>
+</body>
+</html>

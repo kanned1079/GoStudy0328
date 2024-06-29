@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>集合</title>
+    <script>
+        window.onload = () => {
+            // 声明一个set
+            let s1 = new Set();
+            // 集合会自动去重
+            let s2 = new Set(['大事', '小事', '好事', '坏事', '小事']);
+            console.log(s1);
+            console.log(s2);
+
+            // 元素个数
+            console.log(s2.size);
+
+            // 添加元素
+            s2.add('喜事');
+
+            // 删除元素
+            s2.delete('坏事')
+
+            // 检测是否存在 返回true， false
+            console.log(s2.has('糟心事'));
+
+            // 清空
+            s2.clear();
+
+            for (let v of s2)
+                console.log(v);
+        }
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

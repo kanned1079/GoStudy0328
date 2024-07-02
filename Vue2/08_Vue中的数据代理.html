@@ -13,15 +13,15 @@
 
 <script>
     Vue.config.productionTip = false;
+    let data = {
+        name: 'nnu',
+        addr: 'nanjing'
+    }
     const vm = new Vue({
         el: '#root',
-        data() {
-            return {
-                name: 'nnu',
-                addr: 'nanjing'
-            }
-        }
+        data: data,
     });
+    console.log(vm);
 </script>
 </body>
 </html>

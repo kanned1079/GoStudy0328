@@ -53,9 +53,8 @@ func StartAll() {
 	// 中间件来处理 CORS 预检请求
 	r.Use(func(context *gin.Context) {
 		context.Header("Access-Control-Allow-Origin", "*")
-		//c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		//c.Header("Access-Control-Allow-Methods", "*")
 		context.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
-		// 如果是预检请求 返回 200
 		if context.Request.Method == "OPTIONS" {
 			context.AbortWithStatus(http.StatusOK)
 			return
@@ -65,6 +64,8 @@ func StartAll() {
 
 	r.POST("/axios2", func(context *gin.Context) {
 		context.Header("Access-Control-Allow-Origin", "*")
+		context.Header("Content-Type", "application/json")
+		context.Header("Access-Control-Allow-Methods", "*")
 		username := context.PostForm("name")
 		pwd := context.PostForm("pwd")
 		log.Println(username, pwd)

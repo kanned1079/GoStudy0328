@@ -57,6 +57,8 @@
                     // 你可以在这里添加请求头信息
 
                 },
+            }).then(value => {
+                console.log(value);
             })
         });
         document.getElementById('btn03').addEventListener('click', () => {
@@ -69,8 +71,7 @@
                     b: 200,
                 },
                 headers: {
-                    // aa: 111,
-                    // bb: 222,
+                    'Access-Control-Allow-Origin': '*',
                 },
                 data: {
                     name: 'admin',
@@ -81,6 +82,12 @@
             })
         });
 
+        document.getElementById('btn04').onclick = () => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:9000/axios2');
+            xhr.send()
+        }
+
     }
 </script>
 <body style="text-align: center; background-color: #666666">
@@ -89,6 +96,8 @@
 <button id="btn02" class="btn">POST</button>
 <br><br>
 <button id="btn03" class="btn">AJAX</button>
+<br><br>
+<button id="btn04" class="btn">原生AJAX</button>
 <br><br>
 
 </body>

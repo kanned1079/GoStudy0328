@@ -880,7 +880,7 @@
         <entry key="file://$PROJECT_DIR$/AJAX/100_TestBackend/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719462053441" />
+              <option name="lastModified" value="1719896926693" />
               <option name="schema">
                 <list>
                   <option value="User" />
@@ -2969,6 +2969,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719806147458" />
+    <option name="lastTimeChecked" value="1719893848936" />
   </component>
 </project>

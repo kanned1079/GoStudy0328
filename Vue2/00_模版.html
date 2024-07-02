@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>模版</title>、
+    <title>模版</title>
     <script src="./js/vue.js"></script>
 </head>
 <body>
@@ -11,7 +11,12 @@
 </div>
 <script>
     Vue.config.productionTip = false;
-    new Vue({});
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {}
+        }
+    });
 </script>
 </body>
 </html>

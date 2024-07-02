@@ -52,7 +52,8 @@
     <h1>Welcome to {{ name }}</h1>
     <a href="https://ikanned.com:24444/" @click.prevent="showInfo1">点我提示信息</a><br>
     <div class="div1" @click="showInfo1">
-        <button @click.stop="showInfo1">点我提示信息</button>
+        <button @click.stop.prevent="showInfo1">点我提示信息</button>
+        <!--        修饰符可以链式调用-->
     </div>
     <button @click.once="showInfo1">事件只触发一次</button>
     <br>

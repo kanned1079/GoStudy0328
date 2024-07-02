@@ -6,22 +6,22 @@
     <script src="./js/vue.js"></script>
 </head>
 <body>
-    <div id="root">
-        <h2>名称 {{ name }}</h2>
-        <h2>名称 {{ addr }}</h2>
-    </div>
+<div id="root">
+    <h2>名称 {{ name }}</h2>
+    <h2>名称 {{ addr }}</h2>
+</div>
 
-    <script>
-        Vue.config.productionTip = false;
-        const vm = new Vue({
-            el: '#root',
-            data() {
-                return {
-                    name: 'nnu',
-                    addr: 'nanjing'
-                }
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'nnu',
+                addr: 'nanjing'
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>

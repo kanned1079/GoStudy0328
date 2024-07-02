@@ -27,15 +27,14 @@
             console.log('age属性被读取');
             return number;
         },   // 这一整个就叫getter
-        set (value) {  // 当有人修改person的age属性时 set函数就会被调用
-            console.log('age属性被修改 value='+value);
+        set(value) {  // 当有人修改person的age属性时 set函数就会被调用
+            console.log('age属性被修改 value=' + value);
             number = value;
         }   // 这一整个就叫getter
 
     });
     // 使用这个添加属性 那么这个属性是不参加枚举的 也就是不能被遍历
     console.log(person);
-
 
 
 </script>

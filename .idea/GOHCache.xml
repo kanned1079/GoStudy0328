@@ -2691,7 +2691,7 @@
         <entry key="file://$PROJECT_DIR$/SimpleJSONTest/router/handles.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719209299696" />
+              <option name="lastModified" value="1720010918605" />
             </ScannedPath>
           </value>
         </entry>
@@ -2712,7 +2712,7 @@
         <entry key="file://$PROJECT_DIR$/SimpleJSONTest/users/crud.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1719393345000" />
+              <option name="lastModified" value="1720010918260" />
             </ScannedPath>
           </value>
         </entry>
@@ -2845,6 +2845,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/Vue2/js/delayserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719995259729" />
+            </ScannedPath>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="tableStructMapping">
@@ -2969,6 +2976,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1719893848936" />
+    <option name="lastTimeChecked" value="1719980681456" />
   </component>
 </project>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-cloak指令</title>
+    <!--    向其所在的标签插入文本-->
+<!--    <script src="./js/vue.js"></script>-->
+<!--    延迟js的加载-->
+<!--    <script src="http://localhost:8080/3s"></script>-->
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div v-cloak> {{name}}</div>
+</div>
+<script src="http://localhost:8080/3s"></script>
+<script>
+    console.log('1')
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'kanna',
+                name1: '<h2>标题2</h2>'
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

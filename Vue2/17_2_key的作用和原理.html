@@ -33,9 +33,6 @@
     <h2>人员列表</h2>
     <button @click="add">添加一个项目</button>
     <ul>
-
-
-
         <li v-for="(p, index) of persons" :key="p.id">
             <!--            姓名-年龄-->
             {{ p.name }}-{{ p.age }}

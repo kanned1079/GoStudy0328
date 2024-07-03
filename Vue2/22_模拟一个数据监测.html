@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟一个数据监测</title>
+</head>
+<body>
+<script>
+    let data = {
+        name: 'NNU',
+        addr: 'Nanjing',
+    };
+    // Object.defineProperty(data, 'name', {
+    //     get() {
+    //         return data.name;
+    //     },
+    //     set(val) {
+    //         data.name = val;
+    //     }
+    // })
+    const obs = new Observer(data);
+    console.log(obs)
+    let vm = {}
+    vm._data = data = obs
+
+    function Observer(obj) {
+        // 汇总对象中所有的属性形成一个数组
+        const keys = Object.keys(obj);
+        // 遍历
+        keys.forEach((k) => {
+            Object.defineProperty(this, k, {
+                get() {
+                    return obj[k];
+                },
+                set(val) {
+                    console.log(`${k}被修改了`)
+                    obj[k] = val;
+                },
+            })
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的嵌套</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!--    <h2>学校名称 {{ schoolName }}</h2>-->
+    <!--    <h2>学校地址 {{ schoolAddr }}</h2>-->
+<!--    <xuexiao></xuexiao>-->
+    <!--    但标签使用 必须要在脚手架环境下-->
+    <!--    <xuexiao/>-->
+<!--    <hello></hello>-->
+<!--    <xuesheng></xuesheng>-->
+    <App></App>
+    <hr>
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+
+    const student = Vue.extend({
+        template: `<div style="background-color: #39987c">
+            <h2>学生姓名 {{ name }}</h2>
+            <h2>学生年龄 {{ age }}</h2>
+        </div>`,
+        data() {
+            return {
+                name: 'kanna',
+                age: 18,
+            }
+        }
+    });
+
+
+
+
+    // 1. 创建组件
+    // Vue.extend(<这里需要的是一个page对象>)
+    const school = Vue.extend({
+        // 指定在开发者工具里显示的名字
+        name: 'mySchool',
+        template: `
+          <div style="background-color: #5588aa"><h2>学校名称 {{ name }}</h2>
+            <h2>学校地址 {{ addr }}</h2>
+            <student></student>
+          </div>`,
+        data() {
+            return {
+                name: 'NNU',
+                addr: 'Nanjing',
+            }
+        },
+        components: {
+            student,
+        }
+    });
+
+    const hello = Vue.extend({
+        template: `<h1>{{ msg }}</h1>`,
+        data() {
+            return {
+                msg: 'Hello',
+            }
+        }
+    });
+
+    const app = Vue.extend({
+        template: `
+            <div>
+              <hello></hello>
+              <school></school>
+            </div>
+        `,
+        components: {
+            school,
+            hello
+        }
+    });
+
+
+    // 2. 已经完成创建了组件 接下来是注册组件
+    const vm = new Vue({
+        el: '#root',
+        // 注册组件(局部注册)
+        components: {
+            App: app,
+        },
+    });
+
+    // 3. 使用
+
+    // new Vue({
+    //     el: '#root',
+    //     data() {
+    //         return {
+    //             school: {
+    //                 name: 'NNU',
+    //                 addr: 'Nanjing',
+    //             },
+    //             student: {
+    //                 name: 'kanna',
+    //                 age: 19,
+    //             }
+    //         }
+    //     }
+    // });
+</script>
+
+</body>
+</html>

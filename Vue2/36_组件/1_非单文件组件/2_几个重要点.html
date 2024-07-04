@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本使用</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!--    1.个重要的内置关系: VueComponent.prototype.proto === Vueprototype-->
+    <!--    2.为什么要有这个关系: 让组件实例对象 (vc) 可以访问到 Vue原型上的属性、方法-->
+
+    <!--    <h2>学校名称 {{ schoolName }}</h2>-->
+    <!--    <h2>学校地址 {{ schoolAddr }}</h2>-->
+<!--    <xuexiao></xuexiao>-->
+    <!--    但标签使用 必须要在脚手架环境下-->
+    <!--    <xuexiao/>-->
+    <hr>
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+
+    // 1. 创建组件
+    // Vue.extend(<这里需要的是一个page对象>)
+    const school = Vue.extend({
+        // 指定在开发者工具里显示的名字
+        name: 'mySchool',
+        template: `
+          <div><h2>学校名称 {{ name }}</h2>
+            <h2>学校地址 {{ addr }}</h2>
+            <button @click="showName">显示名称</button>
+          </div>`,
+        data() {
+            return {
+                name: 'NNU',
+                addr: 'Nanjing',
+            }
+        },
+        methods: {
+            showName() {
+                alert(this.name);
+            }
+        }
+    });
+
+    // 2. 已经完成创建了组件 接下来是注册组件
+    const vm = new Vue({
+        el: '#root',
+        // 注册组件(局部注册)
+        components: {
+
+        },
+        data() {
+            return {
+                msg: 'hello',
+            }
+        }
+    });
+
+    console.log(school.prototype)
+    console.log(school.prototype.__proto__ === Vue.prototype)
+
+    // 3. 使用
+
+    // new Vue({
+    //     el: '#root',
+    //     data() {
+    //         return {
+    //             school: {
+    //                 name: 'NNU',
+    //                 addr: 'Nanjing',
+    //             },
+    //             student: {
+    //                 name: 'kanna',
+    //                 age: 19,
+    //             }
+    //         }
+    //     }
+    // });
+</script>
+
+</body>
+</html>

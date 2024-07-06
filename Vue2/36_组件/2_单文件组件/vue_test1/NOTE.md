@@ -22,3 +22,13 @@
   2. 使用mixin
      1. 全局混入 在 `main.js` 中 `Vue.mixin(xxx)`
      2. 局部混入 `mixin: []` 
+
+## 插件
+- 功能：用于哦增强Vue
+- 本质：包含install方法的一个对象 install的第一个参数是Vue 第二个以后的参数是插件使用者传递的数据
+- 定义插件：`对象.install = function(Vue, options) {Vue.filter(...), Vue.directive('...', {...})}, Vue.mixin(...), Vue.prototype.$myMethod = function() {...}`
+- 使用插件：`Vue.use(<插件名>)`
+
+## scoped样式
+- 作用：让样式局部生效 防止冲突
+- 写法 `<style scoped> ... </style>` 

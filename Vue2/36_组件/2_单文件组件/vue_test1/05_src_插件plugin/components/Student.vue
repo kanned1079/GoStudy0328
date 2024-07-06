@@ -12,13 +12,14 @@ export default {
 
 <template>
   <div class="school">
-    <h2 class="qwe">学生名称：{{ name }}</h2>
+    <h2>学生名称：{{ name }}</h2>
     <h2>学生性别：{{ sex }}</h2>
+    <input type="text" v-fbind:value="name">
   </div>
 </template>
 
-<style scoped>
+<style>
 .school {
-  background-color: orange;
+  background-color: white;
 }
 </style>

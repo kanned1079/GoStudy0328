@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage</title>
+</head>
+<body>
+<h2>localStorage</h2>
+<button onclick="saveData()">保存数据</button>
+<button onclick="readData()">读取数据</button>
+<button onclick="deleteData()">删除数据</button>
+<button onclick="clearData()">清空数据</button>
+<script>
+    function saveData() {
+        let person = {name: '张三', age: 18, addr: 'shanghai'}
+        localStorage.setItem('msg', 'helllllllllllloooooo.')
+        localStorage.setItem('msg2', 666666)
+        localStorage.setItem('person', JSON.stringify(person))
+    }
+
+    function readData() {
+        // 如果不存在即为null null反序列化后依旧是null
+        let person = JSON.parse(localStorage.getItem('person'))
+        console.log(person)
+    }
+    function deleteData() {
+        localStorage.removeItem('msg')
+    }
+    function clearData() {
+        localStorage.clear()
+    }
+</script>
+</body>
+</html>

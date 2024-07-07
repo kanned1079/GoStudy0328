@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sessionStorage</title>
+</head>
+<body>
+<!--sessionStorage 会话 只会保存一次-->
+<h2>sessionStorage</h2>
+<button onclick="saveData()">保存数据</button>
+<button onclick="readData()">读取数据</button>
+<button onclick="deleteData()">删除数据</button>
+<button onclick="clearData()">清空数据</button>
+<script>
+    function saveData() {
+        let person = {name: '张三', age: 18, addr: 'shanghai'}
+        sessionStorage.setItem('msg', 'helllllllllllloooooo.')
+        sessionStorage.setItem('msg2', 666666)
+        sessionStorage.setItem('person', JSON.stringify(person))
+    }
+
+    function readData() {
+        // 如果不存在即为null null反序列化后依旧是null
+        let person = JSON.parse(sessionStorage.getItem('person'))
+        console.log(person)
+    }
+
+    function deleteData() {
+        sessionStorage.removeItem('msg')
+    }
+
+    function clearData() {
+        sessionStorage.clear()
+    }
+</script>
+</body>
+</html>

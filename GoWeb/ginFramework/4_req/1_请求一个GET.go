@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/go-resty/resty/v2"
 	"log"
 	"net/http"
 )
-import "github.com/go-resty/resty/v2"
+
+const key = "844af2d5f3f0481f9492e4f36519fa3b"
 
 type Area struct {
 	Code     string     `json:"code"`
@@ -32,8 +34,6 @@ type Refer struct {
 	Sources []string `json:"sources"`
 	License []string `json:"license"`
 }
-
-const key = "844af2d5f3f0481f9492e4f36519fa3b"
 
 type NowWeather struct {
 	Code       string `json:"code"`
@@ -76,6 +76,7 @@ func main() {
 		}
 		apiResp := resp.Result().(*Area)
 		areaId := apiResp.Location[0].ID
+		log.Println("AreaId:", areaId)
 		url := fmt.Sprintf("https://devapi.qweather.com/v7/weather/now?location=%s&key=%s", areaId, key)
 		log.Println("url:", url)
 		resp, err = client.R().SetResult(&NowWeather{}).Get(url)

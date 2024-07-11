@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "ajax": "^0.0.4",
+    "axios": "^1.7.2",
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
     "pubsub-js": "^1.9.4"

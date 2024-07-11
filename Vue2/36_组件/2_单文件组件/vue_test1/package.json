@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/cli": "^5.0.8",
+    "axios": "^1.7.2",
     "core-js": "^3.8.3",
     "less-loader": "^12.2.0",
     "pubsub-js": "1.6",

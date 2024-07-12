@@ -21,6 +21,6 @@ func main() {
 		c.JSON(200, studentSlice)
 	})
 
-	r.Run("localhost:5000")
+	r.Run("localhost:5001")
 
 }

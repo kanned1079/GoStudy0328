@@ -3,18 +3,19 @@ export default {
   name: 'MyCategory',
   // props: ['listData', 'title'],
   props: ['title'],
+  data() {
+    return {
+      games: ['红色警戒', '穿越火线', '劲舞团', '超级玛丽'],
+      msg: 'HELLO',
+    }
+  }
 }
 </script>
 
 <template>
 <div class="category">
   <h3>{{ title }}</h3>
-<!--  定义一个插槽 等待组件使用者填充内容-->
-  <slot>我是一些默认值 如果没有传递默认值就会出现</slot>
-<!--  <ul v-show="title !== '美食'">-->
-<!--    <li v-for="(item,index) in listData" :key="index">{{item}}</li>-->
-<!--  </ul>-->
-<!--  <img :src="this.$imgAddr" alt="" v-show="title === '美食'">-->
+  <slot :games="games" :msg="msg">我是一些默认值 如果没有传递默认值就会出现1</slot>
 </div>
 </template>
 

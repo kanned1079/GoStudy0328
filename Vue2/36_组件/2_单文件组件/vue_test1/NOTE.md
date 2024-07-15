@@ -11,19 +11,19 @@
 ## props配置
 
 1. 传递数据  `<Demo name></Demo>`
-   2. 接收数据
-       1. 只接收 `props['name']`
-       2. 限制类型 `props: {name: Number}`
-       3. 限制类型、必要性、c 
-       ```javascript
-       props: { 
-            name: {
-                type: String,       //限制类型
-                required: true,     //必要性
-                default: 'kanna'    //必要性
-            }
-        }
-        ```
+    2. 接收数据
+        1. 只接收 `props['name']`
+        2. 限制类型 `props: {name: Number}`
+        3. 限制类型、必要性、c
+        ```javascript
+        props: { 
+             name: {
+                 type: String,       //限制类型
+                 required: true,     //必要性
+                 default: 'kanna'    //必要性
+             }
+         }
+         ```
 3. mark: props是只读的 vue底层会监测你对props的修改 如果进行了修改会触发警告 如果需要修改 需要拷贝一份来修改
 
 ## mixin(混入)
@@ -53,7 +53,7 @@
 ## scoped样式
 
 - **作用：** 让样式局部生效 防止冲突
-- **写法：**  
+- **写法：**
     ```html
     <style scoped>
         /*...*/
@@ -63,16 +63,16 @@
 ## 全局事件总线(GlobalEventBus)
 
 - 一种组件间通信的方式 适用于任何组件间通信
-  - 安装全局事件总线 
-      ```javascript
-      new Vuw({
-        // ... 
-            beforeCreate() {
-            Vue.prototype.$bus = this;
-        }, 
-         // ...
-    })
-    ```
+    - 安装全局事件总线
+        ```javascript
+        new Vuw({
+          // ... 
+              beforeCreate() {
+              Vue.prototype.$bus = this;
+          }, 
+           // ...
+      })
+      ```
 - 使用事件总线
     - **接收数据** A组件想接收数据 则在A组件中给$bus绑定自定义事件 事件的 **回调留在A组件自身**
         ```javascript
@@ -93,19 +93,19 @@
 ## 消息订阅与发布(pubsub-js第三方库实现)
 
 - 一种组件间通信的方式 适用于**任意组件间通信**
-  - **使用步骤：**
-      1. 安装pubsub `npm i pubsub-js@1.6`
-      2. 引入 `import pubsub from 'pubsub-js'`
-         3. 接收数据：A组件想要接收数据 则在A组件中订阅消息 订阅的 **回调留在A组件自身** 
-           ```javascript
-            methods: { 
-                <回调函数>(msgName, data) {
-            }}, 
-            mounted() { 
-                this.pid = pubsub.subscribe('<消息名/主题>, <回调函数名>)
-            }
-           ```
-      4. 提供数据  `pubsub.publish('<消息名/主题>', <消息内容>)`
+    - **使用步骤：**
+        1. 安装pubsub `npm i pubsub-js@1.6`
+        2. 引入 `import pubsub from 'pubsub-js'`
+            3. 接收数据：A组件想要接收数据 则在A组件中订阅消息 订阅的 **回调留在A组件自身**
+             ```javascript
+              methods: { 
+                  <回调函数>(msgName, data) {
+              }}, 
+              mounted() { 
+                  this.pid = pubsub.subscribe('<消息名/主题>, <回调函数名>)
+              }
+             ```
+        4. 提供数据  `pubsub.publish('<消息名/主题>', <消息内容>)`
 
 ## nextTick方法
 
@@ -130,6 +130,7 @@
     3. 工作方式：若按照上述配置代理 当请求了不再前端的资源时 那么请求会转发给服务器（优先匹配前端资源）
 
 ### 方法2
+
 - 编写vue.conf.js配置具体代理规则
     ```javascript
     module.exports = {
@@ -155,10 +156,12 @@
     2. 缺点：配置略微繁琐 请求资源必须加前缀
 
 ## 插槽(slot)
+
 - **作用：** 让父组件可以向子组件制定位置插入html结构 也是一种组件间通信方式 适用于 **父组件 -> 子组件**
 - **分类：** 默认插槽 具名插槽 作用域插槽
 - 使用方式
-  - 1. 默认插槽
+    -
+        1. 默认插槽
     ```html
     父组件中
     <MyCategory title="美食">
@@ -172,7 +175,8 @@
         </div>
     </template>
     ```
-  - 2. 具名插槽
+    -
+        2. 具名插槽
     ```html
     父组件中
     <MyCategory slot="center">
@@ -191,74 +195,91 @@
     </template>
     ```
 
-  - 3. 作用域插槽
-    - **理解：** <p style="color: red">数据在组件的自身 但根据数据生成的结构需要组件的使用者来决定</p>
-    - **具体使用方法：**
-      ```html
-      父组件中
-      <MyCategory title="游戏">
-         <!--作用域插槽必须要使用template标签和scoped-->
-       <template slot-scope="aaa">
-         <ul>
-           <li v-for="(item,index) in aaa.games" :key="index">{{item}}</li>
-         </ul>
-       </template>
-      </MyCategory>
+    -
+        3. 作用域插槽
 
-      <MyCategory title="游戏">
-      <template slot-scope="aaa">
-        <ol>
-          <li v-for="(item,index) in aaa.games" :key="index">{{item}}</li>
-        </ol>
-      </template>>
-      </MyCategory>
-      子组件中
-      <template>
-        <div class="category">
-            <h3>{{ title }}</h3>
-        <slot :games="games" :msg="msg">我是一些默认值 如果没有传递默认值就会出现1</slot>
-        </div>
-      </template>
-      ```
-    - **ps：** 作用域插槽中也可以写name 
+        - **理解：** <p style="color: red">数据在组件的自身 但根据数据生成的结构需要组件的使用者来决定</p>
+        - **具体使用方法：**
+          ```html
+          父组件中
+          <MyCategory title="游戏">
+             <!--作用域插槽必须要使用template标签和scoped-->
+           <template slot-scope="aaa">
+             <ul>
+               <li v-for="(item,index) in aaa.games" :key="index">{{item}}</li>
+             </ul>
+           </template>
+          </MyCategory>
+    
+          <MyCategory title="游戏">
+          <template slot-scope="aaa">
+            <ol>
+              <li v-for="(item,index) in aaa.games" :key="index">{{item}}</li>
+            </ol>
+          </template>>
+          </MyCategory>
+          子组件中
+          <template>
+            <div class="category">
+                <h3>{{ title }}</h3>
+            <slot :games="games" :msg="msg">我是一些默认值 如果没有传递默认值就会出现1</slot>
+            </div>
+          </template>
+          ```
+        - **ps：** 作用域插槽中也可以写name
 
 ## Vuex
-- **概念：** 专门在Vue中实现集中式状态(数据)管理的一个插件 对Vue应用中多个组件的共享状态进行集中式的管理(r/w) 也是一种组件间通信 且适用于任意组件间通信
+
+- **概念：** 专门在Vue中实现集中式状态(数据)管理的一个插件 对Vue应用中多个组件的共享状态进行集中式的管理(r/w) 也是一种组件间通信
+  且适用于任意组件间通信
 - **Github地址：** [Vuex地址](https://github.com/vuejs/vuex)
 - **什么时候使用：** (共享)
-  - 多个组件依赖于同一状态
-  - 来自不同组件的行为需要变同一状态
-- **原理图：** 
+    - 多个组件依赖于同一状态
+    - 来自不同组件的行为需要变同一状态
+- **原理图：**
 - <img src="https://vuex.vuejs.org/vuex.png" style="width: 60%; border-radius: 10px">
+
 #### <p style="color: #0c72d2; font-weight: bold;">State</p>
+
 - 这是一个对象 存放着数据 如 `{ todos: [], sum: 0, }`
+
 #### <p style="color: #0c72d2; font-weight: bold;">Vue Components</p>
+
 - 这是一个对象 使用`dispatch('jia', 2)`来操作数据
+
 #### <p style="color: #0c72d2; font-weight: bold;">Action</p>
+
 - 这也是一个对象 内容为键值对 恰好又一个方法与上边对应`{... jia: function(){}, ...}`
 - 需要再自定义的函数中自己调用`commit('jia', 2)`进行提交
+
 #### <p style="color: #0c72d2; font-weight: bold;">Mutations</p>
+
 - 这也是一个Object对象 具有和上面commit中对应的函数 `{... jia:function() {}, ...}`
 - `jia:function`中含有两个对象
-  1. state
-  2. 2 (具体加的值)
+    1. state
+    2. 2 (具体加的值)
 - `jia:function`中写入`state.sum += 2`会自动触发底层的Mutate
 - 重新解析模版 再进行渲染
+
 #### 为何Actions显得多余
+
 - 假设执行`dispatch('chu', <值>)` 这里的值不确定 需要请求后端服务起来获得
 - 发送Ajax请求来获取值 (图中 Backend API)
 - 获得值来进行继续的计算
 - **ps:** 如果知道具体的值 则允许跳过Actions直接调用commit
 
 #### Devtools
+
 - Vuex官方出的一个开发者调试工具
 - 注意开发者只能直接与Mutations对话
 
 #### <p style="font-weight: bold; color: #985f0d">store</p>
+
 - 图中的State Actions Mutations 都需要经过 **store**进行管理
 - 调用的`dispatch()`是由store提供的而不是window
 
 ### 搭建vuex环境
+
 - 创建 `store/index.js`文件
     ```javascript
     import Vue from 'vue'
@@ -290,9 +311,10 @@
         // ...
     }).$mount('#app')
     ```
-  
+
 ### 基本使用
-1. 初始化数据`state` 配置`actions` `mutations` 操作文件`store.js`
+
+1. 初始化数据`state` 配置`actions` `mutations` 操作文件`index.js`
     ```javascript
     import Vue from 'vue'
     // 该文件用于创建vuex中的核心store
@@ -330,10 +352,11 @@
     ```
 2. 组件中读取vuex中的数据：`$store.state.sum`
 3. 组件中修改vuex中的数据：
-   1. 无明确方法值需要中间操作的：`$store.dispatch('<actions中的方法名>', <数据>)`
-   2. 有明确的值可跳过dispatch直接调用commit：`$store.commit('<mutations中的方法名>', <数据>)`
+    1. 无明确方法值需要中间操作的：`$store.dispatch('<actions中的方法名>', <数据>)`
+    2. 有明确的值可跳过dispatch直接调用commit：`$store.commit('<mutations中的方法名>', <数据>)`
 
 ### 四个map方法的使用
+
 1. **mapState方法：** 用于映射`state`中的数据为 **计算属性**
     ```javascript
     computed: {
@@ -369,5 +392,115 @@
         // 数组写法
         ...mapMutations(['JIA', 'JIAN']),
     ```
- 
 
+### 模块化+命名空间
+
+- **目的：** 让代码更好维护 让多种数据分类更加明确
+- 修改 `index.js`
+    ```javascript
+    const countAbout = {
+        namespaced: true,   // 开启命名空间
+        state: { x: 1, },
+        mutations: { ... },
+        actions: { ... },
+        getters: {
+            getSum(state) {
+                return state.x * 10;
+            }
+        } 
+    }
+    const personAbout = {
+        namespaced: true,   // 开启命名空间
+        // ......
+    }
+    const store = new Vuex.Store({
+        modules: {
+            countAbout,
+            personAbout
+        }
+   })
+    ```
+
+- 开启命名空间(namespaced)后 组件中读取state数据
+    ```javascript
+    // 方式1 直接自己读取
+    this.$store.state.personAbout.personList
+    // 方式2 借助mapState读取
+    ...mapState('countAbout', ['sum', 'school', 'subject'])
+    ```
+- 开启命名空间(namespaced)后 组件中读取getters数据
+    ```javascript
+    // 方式1 直接自己读取
+    this.$store.getters['personAbout/firstPersonName']
+    // 方式2 借助mapGetters读取
+    ...mapGetters('countAbout', ['bigSum'])
+    ```
+- 开启命名空间(namespaced)后 组件中调用dispatch
+    ```javascript
+    // 方式1 直接的dispatch
+    this.$store.dispatch('personAbout/addPersonWang', person)
+    // 方式2 借助mapActions
+    ...mapActions('countAbout', {incrementOdd: 'jiaOdd', incrementWait: 'jiaWait'})
+    ```
+- 开启命名空间(namespaced)后 组件中调用dispatch
+    ```javascript
+    // 方式1 直接的commit
+    this.$store.commit('personAbout/ADD_PERSON', person)
+    // 方式2 借助mapMutations
+    ...mapMutations('countAbout', {increment: 'jia', decrement: 'jian'})
+    ```
+
+## 路由(Vue router)
+
+- **理解：** vue的一个插件库 专门用来实现SPA应用
+- **什么是SPA应用：**
+    1. 单页Web应用 (Single page application, SPA)
+    2. 整个页面只有 **一个完整的页面**
+    3. 点击页面中的导航链接 **不会刷新** 页面 只会做页面的 **局部更新**
+    4. 数据需要通过ajax请求获取
+- **路由的理解：**
+    1. *什么是路由*
+        - 一个路由就是一组映射关系 (key-value)
+        - key为路径 value可能是function或component
+    2. *路由的分类*
+        1. 后端路由：
+            - *理解：* value是function 用于处理客户端提交的请求
+            - *工作过程：* 服务器收到一个请求时 根据**请求路径**找到匹配的**函数**来处理请求 返回响应数据
+        2. 前端路由：
+            - *理解：* value是component 用于展示页面内容
+            - *工作过程：** 当浏览器的路径改变时 对应组件就会显示
+
+### 路由的基本使用
+1. 创建一个路由 (位于 `src/router/index.js` )
+    ```javascript
+    // 该文件用于创建整个应用的路由器
+    import VueRouter from 'vue-router'
+    // 引入组件
+    import MyAbout from '../pages/About.vue'
+    import MyHome from '../pages/Home.vue'
+    // 创建并暴露
+    export default new VueRouter({
+        routes: [{
+                path: '/about',
+                component: MyAbout,
+             },
+             {
+                path: '/home',
+                component: MyHome,
+             },
+        ],
+    })
+    ```
+2. 实现切换
+    ```html
+    <router-link class="list-group-item" active-class="active" to="/about">About</router-link>
+    ```
+3. 指定展示位置
+    ```html
+    <router-view></router-view>
+    ```
+### 几个注意点
+1. 路由组件通常放在`pages`文件夹 一般组件一般放在`components`中
+2. 通过切换 “隐藏”了路由组件 默认是被销毁掉的 需要的时候再进行挂载
+3. 每个组件都有自己`$route`属性 里面存储着自己的路由信息
+4. 真个应用只有一个router 可以通过组件的`$router`属性获取到 

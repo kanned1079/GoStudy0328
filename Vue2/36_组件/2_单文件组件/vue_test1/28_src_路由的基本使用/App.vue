@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-xs-offset-2 col-xs-8">
-        <MyBanner></MyBanner>
+        <div class="page-header"><h2>Vue Router Demo</h2></div>
       </div>
     </div>
     <div class="row">
@@ -33,12 +33,9 @@
 <script>
 // import MyHome from './components/Home.vue'
 // import MyAbout from "@/components/About.vue";
-import MyBanner from '@/components/Banner.vue'
-
 export default {
   name: 'App',
   // components: {MyAbout, MyHome},
-  components: {MyBanner},
 }
 </script>
 

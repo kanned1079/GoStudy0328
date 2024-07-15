@@ -12,13 +12,14 @@ export default {
   },
   methods: {
     // 借助mapMutations生成对应的方法 方法中会调用commit去联系mutations （对象写法）
-    ...mapMutations({increment: 'JIA', decrement: 'JIAN'}),
+    ...mapMutations('countAbout', {increment: 'JIA', decrement: 'JIAN'}),
     // 使用mapActions生成对应的方法 方法会调用dispatch去联系action （对象写法）
-    ...mapActions({incrementOdd: 'jiaOdd', incrementWait: 'jiaWait'}),
+    ...mapActions('countAbout', {incrementOdd: 'jiaOdd', incrementWait: 'jiaWait'}),
   },
   computed: {
-    ...mapState(['sum', 'school', 'subject', 'personList']),
-    ...mapGetters(['bigSum']),
+    ...mapState('countAbout', ['sum', 'school', 'subject']),
+    ...mapState('personAbout', ['personList']),
+    ...mapGetters('countAbout', ['bigSum']),
   },
   mounted() {
     // const x = mapState({})

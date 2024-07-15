@@ -13,7 +13,6 @@ export default new VueRouter({
     routes: [
         // 一级路由
         {
-            name: 'guanyu', // 起名 可以简化跳转编码
             path: '/about',
             component: MyAbout,
         },
@@ -27,17 +26,8 @@ export default new VueRouter({
                     component: MyMessage,
                     children: [
                         {
-                            name: 'xiangqing',  // 起名
-                            path: 'detail/:id/:title',
+                            path: 'detail',
                             component: MyDetail,
-                            // props的第一种写法 值为对象 该对象中所有的key value都会以props的形式传递给Detail组件
-                            // props: {a: 1, b: 'hellohello'}
-                            // 第二种写法 如果是true 就会把该路由组件收到的所有params参数 以props的形式传给Detail
-                            // props: true,
-                            // 第三种写法 值为函数
-                            props($route) {
-                                return {id: $route.query.id, title: $route.query.title};
-                            }
                         }
                     ]
                 },

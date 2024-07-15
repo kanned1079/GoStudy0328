@@ -160,8 +160,7 @@
 - **作用：** 让父组件可以向子组件制定位置插入html结构 也是一种组件间通信方式 适用于 **父组件 -> 子组件**
 - **分类：** 默认插槽 具名插槽 作用域插槽
 - 使用方式
-    -
-        1. 默认插槽
+1. 默认插槽
     ```html
     父组件中
     <MyCategory title="美食">
@@ -504,3 +503,129 @@
 2. 通过切换 “隐藏”了路由组件 默认是被销毁掉的 需要的时候再进行挂载
 3. 每个组件都有自己`$route`属性 里面存储着自己的路由信息
 4. 真个应用只有一个router 可以通过组件的`$router`属性获取到 
+
+### 嵌套(多级)路由
+1. 配置路由规则 使用children配置项
+    ```javascript
+    export default new VueRouter({
+        routes: [
+            // 一级路由
+            {
+                path: '/home',
+                component: MyHome,
+                // 二级路由
+                children: [
+                    {
+                        path: 'message',    // 二级路径不要写/
+                        component: MyMessage,
+                    },
+                    {
+                        path: 'news',
+                        component: MyNews,
+                    }
+                ],
+    
+            },
+    
+        ],
+    })
+    ```
+2. 跳转 (要写完整的路径)
+    ```html
+    <router-link to="/home/message">Message</router-link>
+    ```
+
+### 路由的query参数
+1. 传递参数
+    ```html
+    <li v-for="m in messageList" :key="m.id">
+        <!--        跳转路由并携带query参数 to的字符串写法-->
+        <!--        <router-link :to=" `/home/message/detail?id=${m.id}&title=${m.title}` ">{{ m.title }}</router-link>-->
+        <!--        to的对象写法-->
+        <router-link :to="{
+            path: '/home/message/detail',
+            query: {
+                id: m.id,
+                title: m.title,
+            },}">
+            {{ m.title }}
+        </router-link>
+    </li>
+    ```
+2. 接收参数
+    ```javascript
+    $route.query.id
+    $route.query.title
+    ```
+   
+### 命名路由
+- **作用：** 可以简化路由跳转的参数
+- **使用：**
+    1. 给路由命名
+    ```javascript
+    name: 'xiangqing',  // 起名
+    path: 'detail',
+    component: MyDetail,
+    ```
+    2. 简化跳转
+    ```html
+    <!--简化前-->
+    <router-link to="/demo/test/welcome">跳转</router-link>
+    <!--简化后-->
+    <router-link :to="{name: 'hello'}"">跳转</router-link>
+    <!--简化写法配合传递参数-->
+    <router-link :to="{
+        name: 'hello',
+        query: {
+            id: 666,
+            title: '你好',
+        }}">
+    </router-link>
+    ```
+  
+### 路由的params参数
+1. **配置路由：** 声明接受params参数
+    ```javascript
+        name: 'xiangqing',  // 起名
+        path: 'detail/:id/:title',  // 使用占位符声明接收params参数
+        component: MyDetail,
+    ```
+2. 传递参数
+    ```html
+    <!--跳转并携带params参数 to的字符串写法-->
+    <router-link to="/home/message/detail/666/你好">跳转</router-link>
+    <!--to的对象写法-->
+    <router-link :to="{
+              // path: '/home/message/detail',
+              // 注意如果传递params 那么这里不能使用path 只能用name
+              name: 'xiangqing',
+              params: {
+                id: m.id,
+                title: m.title,
+              }
+            }">
+        {{ m.title }}
+    </router-link>
+    ```
+3. **ps：** 路由携带params参数时 若使用to的对象写法 则不能使用path配置项 必须使用name配置项 
+4. 接收参数
+     ```html
+     $route.params.id
+     $route.params.title
+     ```
+   
+### 路由的props配置
+- **作用：** 让路由组件更方便的收到参数
+    ```javascript
+    name: 'xiangqing',  // 起名
+    path: 'detail/:id/:title',
+    component: MyDetail,
+    // props的第一种写法 值为对象 该对象中所有的key value都会以props的形式传递给Detail组件
+    // props: {a: 1, b: 'hellohello'}
+    // 第二种写法 如果是true 就会把该路由组件收到的所有params参数 以props的形式传给Detail
+    // props: true,
+    // 第三种写法 值为函数
+    props($route) {
+    return {id: $route.query.id, title: $route.query.title};
+    }
+    ```

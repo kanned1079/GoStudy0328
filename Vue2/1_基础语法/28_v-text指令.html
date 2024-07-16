@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text指令</title>
+    <!--    向其所在的标签插入文本-->
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <div> {{name}}</div>
+    <div v-text="name"> {{name}}</div>
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'kanna',
+            }
+        }
+    });
+</script>
+</body>
+</html>

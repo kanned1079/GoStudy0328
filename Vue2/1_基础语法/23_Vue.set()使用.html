@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set()的使用</title>
+    <script src="jsue.js"></script>
+    <script>
+        window.onload = () => {
+
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <h1>学校信息</h1>
+    <h2>学校名称： {{ school.name }}</h2>
+    <h2>学校地址： {{ school.addr }}</h2>
+    <h2>校长： {{ school.leader }}</h2>
+    <hr>
+    <h1>学生信息</h1>
+    <button @click="addSex">添加一个sex属性</button>
+    <h2>姓名 {{ students.name }}</h2>
+    <h2 v-if="students.sex">性别 {{ students.sex }}</h2>
+    <h2>年龄 真实{{ students.age.rAge }} 对外{{ students.age.sAge }}</h2>
+    <ul>
+        <li v-for="(f, index) in students.friends" :key="index">
+            {{ f.name }} - {{ f.age }}
+        </li>
+    </ul>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            school: {
+                name: 'NNU',
+                addr: 'Nanjing',
+                // leader: '',
+            },
+            students: {
+                name: 'Tom',
+                // sex: '男',
+                age: {
+                    rAge: 40,
+                    sAge: 19,
+                },
+                friends: [
+                    {name: 'Jerry', age: 15},
+                    {name: 'Tony', age: 36},
+                ]
+            }
+        },
+        methods: {
+            addSex() {
+                this.$set(this.students, 'sex', 'female');
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

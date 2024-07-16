@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <script src="jsue.js"></script>
+    <style>
+        button {
+            width: 200px;
+            height: 35px;
+            background-color: #5588aa;
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <h1>Welcome to {{ name }}</h1>
+    <button v-on:click="showInfo1">点我提示信息1_不传参</button>
+    <br>
+    <button @click="showInfo2(2, $event)">点我提示信息2_传参</button>
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'atguigu',
+            }
+        },
+        methods: {
+            showInfo1(event) {   // 事件对象
+                console.log('同学你好1');
+                console.log(event.target);
+                console.log(event.target.innerText);
+                console.log(this);
+            },
+            // showInfo: (event) => { // 所有被vue管理的函数最好使用普通函数 不要使用箭头函数
+            //     console.log(this);  // 使用这个那么这里的this就是window
+            // }
+            showInfo2(val, ev) {
+                console.log('同学你好！！');
+                console.log(val);
+                console.log(ev.target);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

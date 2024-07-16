@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_methods实现</title>
+    <script src="jsue.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    姓: <input type="text" v-model="firstName"><br>
+    名: <input type="text" v-model="lastName"><br>
+    全名: <span>{{ fullName() }}</span>
+    <!--        这里方法调用需要加上()-->
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstName: '张',
+                lastName: '三',
+            }
+        },
+        methods: {
+            fullName() {
+                return this.firstName + '-' + this.lastName;
+            }
+        }
+    });
+</script>
+</body>
+</html>

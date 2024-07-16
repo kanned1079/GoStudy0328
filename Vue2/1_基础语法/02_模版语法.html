@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模版语法</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+
+<div id="root">
+    <h1>插值语法</h1>
+    <!--    插值用于解析标签体内容-->
+    <h3>Hello {{ name }}</h3>
+    <hr>
+    <h1>指令语法</h1>
+    <!--    v-bind: 可以简写为 :-->
+    <!--    指令语法用于解析标签 同样这里是要写js表达式-->
+    <a :href="url" v-bind:x="hello">链接</a>
+    <a :href="school.addr">{{ school.name }}</a>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    new Vue({
+        el: '#root',
+        data: {
+            name: 'kanna',
+            url: 'https://ikanned.com:24444/',
+            hello: 'hello1',
+            school: {
+                name: 'nnu',
+                addr: 'https://baidu.com/',
+            }
+        }
+    })
+</script>
+</body>
+</html>

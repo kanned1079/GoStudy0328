@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据绑定</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!--        单项绑定-->
+    单向数据绑定：<input type="text" :value="name"><br><br>
+    <!--        双向绑定的v-model可以简写成v-model 因为一般都是value数据 如下-->
+    双向数据绑定：<input type="text" v-model="name"><br><br>
+    <!--        这个是错误的-->
+    <!--        v-model只能在表单类控件中使用-->
+    <!--        <h2 v-model:prefix="x"></h2>-->
+
+</div>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            name: 'kanna',
+        }
+    })
+</script>
+</body>
+</html>

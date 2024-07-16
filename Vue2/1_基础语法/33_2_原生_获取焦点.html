@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数式自定义指令</title>
+    <script src="jsue.js"></script>
+    <style>
+        .demo {
+            background-color: gray;
+        }
+    </style>
+</head>
+<!--需求1:定义一个v-big指令 和v-text功能相似 但会把绑定的数值放大10倍-->
+<!--需求2:定义一个v-fbind指令 和v-bind功能类似 但可以让其所绑定的input元素默认获取焦点-->
+<body>
+    <button id="btn">点我创建一个输入框</button><br><br>
+    <script>
+        document.getElementById('btn').onclick = () => {
+            const input = document.createElement('input');
+            input.className = 'demo';
+            document.body.appendChild(input);
+            input.focus();
+        }
+    </script>
+
+</body>
+</html>

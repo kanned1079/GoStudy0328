@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-once指令.html</title>
+    <script src="jsue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <h2 v-once>初始化 {{ n }}</h2>
+    <h2>当前 {{ n }}</h2>
+    <button @click="n++">n++</button>
+</div>
+<script>
+    console.log('1')
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                n: 1,
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

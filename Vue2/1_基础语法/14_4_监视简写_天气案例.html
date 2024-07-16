@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气案例</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>今天天气很{{ info }}</h2>
+    <button @click="changeWeather">切换天气</button>
+    <!--    @click="<这里可以写一些简单的语句>"-->
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                isHot: true,
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot;
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽';
+            }
+        },
+        // 以下是第一种方法
+        // 简写的前提是 不需要immediate和deep配置项
+        watch: {
+            // 这里面需要的是page对象
+            // 完整写法
+            // isHot: {
+            //     deep: true,
+            //     immediate: true,    // 初始化时 让handle调用一下
+            //     // handler在isHot发生改变时被调用
+            //     handler(newValue, oldValue) {
+            //         console.log('isHot被修改了', newValue, oldValue);
+            //     }
+            // }
+            // 简写
+            // isHot(newValue, oldValue) {
+            //     console.log('isHot被修改了, newValue, oldValue')
+            // }
+        }
+    });
+    // 第二种方法
+    // 第一个是监视对象 第二个是一个page对象
+    // 完整写法
+    // vm.$watch('isHot', {
+    //     // immediate: true,    // 初始化时 让handle调用一下
+    //     // deep: true,     // 深度监视
+    //     // handler在isHot发生改变时被调用
+    //     handler(newValue, oldValue) {
+    //         console.log('isHot被修改了', newValue, oldValue);
+    //     }
+    // })
+    // 简写
+    // 注意这里也不能写箭头函数 会导致this指向异常
+    vm.$watch('isHot', function (newValue, oldValue) {
+            console.log('isHot被修改了, newValue, oldValue')
+    })
+</script>
+</body>
+</html>

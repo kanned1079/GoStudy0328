@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的数据代理</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>名称 {{ name }}</h2>
+    <h2>名称 {{ addr }}</h2>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    let data = {
+        name: 'nnu',
+        addr: 'nanjing'
+    }
+    const vm = new Vue({
+        el: '#root',
+        data: data,
+    });
+    console.log(vm);
+</script>
+</body>
+</html>

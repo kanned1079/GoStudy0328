@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue监测数据改变的原理</title>
+    <script src="jsue.js"></script>
+    <script>
+        window.onload = () => {
+
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <h2>学校名称： {{ name }}</h2>
+    <h2>学校地址： {{ addr }}</h2>
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: 'NNU',
+            addr: 'Nanjing',
+            students: {
+                name: 'Tom',
+                age: 16,
+            }
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+</body>
+</html>

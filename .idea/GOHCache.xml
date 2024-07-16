@@ -2907,7 +2907,7 @@
         <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/servers/server1.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720687313795" />
+              <option name="lastModified" value="1721105100525" />
               <option name="schema">
                 <list>
                   <option value="Student" />
@@ -2919,12 +2919,19 @@
         <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/servers/server2.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1720695210996" />
+              <option name="lastModified" value="1721105100526" />
               <option name="schema">
                 <list>
                   <option value="Car" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/servers/server3.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721105100526" />
             </ScannedPath>
           </value>
         </entry>
@@ -3042,7 +3049,7 @@
         <entry key="stu_37" value="Stu_37" />
         <entry key="stu_37_a" value="Stu_37_A" />
         <entry key="stu_39" value="Stu_39" />
-        <entry key="student" value="student" />
+        <entry key="student" value="Student" />
         <entry key="student72" value="Student72" />
         <entry key="student_31" value="Student_31" />
         <entry key="student_33" value="Student_33" />

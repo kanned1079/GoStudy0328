@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM模型</title>
+    <script src="jsue.js"></script>
+</head>
+<body style="font-family: 'PingFang SC'">
+<!--下面这个就是V(View)-->
+<div id="root">
+    <h1>名称 {{ name }}</h1>
+    <h1>地址 {{ addr }}</h1>
+    <!--    <h1>测试1 {{ 1+1 }}</h1>-->
+    <!--    <h1>测试2 {{ $options }}</h1>-->
+    <!--    <h1>测试3 {{ $emit }}</h1>-->
+</div>
+
+<script>
+    // MVVM
+    // 1.M(Model) 模型(对应vue代码中data的数据)
+    // 2.V(View) View模版
+    // 3.VM(ViewModel) 视图模型(Vue实例对象)
+    Vue.config.productionTip = false;
+    // 这个就是VM(ViewModel) 它也就是界面和Model的纽带 就是映射来建立连接
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                // 这两个也就是Model
+                name: 'nnu',
+                addr: '南京',
+                a: 1,
+                aa: '1',
+            }
+        }
+    });
+
+    console.log(vm);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引出生命周期</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <!--    这里面可以不写写到下面template中-->
+    <button @click="add">n++</button>
+    <h2> val = {{ n }}</h2>
+    <button @click="bye">调用vm.destroy()</button>
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        // template: `
+        //   <div>
+        //     <button @click="add">n++</button>
+        //     <h2> val = {{ n }}</h2></div>`,
+        data() {
+            return {
+                n: 1,
+            }
+        },
+        watch: {
+            n() {
+                console.log('n changed');
+            }
+        },
+        methods: {
+            add() {
+                this.n++;
+            },
+            bye() {
+                this.$destroy();
+                // 完全销毁了一个实例 清理它与其他实例的连接 解绑它的全部指令及事件监听器(这里的事件监听器指的是原生事件)
+                console.log('bye.');
+            }
+        },
+        // 以下都是生命周期
+
+        //Init Events&Lifecycle 初始化生命周期、事件
+        beforeCreate() {
+            // 此时无法通过vm访问到data中的数据、methods等
+            console.log('beforeCreate');
+            //debugger;
+        },
+        // Init injections&reactivity 初始化数据监测、数据代理
+        created() {
+            // 可以通过vm访问到data中的数据、methods中配置的方法
+            console.log('created');
+            // debugger;
+        },
+        // 如果有
+        // 此阶段Vue开始解析模版 生成虚拟DOM 页面还不能显示解析好的内容
+        beforeMount() {
+            // 页面呈现的是未经Vue编译的DOM结构
+            // 所有对DOM的操作都还没有生效
+            console.log('beforeMount');
+            // debugger;
+        },
+        // Create vm.$el and replace "el" with it 将内存中的的虚拟DOM转为真实DOM插入页面
+        mounted() {
+            // 此时页面中的呈现的都是经过Vue编译的DOM
+            // 对DOM的操作均有效（尽可能避免）
+            // 至此初始化过程结束 一般在此开启 定时器、发送网络请求 订阅消息 绑定自定义事件 等初始化操作
+            console.log('mounted');
+            // debugger;
+        },
+        beforeUpdate() {
+            // 在这里数据已经更新了 但是页面还没有更新
+            console.log('beforeUpdate');
+            console.log(this.$data.n);
+            // debugger;
+        },
+        // 在这里对新旧数据进行更新
+        updated() {
+            // 此时页面和数据都是新的
+            console.log('updated');
+            // this.n = 99;
+        },
+        // 生命周期中最后一个流程
+        // 当vm.$destroy()被调用时候
+        beforeDestroy() {
+            // 此时所有的的data、methods、指令等都处于可用状态
+            // 马上要执行销毁过程
+            // 一般在此阶段执行 关闭定时器 取消订阅消息 解绑自定义事件的等的收尾操作
+            // 这里页面上数据已经不会再触发更新了
+            console.log('beforeDestroyed');
+        },
+        // Teardown watches(监视), child components(子组件) and event listeners(事件监听器)
+        destroyed() {
+            // 这里页面上数据已经不会再触发更新了
+        }
+
+
+    });
+
+</script>
+</body>
+</html>

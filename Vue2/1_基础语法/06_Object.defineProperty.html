@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+
+<script>
+    let number = 18;    // 要求
+    let person = {
+        name: '张三',
+        sex: '男',   // 这个可以是直接被删除的
+        age: number,
+    }
+    console.log(person);
+
+    // <添加哪个对象>, <属性名>, <值>
+    Object.defineProperty(person, 'age', {
+        // value: 18,
+        // enumerable: true,   //控制属性是否可以枚举 默认值是false
+        // writable: true,     //使这个变量可以被修改
+        // // 当然这个也是默认不能被删除的
+        // configurable: true,     // 控制属性是否可以被删除
+        get: function () {  // 当有人调用person的age属性时 get函数就会被调用 且返回的就是age的值
+            console.log('age属性被读取');
+            return number;
+        },   // 这一整个就叫getter
+        set(value) {  // 当有人修改person的age属性时 set函数就会被调用
+            console.log('age属性被修改 value=' + value);
+            number = value;
+        }   // 这一整个就叫getter
+
+    });
+    // 使用这个添加属性 那么这个属性是不参加枚举的 也就是不能被遍历
+    console.log(person);
+
+
+</script>
+
+
+</body>
+</html>

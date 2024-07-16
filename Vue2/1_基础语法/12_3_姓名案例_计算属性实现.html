@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_计算属性实现</title>
+    <script src="jsue.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    姓: <input type="text" v-model="firstName"><br>
+    名: <input type="text" v-model="lastName"><br>
+    全名: <span>{{ fullName }}</span><br>
+    <!--    到这里时fullName只会被调用一次 其他的是缓存里来的-->
+    全名: <span>{{ fullName }}</span><br>
+    全名: <span>{{ fullName }}</span><br>
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstName: '张', // 这个叫属性
+                lastName: '三',
+                // 这两个会在vm._data中
+            }
+        },
+        computed: {
+            fullName: {
+                // 但是这个不会在vm._data中 只有在调用的时候会在vm中可调用
+                // get 当有人读取fullName时 这个get就会被调用 且返回值就是fullName的值
+                get() {
+                    // 初次读取fullName时会被调用
+                    // 所依赖的数据发生变化时会被调用
+                    // 调用时Vue将this的对象变为了vm
+                    console.log('fullName.get被调用了');
+                    return this.firstName + '-' + this.lastName;
+                    // 注意这里也需要使用this
+                },
+                set(val) { // 当fullName被修改时被调用
+                    console.log("fullName.set被调用了");
+                    console.log("val = "+ val);
+                    const arr = val.split('-');
+                    this.firstName = arr[0];
+                    this.lastName = arr[1];
+                }
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

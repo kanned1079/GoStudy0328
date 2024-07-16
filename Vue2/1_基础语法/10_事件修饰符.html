@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script src="jsue.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+
+        button {
+            width: 200px;
+            height: 35px;
+            background-color: #5588aa;
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            margin: 10px;
+        }
+
+        .div1 {
+            height: 50px;
+            background-color: skyblue;
+            line-height: 50px;
+        }
+
+        .box1 {
+            height: 100px;
+            background-color: cadetblue;
+        }
+
+        .box2 {
+            height: 50px;
+            background-color: #ffbbaa;
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: #e3e5e7;
+            overflow: auto;
+        }
+
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <h1>Welcome to {{ name }}</h1>
+    <a href="https://ikanned.com:24444/" @click.prevent="showInfo1">点我提示信息</a><br>
+    <div class="div1" @click="showInfo1">
+        <button @click.stop.prevent="showInfo1">点我提示信息</button>
+        <!--        修饰符可以链式调用-->
+    </div>
+    <button @click.once="showInfo1">事件只触发一次</button>
+    <br>
+    <div class="box1" @click.capture="showNum(1)">div1
+        <div class="box2" @click="showNum(2)">div2
+        </div>
+    </div>
+    <div class="box1" @click.self="showInfo1">div1
+        <button @click.stop="showInfo1">点我提示信息3s</button>
+    </div>
+
+    <ul class="list" @wheel.passive="demo">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'atguigu',
+            }
+        },
+        methods: {
+            showInfo1(event) {
+                alert('同学你好！');
+                // Vue 中的事件修饰符
+                // 1. prevent 阻止默认事件
+                // 2. stop 阻止事件冒泡
+                // 3. once 事件只触发一次
+                // 4. capture 使用事件时捕获模式
+                // 5. self 只有event.target是当前操作的元素的时候才触发事件
+                // 6. passive 事件的默认行为立即执行 无需等待事件回调执行完毕
+            },
+            showNum(num) {
+                console.log(num);
+            },
+            demo() {
+                // console.log('@');
+                for (let i = 0; i < 100000; i++) {
+                    setTimeout(() => {
+                        console.log('#');
+
+                    }, 100);
+                }
+                console.log('end')
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

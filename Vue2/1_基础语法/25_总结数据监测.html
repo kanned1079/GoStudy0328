@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set()的使用</title>
+    <script src="jsue.js"></script>
+</head>
+<style>
+    * {
+        margin: 10px;
+    }
+</style>
+<body>
+<div id="root">
+    <h1>学生信息</h1>
+    <button @click="students.age++">年龄+1</button><br>
+    <button @click="addSex">添加性别属性 默认值：男</button><br>
+    <button @click="addFriend">在列表首位添加一个朋友</button><br>
+    <button @click="changeFriend">修改第一个朋友的名字为张三</button><br>
+    <button @click="addHobby">添加一个爱好</button><br>
+    <button @click="changeHobby">修改第一个爱好为：开车</button><br>
+    <h2>姓名 {{ students.name }}</h2>
+    <h2 v-if="students.sex">性别 {{ students.sex }}</h2>
+    <h2>年龄 {{ students.age }}</h2>
+    <h3>爱好</h3>
+    <ul>
+        <li v-for="(h, index) in students.hobby" :key="index">
+            {{ h }} - {{ index }}
+        </li>
+    </ul>
+    <h3>朋友们</h3>
+    <ul>
+        <li v-for="(f, index) in students.friends" :key="index">
+            {{ f.name }} - {{ f.age }}
+        </li>
+    </ul>
+
+</div>
+
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            students: {
+                name: 'Tom',
+                // sex: '男',
+                age: 19,
+                hobby: ['抽烟', '喝酒', '烫头'],
+                friends: [
+                    {name: 'Jerry', age: 15},
+                    {name: 'Tony', age: 36},
+                ]
+            }
+        },
+        methods: {
+            addSex() {
+                this.$set(this.students, 'sex', '男');
+            },
+            addFriend() {
+                this.students.friends.unshift({name: 'f', age: 19});
+            },
+            changeFriend() {
+                this.students.friends[0].name = '张三';
+            },
+            addHobby() {
+                this.students.hobby.push('新爱好');
+            },
+            changeHobby() {
+                this.students.hobby.splice(0,1,'开车');
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

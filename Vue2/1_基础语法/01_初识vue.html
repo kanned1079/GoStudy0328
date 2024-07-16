@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<!-- 准备一个容器 -->
+<div id="root">
+    <!-- 这个叫插值语法 -->
+    <h1>Hello {{ name }}</h1>
+    <h1>Age {{ age }}</h1>
+</div>
+
+<div class="root">
+    <!-- 这个叫插值语法 -->
+    <h1>Hello {{ name }}</h1>
+</div>
+
+<script>
+    Vue.config.productionTip = false;   // 设置为 false 以阻止 vue 在启动时生成生产提示
+    // Vue是一个全局构造函数
+    // 创建一个Vue实例
+    new Vue({
+        el: '#root', // el是element的简写 指定当前vue实例为哪个容器服务
+        // el: document.getElementById('root'); // 这个也行
+        data() {    // 这里的data供el指定的那个容器所使用
+            return {
+                name: 'kanna',
+                age: 18,
+            }
+        },
+    });
+
+</script>
+</body>
+</html>

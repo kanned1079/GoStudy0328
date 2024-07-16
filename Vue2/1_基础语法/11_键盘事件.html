@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>Welcome {{ name }}</h2>
+    <input type="text" placeholder="按下回车输入" @keydown.meta.c="showInfo">
+    <!--    修饰键后面也能接着写-->
+</div>
+<script>
+    Vue.config.productionTip = false;
+    // 可以自己加别名
+    Vue.config.keyCodes.huiche = 13;
+    const vm = new Vue({
+        el: "#root",
+        data() {
+            return {
+                name: 'kanna',
+            }
+        },
+        methods: {
+            showInfo(event) {
+                // 在Vue中不需要这么写 只需要在上面@keyup后加入.enter
+                // Vue中常用的按键别名
+                // 回车 enter
+                // 删除 delete    (捕获删除和退格子键)
+                // 退出 esc
+                // 空格 space
+                // 换行 tab   必须配合keydown使用
+                // 上 up
+                // 下 down
+                // 左 left
+                // 右 right
+
+                // 特殊 系统修饰键
+                // ctrl
+                // alt
+                // shift
+                // meta
+                // (1)配合keyup使用 按下修饰键的同时 再按下其他键 释放后事件才被触发
+                // (2)配合keydown使用 正常触发事件
+
+                // if (event.key != 'Enter') return
+                console.log(event.key)
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_el和data的两种写法</title>
+    <script src="jsue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h2>Hello {{ name }}</h2>
+</div>
+
+<div id="root2">
+    <h2>Hello {{ name }}</h2>
+</div>
+<script>
+    Vue.config.productionTip = false;
+
+    // el的两种写法
+    // 这里vue实例 上面相当于就是模版 交给vue来解析
+    const x = new Vue({
+        // el: '#root', // 这是第一种写法
+        data: { // 这是data的第一种写法 叫对象式
+            name: 'kanna',
+        }
+    });
+
+    console.log(x);
+    // setTimeout(() => {
+    //     x.$mount('#root'); // 这个和上面el一样 但是这个更灵活
+    // }, 1000)
+    x.$mount('#root');
+
+    //data 的两种写法 下面的叫函数式 建议用函数式
+    new Vue({
+        el: '#root2',
+        // 如果是vue所管理的函数 那就不要使用箭头函数
+        data: function () {
+            console.log(this);
+            // 此处的this是vue对象 如果是function
+            // 如果使用箭头函数 那么这里就是window
+            return {
+                name: 'kinggyo',
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

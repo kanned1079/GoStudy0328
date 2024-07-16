@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式</title>
+    <script src="jsue.js"></script>
+    <style>
+        .basic {
+            width: 480px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 10px;
+            line-height: 100px;
+        }
+
+        .happy {
+            background-color: coral;
+        }
+
+        .sad {
+            background-color: blue;
+        }
+
+        .normal {
+            background-color: #ffe57d;
+        }
+
+        .self1 {
+            background-color: #39987c;
+        }
+
+        .self2 {
+            text-shadow: 2px 2px 2px #ffe57d;
+            font-size: 30px;
+            font-family: Monaco;
+        }
+
+        .self3 {
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body style="background-color: #666666">
+<div id="root">
+    <!--    v-bind绑定class样式 适用于 样式的类名不确定，需要动态指定-->
+    <div class="basic" :class="mood" @click="changeMood">test</div>
+    <hr>
+    <!--    适用于要绑定的样式的个数和名字不确定-->
+    <div class="basic" :class="classArr">{{ name }}</div>
+    <hr>
+    <!--    要绑定的样式个数确定 名字也确定 但要动态决定用不用-->
+    <div class="basic" :class="classObj">{{ name }}</div>
+    <!--    内联样式 {key: value} 使用对象形式-->
+    <div class="basic" :class="basic" :style="styleObj">{{ name }}</div>
+    <!--    内联样式 使用数组形式 数组里面是样式对象-->
+    <div class="basic" :class="basic" :style="[styleObj, styleObj2]">{{ name }}</div>
+    <!--    另类写法-->
+    <div class="basic" :class="basic" :style="styleArr">{{ name }}</div>
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'kanna',
+                mood: 'normal',
+                classArr: ['self1', 'self2', 'self3'],
+                classObj: {
+                    self1: true,
+                    self2: false,
+                },
+                styleObj: {
+                    fontSize: 49 + 'px',
+                    color: 'skyblue',
+                },
+                styleObj2: {
+                    backgroundColor: '#e3e5e7',
+                },
+                styleArr: [ // 这个数组里面是对象
+                    {
+                        fontSize: 27 + 'px',
+                        color: '#e3e5e7',
+                    }, {
+                        textAlign: 'center',
+                        backgroundColor: '#31b3ac',
+                    }
+                ]
+            }
+        },
+        methods: {
+            changeMood() {
+                this.mood = 'happy';
+                // 要求随机切换
+                const arr = ['happy', 'sad', 'normal'];
+                // 随机生成0 1 2
+                const index = Math.floor(Math.random(0, 3) * 3);
+                this.mood = arr[index];
+            }
+        }
+    });
+</script>
+</body>
+</html>

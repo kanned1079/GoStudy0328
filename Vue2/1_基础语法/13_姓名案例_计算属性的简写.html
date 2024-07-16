@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_计算属性实现</title>
+    <script src="jsue.js"></script>
+    <style>
+        * {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    姓: <input type="text" v-model="firstName"><br>
+    名: <input type="text" v-model="lastName"><br>
+    全名: <span>{{ fullName }}</span><br>
+    <!--    计算属性不要()-->
+    <!--    全名: <span>{{ fullName }}</span><br>-->
+    <!--    全名: <span>{{ fullName }}</span><br>-->
+</div>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                firstName: '张',
+                lastName: '三',
+            }
+        },
+        computed: {
+            // 完整写法
+            // fullName: {
+            //     get() {
+            //         console.log('fullName.get被调用了');
+            //         return this.firstName + '-' + this.lastName;
+            //     },
+            //     // set(val) {
+            //     //     console.log("fullName.set被调用了");
+            //     //     console.log("val = " + val);
+            //     //     const arr = val.split('-');
+            //     //     this.firstName = arr[0];
+            //     //     this.lastName = arr[1];
+            //     // }
+            // }
+
+            // 简写
+            // 计算属性只有只读的时候 才能用简写
+            fullName() {
+                console.log('fullName.get被调用了');
+                // compute属性不能使用异步任务 但是监视可以
+                // return setTimeout(function () {
+                //     return this.firstName + '-' + this.lastName;
+                // }, 1000);
+                // return this.firstName + '-' + this.lastName;
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 <script>
+
 export default {
   name: 'MyAbout',
   beforeDestroy() {
@@ -9,7 +10,8 @@ export default {
   },
   // beforeRouteEnter 通过路由规则进入组件时被调用
   beforeRouteEnter(to, from, next) {
-
+    console.log(to, from);
+    next();
   },
   // beforeRouteLeave 通过路由规则离开组件时被调用
   beforeRouteLeave() {

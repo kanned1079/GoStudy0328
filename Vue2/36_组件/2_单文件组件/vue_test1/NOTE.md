@@ -629,3 +629,74 @@
     return {id: $route.query.id, title: $route.query.title};
     }
     ```
+  
+### `<router-link>`的replace属性
+- 模拟栈的操作
+- 默认为push 记录每一次的记录
+- 加入 `replace` 属性则会替换当前操作
+
+### 编程式路由导航
+- **作用：** 不借助 `<router-link>` 实现路由跳转 让路由跳转更加灵活
+- **使用：**
+    ```javascript
+    // 路由跳转的两个Api
+    this.$router.push({
+        name: 'xiangqing',
+        params: {id: 'xxx', title: 'yyy'},
+    })
+    
+    this.$router.replace({
+        name: 'xiangqing',
+        params: {id: 'xxx', title: 'yyy'},
+    })
+    
+    this.$router.forward(); // 前进
+    this.$router.back();    // 后退
+    this.$router.go(3);     // 可前可后 根据传入的值 负数后退 正数前进
+    ```
+  
+### 缓存路由组件
+- **作用：** 让不展示的路由组件保持挂载 不被销毁
+- **具体编码：**
+    ```html
+    <!--    <keep-alive include="MyNews">-->
+    <!--    以上为缓存一个 下面的为缓存多个-->
+    <keep-alive :include="['MyNews', 'MyMessage']">
+    <!--    注意上边include的名字是组件中的name属性-->
+        <router-view></router-view>
+    </keep-alive>
+    ```
+  
+### 两个新的声明周期钩子
+- **作用：** 路由组件独有的两个钩子 用于捕获路由组件的激活状态
+- **具体名字：**
+  1. `activated() {}` 路由组件被激活时触发
+  2. `deactivated() {}` 路由组件失活时触发
+
+### 路由守卫
+- **作用：** 对路由进行权限控制
+- **分类：** 全局守卫、独享守卫、组件内守卫
+- 全局守卫：
+    ```javascript
+    // 全局前置路由守卫
+    // 每一次路由切换之前被调用 和初始化前被调用
+    router.beforeEach((to, from, next) => {
+        console.log('全局前置路由守卫', to, from);
+        if (to.meta.isAuth) {
+            if (localStorage.getItem('school') === 'NNU')
+                next();
+            else
+                alert('学校名错误')
+        } else {
+            next();
+        }
+    })
+    
+    // 全局后置路由守卫
+    // 每一次路由切换之后被调用 和初始化后被调用
+    router.afterEach((to, from) => {
+        console.log('后局前置路由守卫', to, from);
+        document.title = to.meta.title;
+    })
+    ```
+- 独享守卫

@@ -23,7 +23,7 @@ export default {
   activated() {
     console.log('News activated')
     setInterval(() => {
-              // console.log('@');
+              console.log('@');
               this.opacity -= 0.01;
               if (this.opacity <= 0)
                 this.opacity = 1;

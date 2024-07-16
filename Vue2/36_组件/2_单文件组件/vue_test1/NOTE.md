@@ -699,4 +699,50 @@
         document.title = to.meta.title;
     })
     ```
-- 独享守卫
+- 独享守卫 (**ps:** 独享守卫没有退出)
+    ```javascript
+    beforeEnter(to, from, next) {
+        if (to.meta.isAuth) {
+            if (localStorage.getItem('school') === 'NNU') {
+                next()
+            } else {
+                alert('学校名不可用')
+            }
+        } else {
+            next();
+        }
+    },
+    ``` 
+- 组件内守卫 (**ps:** 必须通过路由规则进入组件)
+    ```javascript
+    // beforeRouteEnter 通过路由规则进入组件时被调用
+    beforeRouteEnter(to, from, next) {
+        console.log('独享路由守卫-进入-About---beforeRouteEnter');
+        console.log(to, from, next);
+        if (to.meta.isAuth) {
+            if (localStorage.getItem('school') === 'NNU') {
+                next();
+            }
+        } else {
+            next();
+        }
+    },
+    // beforeRouteLeave 通过路由规则离开组件时被调用
+    beforeRouteLeave(to, from, next) {
+        console.log('独享路由守卫-离开-About---beforeRouteLeave');
+        console.log(to, from, next);
+        next();
+    }
+    ```
+  
+### 路由的两种工作模式
+1. 对于一个url来说 #后面的就是哈希值
+2. hash值不会包含在http请求中 (哈希值不会带给服务器)
+3. Hash模式
+   1. 地址中永远带着#号 不美观
+   2. 若以后将地址通过第三方手机app分享 若app检验严格 则地址会被标记为不合法
+   3. 兼容性较好
+4. History模式
+   1. 地址干净美观
+   2. 兼容性和Hash模式相比略差
+   3. 应用部署上线时需要后端人员支持 解决刷新页面服务端404的问题

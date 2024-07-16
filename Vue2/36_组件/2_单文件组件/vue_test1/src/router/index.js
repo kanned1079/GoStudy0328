@@ -10,13 +10,14 @@ import MyDetail from '../pages/Detail.vue'
 // 创建一个路由器
 // 创建并暴露
 const router = new VueRouter({
+    mode: 'history',    // 选择路由的工作模式
     routes: [
         // 一级路由
         {
             name: 'guanyu', // 起名 可以简化跳转编码
             path: '/about',
             component: MyAbout,
-            meta: {title: '关于'}
+            meta: {title: '关于', isAuth: true}
         },
         {
             name: 'zhuye',
@@ -90,13 +91,13 @@ const router = new VueRouter({
 //     }
 // })
 //
-// // 全局后置路由守卫
-// // 每一次路由切换之后被调用 和初始化后被调用
-// router.afterEach((to, from) => {
-//     console.log('后局前置路由守卫', to, from);
-//     document.title = to.meta.title;
-// })
-//
+// 全局后置路由守卫
+// 每一次路由切换之后被调用 和初始化后被调用
+router.afterEach((to, from) => {
+    console.log('后局前置路由守卫', to, from);
+    document.title = to.meta.title;
+})
+
 
 
 export default router

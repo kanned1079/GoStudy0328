@@ -6,14 +6,6 @@ export default {
   },
   mounted() {
     console.log('About mounted')
-  },
-  // beforeRouteEnter 通过路由规则进入组件时被调用
-  beforeRouteEnter(to, from, next) {
-
-  },
-  // beforeRouteLeave 通过路由规则离开组件时被调用
-  beforeRouteLeave() {
-
   }
 }
 </script>

@@ -3042,7 +3042,7 @@
         <entry key="stu_37" value="Stu_37" />
         <entry key="stu_37_a" value="Stu_37_A" />
         <entry key="stu_39" value="Stu_39" />
-        <entry key="student" value="Student" />
+        <entry key="student" value="student" />
         <entry key="student72" value="Student72" />
         <entry key="student_31" value="Student_31" />
         <entry key="student_33" value="Student_33" />
@@ -3065,6 +3065,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1720680862850" />
+    <option name="lastTimeChecked" value="1721104464059" />
   </component>
 </project>

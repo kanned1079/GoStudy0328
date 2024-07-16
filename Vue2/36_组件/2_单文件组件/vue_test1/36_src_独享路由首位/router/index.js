@@ -55,17 +55,17 @@ const router = new VueRouter({
                     meta: {isAuth: true,title: '新闻'},
                     // 组件独有的 独享路由守卫
                     // 注意独享路由守卫只有一个enter
-                    // beforeEnter(to, from, next) {
-                    //     if (to.meta.isAuth) {
-                    //         if (localStorage.getItem('school') === 'NNU') {
-                    //             next()
-                    //         } else {
-                    //             alert('学校名不可用')
-                    //         }
-                    //     } else {
-                    //         next();
-                    //     }
-                    // },
+                    beforeEnter(to, from, next) {
+                        if (to.meta.isAuth) {
+                            if (localStorage.getItem('school') === 'NNU') {
+                                next()
+                            } else {
+                                alert('学校名不可用')
+                            }
+                        } else {
+                            next();
+                        }
+                    },
 
 
                 }
@@ -92,11 +92,11 @@ const router = new VueRouter({
 //
 // // 全局后置路由守卫
 // // 每一次路由切换之后被调用 和初始化后被调用
-// router.afterEach((to, from) => {
-//     console.log('后局前置路由守卫', to, from);
-//     document.title = to.meta.title;
-// })
-//
+router.afterEach((to, from) => {
+    console.log('后局前置路由守卫', to, from);
+    document.title = to.meta.title;
+})
+
 
 
 export default router

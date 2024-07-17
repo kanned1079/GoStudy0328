@@ -2904,6 +2904,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/Vue2/1_基础语法/js/delayserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1719995259729" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/servers/server1.go">
           <value>
             <ScannedPath>
@@ -2932,13 +2939,6 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1721105100526" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/Vue2/js/delayserver.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1719995259729" />
             </ScannedPath>
           </value>
         </entry>
@@ -3049,7 +3049,7 @@
         <entry key="stu_37" value="Stu_37" />
         <entry key="stu_37_a" value="Stu_37_A" />
         <entry key="stu_39" value="Stu_39" />
-        <entry key="student" value="Student" />
+        <entry key="student" value="student" />
         <entry key="student72" value="Student72" />
         <entry key="student_31" value="Student_31" />
         <entry key="student_33" value="Student_33" />
@@ -3072,6 +3072,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1721104464059" />
+    <option name="lastTimeChecked" value="1721198358431" />
   </component>
 </project>

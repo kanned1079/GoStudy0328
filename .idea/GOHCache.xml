@@ -81,6 +81,13 @@
             </set>
           </value>
         </entry>
+        <entry key="BableLabel">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="BankAccount">
           <value>
             <set>
@@ -165,6 +172,13 @@
             </set>
           </value>
         </entry>
+        <entry key="ColumnData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Computer">
           <value>
             <set>
@@ -215,6 +229,13 @@
             </set>
           </value>
         </entry>
+        <entry key="CountData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="CurUser">
           <value>
             <set>
@@ -234,6 +255,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/p46_CustomerInfosManagementSystem/services/customerServices.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Data">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
             </set>
           </value>
         </entry>
@@ -727,6 +755,13 @@
             </set>
           </value>
         </entry>
+        <entry key="TableData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Tag">
           <value>
             <set>
@@ -804,6 +839,13 @@
             </set>
           </value>
         </entry>
+        <entry key="VideoData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Visitors_33">
           <value>
             <set>
@@ -843,6 +885,20 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/p46_CustomerInfosManagementSystem/view/customerView.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="data">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="date">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
             </set>
           </value>
         </entry>
@@ -2911,6 +2967,21 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1721294220798" />
+              <option name="schema">
+                <list>
+                  <option value="TableData" />
+                  <option value="CountData" />
+                  <option value="VideoData" />
+                  <option value="ColumnData" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/servers/server1.go">
           <value>
             <ScannedPath>
@@ -2958,6 +3029,7 @@
         <entry key="article" value="Article" />
         <entry key="b" value="B" />
         <entry key="b_37" value="B_37" />
+        <entry key="bable_label" value="BableLabel" />
         <entry key="bank_account" value="BankAccount" />
         <entry key="bb_37" value="BB_37" />
         <entry key="box_33" value="Box_33" />
@@ -2972,6 +3044,7 @@
         <entry key="cats" value="Cats" />
         <entry key="char_count" value="charCount" />
         <entry key="circle_30" value="Circle_30" />
+        <entry key="column_data" value="ColumnData" />
         <entry key="computer" value="Computer" />
         <entry key="computer_42" value="Computer_42" />
         <entry key="computer_44" value="Computer_44" />
@@ -2979,10 +3052,12 @@
         <entry key="conf79" value="Conf79" />
         <entry key="config" value="Config" />
         <entry key="connection" value="Connection" />
+        <entry key="count_data" value="CountData" />
         <entry key="cur_user" value="CurUser" />
         <entry key="customer" value="Customer" />
         <entry key="customer_service" value="CustomerService" />
         <entry key="customer_view" value="customerView" />
+        <entry key="data" value="Data" />
         <entry key="db_info" value="DbInfo" />
         <entry key="draws" value="draws" />
         <entry key="encryptor" value="Encryptor" />
@@ -3056,6 +3131,7 @@
         <entry key="student_37" value="Student_37" />
         <entry key="student_40" value="Student_40" />
         <entry key="student_44" value="Student_44" />
+        <entry key="table_data" value="TableData" />
         <entry key="tag" value="Tag" />
         <entry key="transfer" value="Transfer" />
         <entry key="tv" value="TV" />
@@ -3068,6 +3144,7 @@
         <entry key="user_process" value="UserProcess" />
         <entry key="users" value="Users" />
         <entry key="val_node1" value="valNode1" />
+        <entry key="video_data" value="VideoData" />
         <entry key="visitors_33" value="Visitors_33" />
         <entry key="wx_users" value="WxUsers" />
       </map>

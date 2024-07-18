@@ -47,8 +47,8 @@ export default {
   }
   .r-content {
     .user {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       border-radius: 50px;
     }
   }

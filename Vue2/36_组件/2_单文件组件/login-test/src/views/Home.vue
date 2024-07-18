@@ -1,86 +1,120 @@
 <script>
+import {getData} from '../api'
+import * as echarts from 'echarts'
 export default {
   name: '',
   data: function () {
     return {
-      tableData: [
-        {
-          name: 'aaa',
-          todayBuy: 344,
-          monthBuy: 564,
-          totalBuy: 987,
-        },
-        {
-          name: 'bbb',
-          todayBuy: 236,
-          monthBuy: 560,
-          totalBuy: 350,
-        },
-        {
-          name: 'ccc',
-          todayBuy: 780,
-          monthBuy: 750,
-          totalBuy: 810,
-        },{
-          name: 'ddd',
-          todayBuy: 175,
-          monthBuy: 546,
-          totalBuy: 924,
-        }
-      ],
+      data: {},
+      tableData: [],
       tableLabel: {
         name: '课程',
         todayBuy: '今日购买',
         monthBuy: '当月购买',
         totalBuy: '总购买',
       },
-      countData: [
-        {
-          name: '今日支付订单',
-          value: 1234,
-          icon: 'success',
-          color: '#2ec7c9',
-        },
-        {
-          name: '今日收藏订单',
-          value: 210,
-          icon: 'star-on',
-          color: '#ffb980',
-        },
-        {
-          name: '今日未支付订单',
-          value: 1204,
-          icon: 's-goods',
-          color: '#5ab1ef',
-        },
-        {
-          name: '本月支付订单',
-          value: 134,
-          icon: 'success',
-          color: '#2ec7c9',
-        },
-        {
-          name: '本月收藏订单',
-          value: 2130,
-          icon: 'star-on',
-          color: '#ffb980',
-        },
-        {
-          name: '本月未支付订单',
-          value: 1204,
-          icon: 's-goods',
-          color: '#5ab1ef',
-        },
-      ]
+      countData: [],
+      orderData: {},
     }
   },
+  mounted() {
+    getData().then(({data}) => {
+      // console.log(data)
+      const { tableData, orderData, videoData, columnData } = data
+      this.tableData = tableData  // ok
+      this.countData = orderData  // ok
+      console.log(videoData)  // 在此处可以正常输出
+      this.orderData = videoData
+      { // 折线图生成
+        const chart1 = echarts.init(this.$refs.echaerts1);
+        let chart1_option = {}
+        let xAxis = Object.keys(videoData.data[0])
+        const xAxisData = {
+          data: xAxis,
+        }
+        chart1_option.xAxis = xAxisData
+        chart1_option.yAxis = {}
+        chart1_option.legend = xAxisData
+        chart1_option.tooltip = {}
+        chart1_option.series = []
+        xAxis.forEach(key => {
+          chart1_option.series.push({
+            name: key,
+            data: videoData.data.map(item => item[key]),
+            type: 'line',
+          })
+        })
+        console.log(chart1_option)
+        // 根据配置显示图表
+        chart1.setOption(chart1_option)
+      }
+      { // 柱状图生成
+        const chart2 = echarts.init(this.$refs.echaerts2);
+        const chart2_option = {
+          legend: {
+            textStyle: {
+              color: '#333',
+            }
+          },
+          grid: {
+            left: '20%',
+          },
+          tooltip: {
+            trigger: 'axis',
+          },
+          xAxis: {
+            type: 'category',
+            data: columnData.map(item => item.date),
+            axisLine: {
+              lineStyle: {
+                color: '#17b3a3',
+              }
+            },
+            axisLabel: {
+              interval: 0,
+              color: '#333',
+            }
+          },
+          yAxis: [
+            {
+              type: 'value',
+              axisLine: {
+                lineStyle: {
+                  color: '#17b3a3'
+                }
+              }
+            }
+          ],
+          color: ['#2ec79c', '#b6a2de'],
+          series: [
+            {
+              name: '新增用户',
+              data: columnData.map(item => item.new),
+              type: 'bar',
+            },
+            {
+              name: '活跃用户',
+              data: columnData.map(item => item.active),
+              type: 'bar',
+            }
+          ]
+        }
+        chart2.setOption(chart2_option)
+      }
+
+    }, error => {
+      console.log(error.message)
+    })
+
+
+  }
 }
 </script>
 
 <template>
   <el-row>
-    <el-col :span="8">
-      <el-card class="box-card">
+    <el-col :span="8" style="padding-right: 10px">
+      <el-card class="box-card" style="height: 280px">
         <div class="user">
           <img src="../assets/images/user1.jpg" alt="">
           <div class="userinfo">
@@ -93,7 +127,7 @@ export default {
           <p>上次登录地点：<span>武汉</span></p>
         </div>
       </el-card>
-      <el-card class="box-card" style="margin-top: 20px; height: 460px" >
+      <el-card class="box-card" style="margin-top: 20px; height: 460px">
         <el-table
             :data="tableData"
             style="width: 100%">
@@ -103,10 +137,26 @@ export default {
         </el-table>
       </el-card>
     </el-col>
-    <el-col :span="16">
+    <el-col :span="16" style="padding-left: 10px">
       <div class="num">
-        <el-card v-for="item in countData" :key="item.name">
-          <i class="icon" :class="`el-icon-${item.icon}`"></i>
+        <el-card v-for="item in countData" :key="item.name" :body-style="{ display: 'flex', padding: 0}">
+          <i class="icon" :class="`el-icon-${item.icon}`" v-bind:style="{ backgroundColor: item.color }"></i>
+          <div class="detail">
+            <p class="price"> ¥ {{ item.value }} </p>
+            <p class="desc"> {{ item.name }} </p>
+          </div>
+        </el-card>
+      </div>
+      <el-card style="height: 280px">
+        <!--        折线图的内容-->
+        <div ref="echaerts1" style="height: 280px"></div>
+      </el-card>
+      <div class="graph">
+        <el-card style="height: 260px">
+          <div ref="echaerts2" style="height: 260px"></div>
+        </el-card>
+        <el-card style="height: 260px">
+          <div ref="echaerts3" style="height: 260px"></div>
         </el-card>
       </div>
     </el-col>
@@ -151,4 +201,58 @@ p {
     margin-left: 60px;
   }
 }
+
+.num {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .icon {
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    color: white;
+    align-items: center;
+    line-height: 80px;
+    text-align: center;
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 30px;
+
+    .price {
+      font-size: 30px;
+      margin-bottom: 3px;
+      color: rgba(0, 0, 0, 0.63);
+      line-height: 30px;
+      height: 30px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #999;
+      text-align: center;
+    }
+  }
+
+  .el-card {
+    width: 32%;
+    margin-bottom: 20px;
+  }
+}
+
+.graph {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  .el-card {
+    width: 48.5%;
+  }
+}
+
+
 </style>

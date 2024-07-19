@@ -26,6 +26,11 @@ type VideoData struct {
 	Date []string         `json:"date"`
 }
 
+type piData struct {
+	Name  string `json:"name"`
+	Value int    `json:"value"`
+}
+
 //
 //type Data struct {
 //	Items map[string]int `json:"items"`
@@ -47,6 +52,7 @@ func main() {
 			"orderData":  handleOrderData(),
 			"videoData":  handleVideoData(),
 			"columnData": handleColumnData(),
+			"piData":     handlePiData(),
 		})
 	})
 
@@ -68,9 +74,9 @@ func handleTableData() []TableData {
 
 func handleOrderData() []CountData {
 	var countSlice []CountData
-	countSlice = append(countSlice, CountData{"今日支付订单", getRand(), "success", "#2ec7c9"})
-	countSlice = append(countSlice, CountData{"今日收藏订单", getRand(), "star-on", "#ffb980"})
-	countSlice = append(countSlice, CountData{"今日未支付订单", getRand(), "s-goods", "#5ab1ef"})
+	countSlice = append(countSlice, CountData{"今日支付订单", getRand() / 3, "success", "#2ec7c9"})
+	countSlice = append(countSlice, CountData{"今日收藏订单", getRand() / 3, "star-on", "#ffb980"})
+	countSlice = append(countSlice, CountData{"今日未支付订单", getRand() / 3, "s-goods", "#5ab1ef"})
 	countSlice = append(countSlice, CountData{"本月支付订单", getRand(), "success", "#2ec7c9"})
 	countSlice = append(countSlice, CountData{"本月收藏订单", getRand(), "star-on", "#ffb980"})
 	countSlice = append(countSlice, CountData{"本月未支付订单", getRand(), "s-goods", "#5ab1ef"})
@@ -108,6 +114,16 @@ func handleColumnData() []ColumnData {
 	columnSlice = append(columnSlice, ColumnData{"周六", getRandN(300), getRandN(1000)})
 	columnSlice = append(columnSlice, ColumnData{"周日", getRandN(300), getRandN(1000)})
 	return columnSlice
+}
+
+func handlePiData() []piData {
+	var piSlice []piData
+	piSlice = append(piSlice, piData{"Xiaomi", getRand()})
+	piSlice = append(piSlice, piData{"Huawei", getRand()})
+	piSlice = append(piSlice, piData{"Apple", getRand()})
+	piSlice = append(piSlice, piData{"Google", getRand()})
+	piSlice = append(piSlice, piData{"SONY", getRand()})
+	return piSlice
 }
 
 func getRand() int {

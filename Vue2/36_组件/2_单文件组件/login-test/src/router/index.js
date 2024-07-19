@@ -18,22 +18,27 @@ const routes = [
         children: [
             {
                 path: 'home',   // 主页
+                name: 'home',
                 component: Home,
             },
             {
                 path: 'user',   // 用户管理
+                name: 'user',
                 component: User,
             },
             {
                 path: 'mall',   // 商品管理
+                name: 'mall',
                 component: Mall,
             },
             {
                 path: 'page1',   // 页面1
+                name: 'page1',
                 component: PageOne,
             },
             {
                 path: 'page2',   // 页面2
+                name: 'page2',
                 component: PageTwo,
             },
 
@@ -43,7 +48,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes,
 })
 

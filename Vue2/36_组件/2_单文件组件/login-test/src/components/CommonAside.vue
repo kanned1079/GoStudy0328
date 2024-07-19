@@ -4,9 +4,9 @@
            @open="handleOpen"
            @close="handleClose"
            :collapse="isCollapse"
-           background-color="#545c64"
-           text-color="#fff"
-           active-text-color="#ffd04d">
+           background-color="#fff"
+           text-color="#000"
+           active-text-color="#2f477f">
     <h3>{{ !isCollapse?'通用后台管理系统':'后台'}}</h3>
     <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name" @click="clickMenu(item)">
       <i :class="`el-icon-${item.icon}`"></i>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
 export default {
   data() {
     return {
@@ -93,9 +94,15 @@ export default {
       // 解决方法2
       if (this.$route.path !== item.path && !(this.$route.path === '/home' && (item.path === '/')))
         this.$router.push(item.path)
+      // 修改state中的数据
+      // this.$store.commit('selectMenu', item)
+      this.$store.commit('tab/selectMenu', item)
     }
   },
   computed: {
+    // ...mapMutations('tab',{
+    //   selectMenu: 'selectMenu'
+    // }),
     // 没有子菜单
     noChildren() {
       return this.menuData.filter(item => !item.children);
@@ -124,8 +131,9 @@ export default {
 
   h3 {
     color: white;
+    background-color: #2f477f;
     text-align: center;
-    line-height: 48px;
+    line-height: 50px;
     font-size: 16px;
     font-weight: 400;
   }

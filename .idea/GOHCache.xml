@@ -81,13 +81,6 @@
             </set>
           </value>
         </entry>
-        <entry key="BableLabel">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="BankAccount">
           <value>
             <set>
@@ -255,13 +248,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/p46_CustomerInfosManagementSystem/services/customerServices.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="Data">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
             </set>
           </value>
         </entry>
@@ -888,20 +874,6 @@
             </set>
           </value>
         </entry>
-        <entry key="data">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="date">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="draws">
           <value>
             <set>
@@ -941,6 +913,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/Basic_Syntax/src/p36_encapExamp1/model/person.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="piData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go" />
             </set>
           </value>
         </entry>
@@ -2970,12 +2949,13 @@
         <entry key="file://$PROJECT_DIR$/Vue2/36_组件/2_单文件组件/login-test/TestBackEnd/aa.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1721294220798" />
+              <option name="lastModified" value="1721377504026" />
               <option name="schema">
                 <list>
                   <option value="TableData" />
                   <option value="CountData" />
                   <option value="VideoData" />
+                  <option value="piData" />
                   <option value="ColumnData" />
                 </list>
               </option>
@@ -3029,7 +3009,6 @@
         <entry key="article" value="Article" />
         <entry key="b" value="B" />
         <entry key="b_37" value="B_37" />
-        <entry key="bable_label" value="BableLabel" />
         <entry key="bank_account" value="BankAccount" />
         <entry key="bb_37" value="BB_37" />
         <entry key="box_33" value="Box_33" />
@@ -3057,7 +3036,6 @@
         <entry key="customer" value="Customer" />
         <entry key="customer_service" value="CustomerService" />
         <entry key="customer_view" value="customerView" />
-        <entry key="data" value="Data" />
         <entry key="db_info" value="DbInfo" />
         <entry key="draws" value="draws" />
         <entry key="encryptor" value="Encryptor" />
@@ -3103,6 +3081,7 @@
         <entry key="phone" value="Phone" />
         <entry key="phone_42" value="Phone_42" />
         <entry key="phone_44" value="Phone_44" />
+        <entry key="pi_data" value="piData" />
         <entry key="point28" value="Point28" />
         <entry key="point_43" value="Point_43" />
         <entry key="processor" value="Processor" />
@@ -3149,6 +3128,6 @@
         <entry key="wx_users" value="WxUsers" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1721198358431" />
+    <option name="lastTimeChecked" value="1721364473964" />
   </component>
 </project>

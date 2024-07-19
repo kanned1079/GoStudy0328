@@ -20,10 +20,10 @@ export default {
   mounted() {
     getData().then(({data}) => {
       // console.log(data)
-      const { tableData, orderData, videoData, columnData } = data
+      const { tableData, orderData, videoData, columnData, piData } = data
       this.tableData = tableData  // ok
       this.countData = orderData  // ok
-      console.log(videoData)  // 在此处可以正常输出
+      // console.log(videoData)  // 在此处可以正常输出
       this.orderData = videoData
       { // 折线图生成
         const chart1 = echarts.init(this.$refs.echaerts1);
@@ -44,13 +44,18 @@ export default {
             type: 'line',
           })
         })
-        console.log(chart1_option)
+        // console.log(chart1_option)
         // 根据配置显示图表
         chart1.setOption(chart1_option)
       }
       { // 柱状图生成
         const chart2 = echarts.init(this.$refs.echaerts2);
         const chart2_option = {
+          // title: {
+          //   text: '用户使用量',
+          //   // subtext: 'Fake Data',
+          //   left: 'left'
+          // },
           legend: {
             textStyle: {
               color: '#333',
@@ -101,12 +106,43 @@ export default {
         }
         chart2.setOption(chart2_option)
       }
+      { // 饼状图
+        let chart3 = echarts.init(this.$refs.echaerts3);
+        let chart3_option = {
+          title: {
+            text: '用户使用量',
+            // subtext: 'Fake Data',
+            left: 'center'
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left'
+          },
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: '50%',
+              data: piData,
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        }
+        chart3.setOption(chart3_option)
+      }
 
     }, error => {
       console.log(error.message)
     })
-
-
   }
 }
 </script>

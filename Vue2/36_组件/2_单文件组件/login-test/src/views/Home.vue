@@ -160,7 +160,7 @@ export default {
         </div>
         <div class="login-info">
           <p>上次登录时间：<span>2024-01-01</span></p>
-          <p>上次登录地点：<span>武汉</span></p>
+          <p>上次登录地点：<span>中国大陆</span></p>
         </div>
       </el-card>
       <el-card class="box-card" style="margin-top: 20px; height: 460px">

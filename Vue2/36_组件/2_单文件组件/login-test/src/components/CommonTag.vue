@@ -27,7 +27,7 @@ export default {
 
 <template>
   <div class="tabs">
-    <el-tag
+    <el-tag style="margin-right: 10px; height: 30px; line-height: 30px; align-items: center"
         v-for="item in tabList"
         :key="item.path"
         :closable="item.name !== 'home'"
@@ -40,6 +40,10 @@ export default {
   </div>
 </template>
 
-<style scoped>
-
+<style lang="less" scoped>
+.tabs {
+  el-tag {
+    padding-right: 20px;
+  }
+}
 </style>

@@ -48,7 +48,7 @@ func (MyUser) TableName() string {
 //	passData := context.PostForm("pass")
 //	log.Println("data:", nameData)
 //	user := MyUser{}
-//	result := dao.Db.Where("email = ?", nameData).Limit(1).Find(&user)
+//	result := dao.dao.Where("email = ?", nameData).Limit(1).Find(&user)
 //	if result.RowsAffected == 0 {
 //		context.JSON(http.StatusInternalServerError, gin.H{"error": "用户不存在"})
 //		log.Println("err:", result.Error)
@@ -68,7 +68,7 @@ func (MyUser) TableName() string {
 //
 //func GetAllUsers(context *gin.Context) {
 //	var user1 MyUser
-//	result := dao.Db.First(&user1)
+//	result := dao.dao.First(&user1)
 //	if result.Error != nil {
 //		context.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch users"})
 //		log.Println("err")
@@ -97,7 +97,7 @@ func (u *MyUser) Insert() {
 //		log.Println("此用户不存在 ID=", u.UserId)
 //		return 0
 //	} else {
-//		result := dao.Db.Model(&MyUser{}).Create(&u)
+//		result := dao.dao.Model(&MyUser{}).Create(&u)
 //		if result.Error != nil {
 //			log.Println("insert err:", result.Error)
 //			return 4
@@ -119,7 +119,7 @@ func (u *MyUser) Insert() {
 //	if IsExist(user.Email) == USER_IS_NOT_EXIST { // 用户不存在就创建用户
 //		var ency Encryptor
 //		user.Password = ency.Encrypt(user.Password)
-//		result := dao.Db.Create(&user)
+//		result := dao.dao.Create(&user)
 //		log.Println(result.RowsAffected)
 //		if result.Error != nil {
 //			context.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
@@ -136,7 +136,7 @@ func (u *MyUser) Insert() {
 //	log.Println("email:", email)
 //	var user MyUser
 //	user.Email = email
-//	dao.Db.Where("email = ?", email).Limit(1).Find(&user)
+//	dao.dao.Where("email = ?", email).Limit(1).Find(&user)
 //	log.Println(user)
 //	if user.UserId != 0 {
 //		log.Println("IsExist:该用户已注册")
@@ -165,7 +165,7 @@ func (u *MyUser) Insert() {
 //
 //func AuthUserInfo(email string, password string) (u *MyUser, code int) {
 //	var user MyUser
-//	result := dao.Db.Where("email = ?", email).Limit(1).Find(&user)
+//	result := dao.dao.Where("email = ?", email).Limit(1).Find(&user)
 //	log.Println(user)
 //	var ency Encryptor
 //	user.Password = ency.Decrypt(user.Password)
@@ -188,11 +188,11 @@ func (u *MyUser) Insert() {
 //	email = context.PostForm("mail")
 //	log.Println("HandlerDeleteUser:", email)
 //	var user MyUser
-//	result := dao.Db.Where("email = ?", email).Limit(1).Find(&user)
+//	result := dao.dao.Where("email = ?", email).Limit(1).Find(&user)
 //	log.Println(result.RowsAffected, result.Error)
 //	log.Println(user)
 //	if result.RowsAffected == 1 {
-//		result = dao.Db.Model(&MyUser{}).Where("email = ?", email).Delete(&user)
+//		result = dao.dao.Model(&MyUser{}).Where("email = ?", email).Delete(&user)
 //		if result.RowsAffected == 1 {
 //			context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "deleted": "ok"})
 //		}
@@ -222,7 +222,7 @@ func (u *MyUser) Insert() {
 //	if IsIdExist(user.UserId) == USER_IS_EXISTED {
 //		var ency Encryptor
 //		user.Password = ency.Encrypt(user.Password)
-//		result := dao.Db.Model(&MyUser{}).Where("user_id = ?", user.UserId).Updates(&user)
+//		result := dao.dao.Model(&MyUser{}).Where("user_id = ?", user.UserId).Updates(&user)
 //		log.Println(result.RowsAffected, result.Error)
 //		context.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "data": "update ok"})
 //	} else {
@@ -233,7 +233,7 @@ func (u *MyUser) Insert() {
 //func IsIdExist(id int) (code int) {
 //	log.Println("UserId: ", id)
 //	var usr MyUser
-//	result := dao.Db.Model(&MyUser{}).Where("user_id = ?", id).Limit(1).Find(&usr)
+//	result := dao.dao.Model(&MyUser{}).Where("user_id = ?", id).Limit(1).Find(&usr)
 //	log.Println("RowsAffected: ", result.RowsAffected)
 //	if usr.UserId == id {
 //		log.Println("指定Id的用户存在")

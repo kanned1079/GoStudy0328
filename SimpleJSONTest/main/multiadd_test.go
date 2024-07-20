@@ -40,7 +40,7 @@ func TestAddMultiUser(t *testing.T) {
 			Phone:    randPhoneNumber(8),
 			Level:    0,
 		}
-		//dao.Db.Model(&users.WxUsers{}).Where("email = ?", user.Email).Delete(&user)
+		//dao.dao.Model(&users.WxUsers{}).Where("email = ?", user.Email).Delete(&user)
 		user.Password = ency.Base64Encrypt(user.Password)
 		dao.Db.Create(&user)
 

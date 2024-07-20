@@ -21,7 +21,7 @@ export default {
         <el-header height="50px">
           <CommonHeader></CommonHeader>
         </el-header>
-        <div style="padding: 10px 10px; background-color: #eef1f7">
+        <div style="background-color: #eef1f7">
           <CommonTag></CommonTag>
         </div>
         <el-main style="background-color: #eef1f7">

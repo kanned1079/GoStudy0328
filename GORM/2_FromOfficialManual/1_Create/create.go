@@ -20,7 +20,7 @@ func init() {
 	dsn := "go:PassCode987!@tcp(api.ikanned.com:4407)/db1?charset=utf8mb4&parseTime=True&loc=Local"
 	// ?charset=utf8mb4&parseTime=True&loc=Local 用于解决时间问题为utf-8
 	// parseTime=True&loc=Local 用于处理时间
-	//Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
+	//dao, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
 	// MySQL 驱动程序提供了 一些高级配置 可以在初始化过程中使用，例如：
 	Db, err = gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,
@@ -67,7 +67,7 @@ func CreateMultiRecord() {
 		users = append(users, &User{"testUser" + strconv.Itoa(i), 18, time.Now()})
 	}
 	// 方法1
-	// Db.Create(&users) // 将切片传递给Create方法
+	// dao.Create(&users) // 将切片传递给Create方法
 
 	// 方法2
 	// 你可以通过db.CreateInBatches方法来指定批量插入的批次大小

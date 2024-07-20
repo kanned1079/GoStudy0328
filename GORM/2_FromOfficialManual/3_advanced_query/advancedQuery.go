@@ -15,7 +15,7 @@ func init() {
 	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name 获取详情
 	dsn := "go:PassCode987!@tcp(api.ikanned.com:4407)/db1?charset=utf8mb4&parseTime=True&loc=Local"
 	// parseTime=True&loc=Local 用于处理时间
-	//Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
+	//dao, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
 	// MySQL 驱动程序提供了 一些高级配置 可以在初始化过程中使用，例如：
 	Db, err = gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,

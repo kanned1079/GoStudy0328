@@ -66,12 +66,12 @@ func InsertData(s *Student) (err error) {
 	sqlStr := "insert into students(name, age, email, address) values (?, ?, ?, ?)"
 	stmt, err := Db.Prepare(sqlStr)
 	if err != nil {
-		log.Println("Db.Prepare err: ", err)
+		log.Println("dao.Prepare err: ", err)
 	}
 	lines, err := stmt.Exec(s.Name, s.Age, s.Email, s.Address)
 	log.Println("lines = ", lines)
 	if err != nil {
-		log.Println("Db.Exec err: ", err)
+		log.Println("dao.Exec err: ", err)
 		return err
 	}
 	log.Println("Exec Success.")
@@ -82,11 +82,11 @@ func TruncateData() (err error) {
 	sqlStr := "truncate table students"
 	stmt, err := Db.Prepare(sqlStr)
 	if err != nil {
-		log.Println("Db.Prepare err: ", err)
+		log.Println("dao.Prepare err: ", err)
 	}
 	_, err = stmt.Exec()
 	if err != nil {
-		log.Println("Db.Exec err: ", err)
+		log.Println("dao.Exec err: ", err)
 	}
 	log.Println("Exec Success.")
 	return nil

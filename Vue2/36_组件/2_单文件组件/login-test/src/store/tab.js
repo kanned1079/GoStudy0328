@@ -30,6 +30,12 @@ export default {
                     state.tabList.push(val)
             }
             console.log('added ', state.tabList)
+        },
+        closeTag(state, item) {   // 用于删除指定的Tag数据
+            console.log('关闭Tag')
+            console.log(state)
+            let index = state.tabList.findIndex(val => val.name === item.name)
+            state.tabList.splice(index, 1);
         }
     }
 }

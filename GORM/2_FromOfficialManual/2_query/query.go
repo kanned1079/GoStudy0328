@@ -30,7 +30,7 @@ func init() {
 	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name 获取详情
 	dsn := "go:PassCode987!@tcp(api.ikanned.com:4407)/db1?charset=utf8mb4&parseTime=True&loc=Local"
 	// parseTime=True&loc=Local 用于处理时间
-	//Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
+	//dao, err = gorm.Open(mysql.Open(dsn), &gorm.Config{}) // 第一种写法
 	// MySQL 驱动程序提供了 一些高级配置 可以在初始化过程中使用，例如：
 	Db, err = gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,
@@ -89,7 +89,7 @@ func SelectOneRecord() {
 	Db.Model(&User{}).Find(&res) // 正确 因为目标结构体被传入
 
 	// 错误
-	//Db.Table("users").First(&result)
+	//dao.Table("users").First(&result)
 	//log.Println(users1)
 	// 但是可以使用Take， 如下
 	Db.Model("users").Take(&user1) // 取出所有记录

@@ -1,7 +1,7 @@
 <script>
 import {mapState} from "vuex";
 export default {
-  name: '',
+  name: 'CommonHeader',
   methods: {
     handleMenu() {
       this.$store.commit('tab/collapseMenu')
@@ -20,7 +20,7 @@ export default {
 <template>
   <div class="header-container">
     <div class="l-content">
-      <el-button icon="el-icon-menu" size="mini" @click="handleMenu" style="background-color: #eef1f7"></el-button>
+      <el-button icon="el-icon-s-grid" size="mini" @click="handleMenu" style="background-color: #eef1f7"></el-button>
       <!--      面包屑区域-->
       <!--      <span class="text">首页</span>-->
       <el-breadcrumb separator="/">

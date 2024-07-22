@@ -6,11 +6,11 @@ import (
 )
 
 type UniUsers struct {
-	Name      string    `gorm:"column:name;type:VARCHAR(255);" json:"name"`
-	Age       int32     `gorm:"column:age;type:INT;" json:"age"`
-	Sex       int32     `gorm:"column:sex;type:INT;" json:"sex"`
-	Birth     time.Time `gorm:"column:birth;type:DATETIME;" json:"birth"`
-	Addr      string    `gorm:"column:addr;type:VARCHAR(255);" json:"addr"`
+	Name      string    `gorm:"column:name;type:VARCHAR(255);" json:"name" form:"name"`
+	Age       int32     `gorm:"column:age;type:INT;" json:"age" form:"age"`
+	Sex       int32     `gorm:"column:sex;type:INT;" json:"sex" form:"sex"`
+	Birth     time.Time `gorm:"column:birth;type:DATETIME;" json:"birth" form:"birth"`
+	Addr      string    `gorm:"column:addr;type:VARCHAR(255);" json:"addr" form:"addr"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt

@@ -5,6 +5,7 @@ const http = Axios.create({
     baseURL: 'http://localhost:5001/api',
     timeout: 10000,
     headers: {
+        //'Access-Control-Allow-Headers': '*',
     }
 })
 

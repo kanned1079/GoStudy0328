@@ -97,7 +97,8 @@ export default {
       // 修改state中的数据
       // this.$store.commit('selectMenu', item)
       this.$store.commit('tab/selectMenu', item)
-    }
+    },
+    
   },
   computed: {
     // ...mapMutations('tab',{

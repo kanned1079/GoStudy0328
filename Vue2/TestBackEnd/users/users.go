@@ -6,6 +6,7 @@ import (
 )
 
 type UniUsers struct {
+	Id        int       `gorm:"column:id;type:INT;" json:"id" primaryKey;AUTO_INCREMENT""`
 	Name      string    `gorm:"column:name;type:VARCHAR(255);" json:"name" form:"name"`
 	Age       int32     `gorm:"column:age;type:INT;" json:"age" form:"age"`
 	Sex       int32     `gorm:"column:sex;type:INT;" json:"sex" form:"sex"`

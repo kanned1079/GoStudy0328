@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// HandleGetAllUsers 获取所有用户列表
 func HandleGetAllUsers(context *gin.Context) {
 	context.Header("Access-Control-Allow-Origin", "*")
 	var uniUsers []users.UniUsers
@@ -19,6 +20,7 @@ func HandleGetAllUsers(context *gin.Context) {
 	})
 }
 
+// HandleAddUser 添加一个用户
 func HandleAddUser(context *gin.Context) {
 	context.Header("Access-Control-Allow-Origin", "*")
 	var uniUser users.UniUsers
@@ -30,13 +32,22 @@ func HandleAddUser(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{
 		"code": http.StatusOK,
 	})
-	//var uniUser users.UniUsers
-	//context.PostForm()
 }
+
+// HandleDelUser 处理删除一个用户
 func HandleDelUser(context *gin.Context) {
 
 }
 
+// HandleEditUser 编辑一个已经存在的用户
 func HandleEditUser(context *gin.Context) {
 	context.Header("Access-Control-Allow-Origin", "*")
+	log.Println("HandleEditUser")
+	var newUniUser users.UniUsers
+	if err := context.Bind(&newUniUser); err != nil {
+		log.Println(err)
+	}
+	log.Println(newUniUser)
+	dao.Db.Model(&newUniUser).Where("id = ?", newUniUser.Id).Updates(&newUniUser)
+	context.String(http.StatusOK, "ok")
 }

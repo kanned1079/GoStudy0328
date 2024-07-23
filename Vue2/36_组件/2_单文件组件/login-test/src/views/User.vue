@@ -6,6 +6,7 @@ export default {
     return {
       dialogVisible: false,
       form: {
+        // id: '',
         name: '',
         age: '',
         sex: '',
@@ -80,6 +81,10 @@ export default {
       this.modalType = 1;
       this.dialogVisible = true;
       console.log('edit user function')
+      // 回显数据到表单
+      this.form = JSON.parse(JSON.stringify(row))
+      console.log(this.form)
+
     },
     handleDel(row) {  // 每一项的删除按钮
       console.log('del user function')
@@ -121,8 +126,8 @@ export default {
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-select v-model.number="form.sex" placeholder="请选择性别">
-            <el-option label="男" value=1></el-option>
-            <el-option label="女" value=0></el-option>
+            <el-option label="男" :value=1></el-option>
+            <el-option label="女" :value=0></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="出生日期" prop="birth">
@@ -148,12 +153,17 @@ export default {
     <el-table
         :data="tableData"
         stripe
-        style="width: 100%; border-radius: 10px"
+        style="width: 100%; border-radius: 10px;"
     >
+<!--      <el-table-column-->
+<!--          prop="id"-->
+<!--          label="ID"-->
+<!--          width="120px">-->
+<!--      </el-table-column>-->
       <el-table-column
           prop="name"
           label="姓名"
-          width="120px">
+          width="140px">
       </el-table-column>
       <el-table-column
           prop="age"

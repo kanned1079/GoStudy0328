@@ -14,6 +14,9 @@ export default {
         birth: '',
         addr: '',
       },
+      userform: {
+        name: '',
+      },
       rules: {
         name: [
           {required: true, message: '姓名为必填'},
@@ -106,10 +109,14 @@ export default {
     },
     getList() {
       // 专门用户更新列表
-      getUsers(this.pageData).then(response => {
-        console.log(response.data)
-        this.tableData = response.data.data;
-        this.total = response.data.count ? response.data.count : 0; // 列表的记录数
+      getUsers({
+        params: {
+          ...this.userform, ...this.pageData
+        }
+      }).then(({data}) => {
+        console.log(data)
+        this.tableData = data.data;
+        this.total = data.count ? data.count : 0; // 列表的记录数
         console.log('数据条数：', this.total);
       }, error => {
       })
@@ -122,6 +129,9 @@ export default {
       console.log('页码：', page);
       this.pageData.page = page;
       this.getList();
+    },
+    onSearch() {  // 列表查询条件
+      this.getList()
     }
 
   },
@@ -172,56 +182,69 @@ export default {
         +新增
       </el-button>
       <!--      form搜索区域-->
+      <el-form :model="userform" :inline="true">
+        <el-form-item>
+          <el-input v-model="userform.name" placeholder="请输入过滤的姓名"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSearch" size="medium">查询</el-button>
+        </el-form-item>
+      </el-form>
     </div>
 
-    <el-table
-        :data="tableData"
-        stripe
-        style="width: 100%; border-radius: 10px;"
-        height="90%"
-    >
-      <!--      <el-table-column-->
-      <!--          prop="id"-->
-      <!--          label="ID"-->
-      <!--          width="120px">-->
-      <!--      </el-table-column>-->
-      <el-table-column
-          prop="name"
-          label="姓名"
-          width="140px">
-      </el-table-column>
-      <el-table-column
-          prop="age"
-          label="年龄"
-          width="120px">
-      </el-table-column>
-      <el-table-column
-          prop="sex"
-          label="性别">
-        <template slot-scope="scope">
-          <span style="margin-left: 10px"> {{ scope.row.sex === 1 ? '男' : '女' }} </span>
-        </template>
-      </el-table-column>
-      <el-table-column
-          prop="birth"
-          label="生日">
-      </el-table-column>
-      <el-table-column
-          prop="addr"
-          label="家庭住址">
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button type="info" @click="handleEdit(scope.row)" size="mini">修改</el-button>
-          <el-button type="danger" @click="handleDel(scope.row)" size="mini">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="common-table">
+      <el-table
+          :data="tableData"
+          stripe
+          style="width: 100%; border-radius: 10px;"
+          height="90%"
+      >
+        <!--      <el-table-column-->
+        <!--          prop="id"-->
+        <!--          label="ID"-->
+        <!--          width="120px">-->
+        <!--      </el-table-column>-->
+        <el-table-column
+            prop="name"
+            label="姓名"
+            width="140px">
+        </el-table-column>
+        <el-table-column
+            prop="age"
+            label="年龄"
+            width="120px">
+        </el-table-column>
+        <el-table-column
+            prop="sex"
+            label="性别">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px"> {{ scope.row.sex === 1 ? '男' : '女' }} </span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="birth"
+            label="生日">
+        </el-table-column>
+        <el-table-column
+            prop="addr"
+            label="家庭住址">
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button type="info" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+            <el-button type="danger" @click="handleDel(scope.row)" size="mini">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
 
-    <div>
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="handlePage">
+      <div class="pager">
+        <el-pagination
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="handlePage">
 
-      </el-pagination>
+        </el-pagination>
+      </div>
     </div>
 
 
@@ -230,6 +253,24 @@ export default {
 
 <style lang="less" scoped>
 .manage {
-  height: 90%;
+  height: 100%;
+  .manager_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .common-table {
+    position: relative;
+    height: 700px;
+    .pager {
+      position: absolute;
+      bottom: 0;
+      right: 20px;
+
+    }
+  }
 }
+
+
+
 </style>

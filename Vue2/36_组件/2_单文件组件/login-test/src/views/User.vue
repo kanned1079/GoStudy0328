@@ -1,5 +1,6 @@
 <script>
-import {getUsers, addUser, editUser} from "@/api";
+import {addUser, delUser, editUser, getUsers} from "@/api";
+
 export default {
   name: '',
   data: function () {
@@ -26,12 +27,17 @@ export default {
         birth: [
           {required: true, message: '请选择出生日期'},
         ],
-        addr: [
-          {required: true, message: '地址为必填'},
-        ],
+        // addr: [
+        //   {required: true, message: '地址为必填'},
+        // ],
       },
       tableData: [],
       modalType: 0, // 0表示新增 1表示编辑
+      total: 0,   // 当前的记录总条数
+      pageData: {
+        page: 1,
+        limit: 10,
+      },
     }
   },
   methods: {
@@ -42,9 +48,7 @@ export default {
       //     })
       //     .catch(_ => {
       //     });
-
       this.dialogVisible = false; // 关闭窗口
-
     },
     handleCancel() {
       this.handleClose()
@@ -71,9 +75,7 @@ export default {
           }
           console.log('用户表单', this.form)
           // this.dialogVisible = false; // 填写完成后关闭弹窗
-
         }
-
       })
       this.handleClose()
     },
@@ -84,26 +86,47 @@ export default {
       // 回显数据到表单
       this.form = JSON.parse(JSON.stringify(row))
       console.log(this.form)
-
     },
     handleDel(row) {  // 每一项的删除按钮
       console.log('del user function')
+      console.log(row)
+
+      this.$alert(`确定删除${row.name}的记录吗`, '警告', {
+        confirmButtonText: '确定',
+        callback: action => {
+          delUser(row).then(() => {
+            this.getList()
+          })
+          this.$message({
+            type: 'success',
+            message: `删除成功`
+          });
+        }
+      });
     },
     getList() {
       // 专门用户更新列表
-      getUsers().then(response => {
+      getUsers(this.pageData).then(response => {
         console.log(response.data)
         this.tableData = response.data.data;
-      }, error => {})
+        this.total = response.data.count ? response.data.count : 0; // 列表的记录数
+        console.log('数据条数：', this.total);
+      }, error => {
+      })
     },
     handleAdd() { // 顶部的新增按钮
       this.modalType = 0;
       this.dialogVisible = true
     },
+    handlePage(page) {  // 选择页码的回调函数
+      console.log('页码：', page);
+      this.pageData.page = page;
+      this.getList();
+    }
 
   },
   mounted() {
-      this.getList()
+    this.getList()
   }
 
 }
@@ -148,18 +171,20 @@ export default {
       <el-button type="primary" @click="handleAdd">
         +新增
       </el-button>
+      <!--      form搜索区域-->
     </div>
 
     <el-table
         :data="tableData"
         stripe
         style="width: 100%; border-radius: 10px;"
+        height="90%"
     >
-<!--      <el-table-column-->
-<!--          prop="id"-->
-<!--          label="ID"-->
-<!--          width="120px">-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--          prop="id"-->
+      <!--          label="ID"-->
+      <!--          width="120px">-->
+      <!--      </el-table-column>-->
       <el-table-column
           prop="name"
           label="姓名"
@@ -174,7 +199,7 @@ export default {
           prop="sex"
           label="性别">
         <template slot-scope="scope">
-          <span style="margin-left: 10px"> {{ scope.row.sex===1?'男':'女' }} </span>
+          <span style="margin-left: 10px"> {{ scope.row.sex === 1 ? '男' : '女' }} </span>
         </template>
       </el-table-column>
       <el-table-column
@@ -193,19 +218,18 @@ export default {
       </el-table-column>
     </el-table>
 
+    <div>
+      <el-pagination layout="prev, pager, next" :total="total" @current-change="handlePage">
+
+      </el-pagination>
+    </div>
+
+
   </div>
 </template>
 
 <style lang="less" scoped>
-.btn {
-  background-color: #d46262;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  width: 60px;
-  height: 30px;
-  margin-right: 10px;
+.manage {
+  height: 90%;
 }
-
-
 </style>

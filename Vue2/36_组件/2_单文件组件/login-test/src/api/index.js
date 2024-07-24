@@ -8,7 +8,13 @@ export const getData = () => {
 
 // 返回用户列表
 export const getUsers = (params) => {
-    return http.get('/user/get', params)
+    console.log('getUsers.params ', params)
+    return http.get('/user/get', {
+        params: {
+            page: params.page,
+            limit: params.limit,
+        }
+    })
 }
 
 // 新增用户

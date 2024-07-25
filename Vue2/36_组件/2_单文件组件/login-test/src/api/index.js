@@ -7,8 +7,10 @@ export const getData = () => {
 }
 
 // 返回用户列表
-export const getUsers = (params) => {
-    console.log('getUsers.params ', params)
+export const getUsers = ({params}) => {
+    // console.log('getUsers.params ', params)
+    console.log('页数：', params.page)
+    console.log('限制条数：', params.limit)
     return http.get('/user/get', {
         params: {
             page: params.page,

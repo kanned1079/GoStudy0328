@@ -27,8 +27,8 @@ func HandleGetAllUsers(context *gin.Context) {
 	}
 	log.Println("总用户计数: ", recordCount)
 	pgData.page, _ = strconv.Atoi(context.DefaultQuery("page", "1"))
-	pgData.limit, _ = strconv.Atoi(context.DefaultQuery("limit", "10"))
-
+	pgData.limit, _ = strconv.Atoi(context.DefaultQuery("limit", "1"))
+	log.Println(pgData)
 	offset := (pgData.page - 1) * pgData.limit
 
 	var uniUsers []users.UniUsers

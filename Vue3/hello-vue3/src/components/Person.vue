@@ -1,44 +1,47 @@
-<script lang="ts">
-export default {
-  name: 'Person',
-  beforeCreate() {
-      console.log('beforeCreate')
-  },
-  setup(props, ctx) {
-    // 数据
-    let name = '张三' // 注意此时的name不是响应式的
-    let age = 18
-    let tel = '1231234423'
+// 或者使用一个插件来设置 标签中需要写入name="xxx"
+<script lang="ts" setup name="Person">
+import {ref, watch} from 'vue'
+// 数据
+let sum = ref(0)
+// 方法
+let changeSum = () => sum.value += 1
+//监视 这里sum不需要.value
+const stopWatch = watch(sum, (newValue, oldValue) => {
+  console.log('sum changed', newValue, oldValue)
+  if (newValue >= 10)
+    stopWatch()
+})
+// ------------------------------
+// 数据
+let person = ref({name: '张三', age: 18});
+let changeName = () => person.value.name += '~';
+let changeAge = () => person.value.age += 1;
+let changePerson = () => person.value = {name: '李四', age: 29};
+// 监视
+watch(person, (newValue, oldValue) => {
+  console.log('person变化了', newValue, oldValue)  // 默认监视的是对象的地址值 需要开启深度监视
+}, {
+  deep: true, // 需要开启深度监视
+  // immediate: true, // 立即执行
+})
 
-    // 方法
-    function modifyName() {
-      console.log('modifyName')
-      name = 'ZhangSan' // 注意这里的修改 页面也是不会变化的
-    }
-    function modifyAge() {
-      console.log('modifyName')
-      age += 1
-    }
-    function showTel() {
-      alert(tel)
-    }
 
-    // setup返回值
-    // return {name, age, modifyName, modifyAge, showTel}
-    return () => {
-      return '哈哈'
-    }
-  },
-}
+
 </script>
 
 <template>
   <div class="person">
-    <h2>姓名： {{ name }}</h2>
-    <h2>年龄： {{ age }}</h2>
-    <button @click="modifyName">修改名字</button>
-    <button @click="modifyAge">修改年龄</button>
-    <button @click="showTel">显示联系方式</button>
+    <h1>情况1 监视ref定义的值</h1>
+    <h2>当前求和为{{ sum }}</h2>
+    <button @click="changeSum">sum+1</button>
+  </div>
+  <div class="person">
+    <h1>情况2 监视ref定义的对象数据</h1>
+    <h2>name{{ person.name }}</h2>
+    <h2>age{{ person.age }}</h2>
+    <button @click="changeName">changeName</button>
+    <button @click="changeAge">changeName</button>
+    <button @click="changePerson">changePerson</button>
   </div>
 </template>
 
@@ -47,9 +50,12 @@ export default {
   background-color: skyblue;
   border-radius: 10px;
   padding: 20px;
+  margin-bottom: 5px;
+
   h1 {
     color: white;
   }
+
   button {
     margin: 0 5px;
   }

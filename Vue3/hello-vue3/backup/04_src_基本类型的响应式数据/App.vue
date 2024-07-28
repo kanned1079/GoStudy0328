@@ -9,7 +9,8 @@ export default {
 
 <template>
   <Person></Person>
-
+  <Person></Person>
+  <Person></Person>
 
 </template>
 

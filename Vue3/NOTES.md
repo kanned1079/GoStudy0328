@@ -404,8 +404,8 @@ let personList = reactive<Persons>([
 #### 在子组件中接收
 ```typescript
 // 导入限制
-import { type Persons } from "@/types";
-import { withDefaults } from "vue";
+import {type Persons} from "@/types";
+import {withDefaults} from "vue";
 // 只接收a
 // 但是这样的接收可能会引起类型不匹配问题
 // defineProps(['a'])
@@ -420,8 +420,8 @@ import { withDefaults } from "vue";
 withDefaults(defineProps<{ list?: Persons }>(), {
   list: () => { // 默认值需要以函数形式返回
     return [
-      { id: '10002', name: 'kanna', age: 21 },
-      { id: '10003', name: 'kinggyo', age: 16 },
+      {id: '10002', name: 'kanna', age: 21},
+      {id: '10003', name: 'kinggyo', age: 16},
       // ...
     ]
   }

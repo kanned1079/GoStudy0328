@@ -216,3 +216,16 @@ watch(person, (newValue, oldValue) => {
   // immediate: true, // 立即执行
 })
 ```
+##### 情况3
+- 监视`reactive`定义的**对象类型**数据
+- 默认开启了深度监视 而且不可关闭
+```typescript
+// 数据
+let obj = reactive({a: {b: {c: 666,}}})
+// 方法
+let changeVal = () => obj.a.b.c = 999
+// 监视
+watch(obj, (newVal, oldVal) => {
+  console.log('obj变化了', newVal, oldVal)
+})
+```

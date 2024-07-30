@@ -1,53 +1,40 @@
 // 或者使用一个插件来设置 标签中需要写入name="xxx"
 <script lang="ts" setup name="Person">
-import {reactive, watch} from 'vue'
+// 导入限制
+import { type Persons } from "@/types";
+import { withDefaults } from "vue";
+// 只接收a
+// 但是这样的接收可能会引起类型不匹配问题
+// defineProps(['a'])
 
-// 数据
-let person = reactive({name: '张三', age: 18});
-let obj = reactive({  //隐式创建了深度监视 且该深度监视无法关闭
-  a: {
-    b: {
-      c: 666,
-    }
+// 接收a 同时将a保存
+// let x = defineProps(['a', 'list'])
+
+// 接收a + 限制类型
+// defineProps<{list:Persons}>()
+
+// 接收list 限制类型 限制必要性 指定默认值
+withDefaults(defineProps<{ list?: Persons }>(), {
+  list: () => {
+    return [
+      { id: '10002', name: 'kanna', age: 21 },
+      { id: '10003', name: 'kinggyo', age: 16 },
+      // ...
+    ]
   }
-})
-// 方法
-let changeName = () => person.name += '~';
-let changeAge = () => person.age += 1;
-// let changePerson = () => person = {name: '李四', age: 29};
-let changePerson = () => Object.assign(person, {name: '李四', age: 29})
-let changeVal = () => {obj.a.b.c = 999}
-// 监视
-watch(person, (newValue, oldValue) => {
-  console.log('person变化了', newValue, oldValue)  // 默认监视的是对象的地址值 需要开启深度监视
-}, {
-  deep: true, // 需要开启深度监视
-  // immediate: true, // 立即执行
-})
-watch(obj, (newVal, oldVal) => {
-  console.log('obj变化了', newVal, oldVal)
 })
 
 </script>
 
+
 <template>
-<!--  <div class="person">-->
-<!--    <h1>情况1 监视ref定义的值</h1>-->
-<!--    <h2>当前求和为{{ sum }}</h2>-->
-<!--    <button @click="changeSum">sum+1</button>-->
-<!--  </div>-->
   <div class="person">
-    <h1>情况2 监视reactive定义的对象数据</h1>
-    <h2>name{{ person.name }}</h2>
-    <h2>age{{ person.age }}</h2>
-    <button @click="changeName">changeName</button>
-    <button @click="changeAge">changeName</button>
-    <button @click="changePerson">changePerson</button>
-  </div>
-  <div>
-    <h1>测试</h1>
-    <h2>{{ obj.a.b.c }}</h2>
-    <button @click="changeVal">修改</button>
+    <!-- <h2>{{ .a }}</h2> -->
+    <ul>
+      <li v-for="item in list" :key="item.id">
+        {{ item.name }} - {{ item.age }}
+      </li>
+    </ul>
   </div>
 </template>
 

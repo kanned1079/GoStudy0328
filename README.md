@@ -8,9 +8,4 @@
 4. GoRPC
    - 原生实现
    - go-zero框架
-5. JavaScript 基础语法
-   - ES6 新语法
-6. 一些测试项目
-7. Vue2练习项目
-8. Vue3练习项目
 
